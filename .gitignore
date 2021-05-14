@@ -32,3 +32,11 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# serverless files
+/.serverless/
+/.serverless_nextjs/
+
+# aws environment setup stript
+aws.sh
+
