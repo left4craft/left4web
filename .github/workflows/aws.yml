@@ -46,8 +46,9 @@ jobs:
     - run: npm ci
     - name: serverless deploy
       uses: serverless/github-action@master
-      with:
-        args: deploy
+      # don't use deploy arg with next component
+      # with:
+      #  args: deploy
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
