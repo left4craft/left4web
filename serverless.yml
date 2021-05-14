@@ -16,6 +16,8 @@ left4web:
   inputs:
     bucketName: "left4web-static"
     runtime: "nodejs14.x"
+    cloudfront:
+      distributionId: EPK6X33VWDO19 
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
