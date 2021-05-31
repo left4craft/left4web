@@ -46,26 +46,27 @@ function on_user_changed() {
 function validate_user() {
     const username = document.getElementById("mc_user").value;
     
-    const mojang_request = new XMLHttpRequest();
-    mojang_request.open("get", 
-        "https://api.mojang.com/users/profiles/minecraft/" + username);
-    mojang_request.send();
+    const uuid_request = new XMLHttpRequest();
+    uuid_request.open("get", 
+        "/api/minecraft/getuuid/" + username);
 
-    mojang_request.onload = () => {
+    uuid_request.send();
+
+    uuid_request.onload = () => {
         try {
-            const mojang_response = JSON.parse(mojang_request.response);
+            const uuid_response = JSON.parse(uuid_request.response);
 
-            if(mojang_response.name !== undefined && mojang_response.id !== undefined) {
-                document.getElementById("mc_user").value = mojang_response.name;
+            if(uuid_response.success) {
+                document.getElementById("mc_user").value = uuid_response.name;
 
                 // convert to format that plays nicer with crafatar and internal server databases
-                let uuid = mojang_response.id;
+                let uuid = uuid_response.id;
                 uuid = uuid.slice(0,8) + '-' + uuid.slice(8, 12) + '-' + uuid.slice(12, 16) + '-' + uuid.slice(16, 20) + '-' + uuid.slice(20);
 
                 document.getElementById("mc_uuid").value = uuid;
                 document.getElementById("checkout_button").disabled = false;
                 document.getElementById("mc_preview").style = "";
-                document.getElementById("mc_preview").src = "https://mc-heads.net/player/" + uuid;
+                document.getElementById("mc_preview").src = "/api/minecraft/getskin/" + uuid;
 
                 document.getElementById("validate_button").value = "Validate";
             } else {
@@ -109,7 +110,8 @@ function checkout(sub) {
     checkout_request.open("get", "/api/subscribe/" + sub
         + "?user=" + encodeURIComponent(document.getElementById("mc_user").value)
         + "&uuid=" + encodeURIComponent(document.getElementById("mc_uuid").value));
-    checkout_request.send();
+
+        checkout_request.send();
 
     checkout_request.onload = () => {
         let checkout_response = JSON.parse(checkout_request.response);

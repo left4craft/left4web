@@ -17,7 +17,13 @@ left4web:
     bucketName: "left4web-static"
     runtime: "nodejs14.x"
     cloudfront:
-      distributionId: EPK6X33VWDO19 
+      distributionId: EPK6X33VWDO19
+
+      /api/minecraft/*:
+        minTTL: 900
+        maxTTL: 900
+        defaultTTL: 900
+
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
