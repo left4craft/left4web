@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "aws-sdk": "^2.918.0",
     "mongodb": "^3.6.9",
     "mongodb-client-encryption": "^1.2.3",
     "mysql": "^2.18.1",

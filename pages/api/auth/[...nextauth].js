@@ -1,6 +1,8 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 
+const { DynamoDBAdapter } = require("../../../utils/nextauth_db_adapter");
+
 export default NextAuth({
   jwt: {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
@@ -16,7 +18,5 @@ export default NextAuth({
         clientSecret: process.env.DISCORD_CLIENT_SECRET
       }),    // ...add more providers here
   ],
-
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.DATABASE_URL,
+  adapter: DynamoDBAdapter()
 })
