@@ -1,11 +1,15 @@
 import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/client'
-import { Head } from 'next/head'
+import { stripe_products } from '../../../utils/stripe_products';
 
 export default function Sub() {
 const router = useRouter()
 const { sub } = router.query
 const [ session, loading ] = useSession()
+
+if(!(sub in stripe_products.subscriptions)) {
+    return <p>Product not found</p>
+}
 
 if(loading) {
     return <p>Loading...</p>
@@ -86,7 +90,6 @@ function validate_user() {
 }
 
 function load_stripe(sub) {
-    console.log("Hello");
     document.getElementById("checkout_button").disabled = true; 
     document.getElementById("checkout_button").value = "Loading..."; 
     

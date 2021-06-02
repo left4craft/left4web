@@ -23,6 +23,11 @@ left4web:
         minTTL: 900
         maxTTL: 900
         defaultTTL: 900
+    
+    name:
+      defaultLambda: left4webDefaultLambda
+      apiLambda: left4webApiLambda
+      imageLambda: left4webImageLambda
 
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
