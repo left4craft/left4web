@@ -126,7 +126,6 @@ function checkout(sub) {
 			document.getElementById('checkout_button').disabled = false;
 			document.getElementById('checkout_button').value = 'Error: ' + checkout_response.error;
 		} else {
-			// eslint-disable-next-line no-undef
 			const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 			stripe.redirectToCheckout({ sessionId: checkout_response.session_id });
 		}

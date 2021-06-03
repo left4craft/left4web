@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint pages",
-		"lint:fix": "eslint pages --fix"
+		"lint:fix": "eslint . --fix"
 	},
 	"dependencies": {
 		"aws-sdk": "^2.918.0",
