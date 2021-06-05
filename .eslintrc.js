@@ -116,9 +116,7 @@ module.exports = {
 		'max-statements-per-line': [
 			'error'
 		],
-		'multiline-comment-style': [
-			'warn'
-		],
+		'multiline-comment-style': 'off',
 		'no-return-assign': [
 			'error'
 		],
