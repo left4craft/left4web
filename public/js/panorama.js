@@ -86,7 +86,7 @@ function onWindowResize() {
 
 function update() {
 
-	if(!mouse_down) lon += 0.05;
+	if(!mouse_down) lon += 0.03;
 
 	lat = Math.max(-85, Math.min(85, lat));
 	phi = THREE.MathUtils.degToRad(90 - lat);
@@ -107,7 +107,7 @@ function animate() {
 }
 
 
-document.getElementById('panorama').addEventListener('mousedown', function(e){
+document.getElementById('panorama').addEventListener('mousedown', e=> {
 	mouse_down = true;
 	x = e.offsetX;
 	y = e.offsetY;
@@ -115,19 +115,19 @@ document.getElementById('panorama').addEventListener('mousedown', function(e){
 
 window.addEventListener('mousemove', e => {
 	if (mouse_down === true) {
-		let x_vel = e.offsetX-x;
-		let y_vel = e.offsetY-y;
+		const x_vel = e.offsetX-x;
+		const y_vel = e.offsetY-y;
 
 		lon -= x_vel*180 / window.screen.width;
 		lat += y_vel*180 / window.screen.height;
-	
+
 		x = e.offsetX;
 		y = e.offsetY;
 
 	}
-  });
+});
 
-  window.addEventListener('mouseup', function(e){
+window.addEventListener('mouseup', () => {
 	if (mouse_down === true) {
 		x = 0;
 		y = 0;
