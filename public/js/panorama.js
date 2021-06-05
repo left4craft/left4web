@@ -101,3 +101,14 @@ function animate() {
 	update();
 }
 
+let mouse_down = false;
+
+document.addEventListener('mousedown', function(e){
+	mouse_down = true;
+    console.log('mouse down');
+});
+
+document.addEventListener('mouseup', function(e){
+	mouse_down = false;
+    console.log('mouse up');
+});
