@@ -1,4 +1,4 @@
-import * as THREE from 'https://cdn.skypack.dev/three';
+import * as THREE from 'https://cdn.skypack.dev/pin/three@v0.129.0-chk6X8RSBl37CcZQlxof/mode=imports,min/optimized/three.js';
 
 let camera;
 let renderer;
@@ -8,6 +8,11 @@ let lon = 0;
 let lat = -25;
 let phi = 0;
 let theta = 0;
+
+let mouse_down = false;
+let x = 0;
+let y = 0;
+
 
 init();
 animate();
@@ -81,7 +86,7 @@ function onWindowResize() {
 
 function update() {
 
-	lon += 0.05;
+	if(!mouse_down) lon += 0.05;
 
 	lat = Math.max(-85, Math.min(85, lat));
 	phi = THREE.MathUtils.degToRad(90 - lat);
@@ -101,14 +106,31 @@ function animate() {
 	update();
 }
 
-let mouse_down = false;
 
-document.addEventListener('mousedown', function(e){
+document.getElementById('panorama').addEventListener('mousedown', function(e){
 	mouse_down = true;
-    console.log('mouse down');
+	x = e.offsetX;
+	y = e.offsetY;
 });
 
-document.addEventListener('mouseup', function(e){
-	mouse_down = false;
-    console.log('mouse up');
+window.addEventListener('mousemove', e => {
+	if (mouse_down === true) {
+		let x_vel = e.offsetX-x;
+		let y_vel = e.offsetY-y;
+
+		lon -= x_vel*180 / window.screen.width;
+		lat += y_vel*180 / window.screen.height;
+	
+		x = e.offsetX;
+		y = e.offsetY;
+
+	}
+  });
+
+  window.addEventListener('mouseup', function(e){
+	if (mouse_down === true) {
+		x = 0;
+		y = 0;
+		mouse_down = false;
+	}
 });
