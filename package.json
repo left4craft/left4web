@@ -10,8 +10,7 @@
 		"lint:fix": "eslint . --fix"
 	},
 	"dependencies": {
-		"aws-sdk": "^2.918.0",
-		"mongodb": "^3.6.9",
+		"aws-sdk": "^2.927.0",
 		"mongodb-client-encryption": "^1.2.3",
 		"mysql": "^2.18.1",
 		"next": "^10.2.0",
