@@ -1,12 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getSession } from 'next-auth/client';
-import { connectToDatabase } from '../../../utils/mongodb';
+import { ddb } from '../../../utils/aws';
 import { stripe } from '../../../utils/stripe';
 import { stripe_products } from '../../../utils/stripe_products';
 
 export default async (req, res) => {
 	const session = await getSession({ req });
-	const { db } = await connectToDatabase();
 
 	const {
 		sub, user, uuid
@@ -23,7 +22,7 @@ export default async (req, res) => {
 
 		try {
 			// step 2: get the stripe customer
-			const customer = await get_stripe_customer(session, stripe, db);
+			const customer = await get_stripe_customer(session, stripe);
 
 			// step 3: create the session
 			const checkout_session = await stripe.checkout.sessions.create({
@@ -49,6 +48,8 @@ export default async (req, res) => {
 			});
 
 		} catch (ex) {
+			console.error(ex);
+
 			return res.json({
 				error: 'Internal server error',
 				success: false
@@ -64,20 +65,31 @@ export default async (req, res) => {
 };
 
 // helper function to get a stripe customer, either from the database or creating a new one
-async function get_stripe_customer(session, stripe, db) {
-	const saved_stripe_customer = await db.collection('stripe_customers').findOne({ email: session.user.email });
+async function get_stripe_customer(session, stripe) {
+
+	// query dynamodb to get the first matching email. The database shouldn
+	const saved_stripe_customer = (await ddb.query({
+		TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE,
+		ExpressionAttributeValues: {
+			':email': {S: session.user.email}
+		},
+		KeyConditionExpression: `email = :email`, 
+	}).promise()).Items[0];
 
 	// if the stripe user doesn't exist, make a new one
 	let customer;
 	if(!saved_stripe_customer) {
 		customer = await stripe.customers.create({ email: session.user.email });
+					await ddb.putItem({
+				TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE,
+				Item: {
+					'email': {S: session.user.email},
+					'stripe_customer_id': {S: customer.id}				}
+			}).promise();
 
-		await db.collection('stripe_customers').insertOne({
-			email: session.user.email,
-			stripe_customer_id: customer.id
-		});
 	} else {
-		customer = await stripe.customers.retrieve(saved_stripe_customer.stripe_customer_id);
+		console.log("Got stripe customer: " + saved_stripe_customer.stripe_customer_id.S)
+		customer = await stripe.customers.retrieve(saved_stripe_customer.stripe_customer_id.S);
 	}
 
 	return customer;
