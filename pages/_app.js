@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import '../styles/global.css';
 import { Provider } from 'next-auth/client';
+import 'tailwindcss/tailwind.css';
 
 // use nextauth provider for faster performance
-function MyApp({
+function App({
 	Component, pageProps
 }) {
 	return (
@@ -13,4 +13,4 @@ function MyApp({
 	);
 }
 
-export default MyApp;
+export default App;
