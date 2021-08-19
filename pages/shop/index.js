@@ -1,7 +1,7 @@
 import {
 	signIn, signOut, useSession
 } from 'next-auth/client';
-import { Profile } from '../../utils/components/checkout';
+import { Profile } from '../../components/checkout';
 
 export default function Shop() {
 	const [session,

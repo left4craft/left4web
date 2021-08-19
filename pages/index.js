@@ -28,7 +28,7 @@ export default function Home() {
 				<div id='panorama'></div>
 
 				<div className="absolute left-1/2 top-1/4">
-					<div className="bg-center bg-cover w-32 h-32 hover:scale-110 duration-700" style={ { 'background-image': 'url("/images/logo.png")' } }>
+					<div className="absolute -left-16 bottom-0 bg-center bg-l4c-logo bg-cover w-32 h-32 transform hover:scale-110 duration-700">
 					</div>
 				</div>
 			</main>
