@@ -11,9 +11,8 @@ export default async (req, res) => {
 		sub, user, uuid
 	} = req.query;
 	if (session && sub && user && uuid) {
-
 		// step 1: validate the product exists
-		if(stripe_products.subscriptions[sub] === undefined) {
+		if (stripe_products.subscriptions[sub] === undefined) {
 			return res.json({
 				error: 'Invalid subscription',
 				success: false
@@ -46,7 +45,6 @@ export default async (req, res) => {
 				session_id: checkout_session.id,
 				success: true
 			});
-
 		} catch (ex) {
 			console.error(ex);
 
@@ -55,7 +53,6 @@ export default async (req, res) => {
 				success: false
 			});
 		}
-
 	} else {
 		return res.json({
 			error: 'Unauthorized',
@@ -66,29 +63,32 @@ export default async (req, res) => {
 
 // helper function to get a stripe customer, either from the database or creating a new one
 async function get_stripe_customer(session, stripe) {
-
 	// query dynamodb to get the first matching email. The database shouldn
-	const saved_stripe_customer = (await ddb.query({
-		TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE,
-		ExpressionAttributeValues: {
-			':email': {S: session.user.email}
-		},
-		KeyConditionExpression: `email = :email`, 
-	}).promise()).Items[0];
+	const saved_stripe_customer = (
+		await ddb
+			.query({
+				ExpressionAttributeValues: { ':email': { S: session.user.email } },
+				KeyConditionExpression: 'email = :email',
+				TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE
+			})
+			.promise()
+	).Items[0];
 
 	// if the stripe user doesn't exist, make a new one
 	let customer;
-	if(!saved_stripe_customer) {
+	if (!saved_stripe_customer) {
 		customer = await stripe.customers.create({ email: session.user.email });
-					await ddb.putItem({
-				TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE,
+		await ddb
+			.putItem({
 				Item: {
-					'email': {S: session.user.email},
-					'stripe_customer_id': {S: customer.id}				}
-			}).promise();
-
+					email: { S: session.user.email },
+					stripe_customer_id: { S: customer.id }
+				},
+				TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE
+			})
+			.promise();
 	} else {
-		console.log("Got stripe customer: " + saved_stripe_customer.stripe_customer_id.S)
+		console.log('Got stripe customer: ' + saved_stripe_customer.stripe_customer_id.S);
 		customer = await stripe.customers.retrieve(saved_stripe_customer.stripe_customer_id.S);
 	}
 
