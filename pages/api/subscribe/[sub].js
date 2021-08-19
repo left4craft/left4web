@@ -15,7 +15,7 @@ export default async (req, res) => {
 		if (stripe_products.subscriptions[sub] === undefined) {
 			return res.json({
 				error: 'Invalid subscription',
-				success: false
+				success: false,
 			});
 		}
 
