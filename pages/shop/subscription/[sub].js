@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import {
 	signIn, useSession
 } from 'next-auth/client';
@@ -31,7 +30,7 @@ export default function Sub() {
 			<input id="mc_uuid" type="text" placeholder="Minecraft UUID" disabled /> <br />
 
 			<br /> <br />
-			<Image id="mc_preview" src="//:0" />
+			<img id="mc_preview" src="//:0" /> { /* eslint-disable-line @next/next/no-img-element */ }
 			<br />
 			<div id="checkout_button_div" hidden>
 				<input id="checkout_button" type="button" value="Subscribe" onClick={() => load_stripe(sub)} />

@@ -5,8 +5,7 @@ export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Create Next App</title>
-				{/* <meta name="title" content="Left4Craft | Portal" />
+				<meta name="title" content="Left4Craft | Portal" />
 				<meta name="description"content="Left4Craft - a small community Minecraft server with Survival, Creative, and more." />
 				<meta name="keywords" content="Left4Craft, Minecraft, server, portal, wiki, rules, shop, donate" />
 				<meta name="author" content="Left4Craft, eartharoid@left4craft.org" />
@@ -22,13 +21,15 @@ export default function Home() {
 				<meta name="og:site_name" content="Left4Craft" />
 				<meta name="og:description" content="Left4Craft - a small community Minecraft server with Survival, Creative, and more." />
 				<meta name="theme-color" content="#66AA44" />
-				<link rel="icon" href="/favicon.ico" /> */}
+				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
 			<main>
 				<div id='panorama'></div>
-				<div className="container mx-auto">
-					<h1>Left4Craft</h1>
+
+				<div className="absolute left-1/2 top-1/4">
+					<div className="bg-center bg-cover w-32 h-32 hover:scale-110 duration-700" style={ { 'background-image': 'url("/images/logo.png")' } }>
+					</div>
 				</div>
 			</main>
 			<Script type='module' src='/js/panorama.js' />
