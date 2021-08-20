@@ -5,7 +5,7 @@ export function Navbar (props) {
 		setOpen] = useState(false);
 
 	return <div>
-		<nav className={'bg-gray-800 shadow' + (props.fixed ? ' fixed w-full' : '') }>
+		<nav className={'bg-dark shadow' + (props.fixed ? ' fixed w-full' : '') }>
 			<div className="max-w-7xl mx-auto px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className=" flex items-center">
@@ -56,7 +56,7 @@ export function Navbar (props) {
 					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/">
                     Home
 					</a>
-					<a className="text-gray-300 block px-3 py-2 rounded-md text-base font-medium" href="/shop">
+					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/shop">
                     Shop
 					</a>
 					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="https://wiki.left4craft.org">

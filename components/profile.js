@@ -3,7 +3,7 @@ function md5(d){return rstr2hex(binl2rstr(binl_md5(rstr2binl(d),8*d.length)))}fu
 
 export function Profile (props) {
 	if(props.loading) {
-		return <div className="shadow-lg bg-gray-800 p-4">
+		return <div className="shadow-lg bg-dark p-4">
 			<div className="flex-row gap-4 flex justify-center items-center">
 				<div className="flex-shrink-0">
 					<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
@@ -16,7 +16,7 @@ export function Profile (props) {
 						Loading...
 					</span>
 				</div>
-				<button type="button" onClick={props.signOut} className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+				<button type="button" onClick={props.signOut} className="py-2 px-4 bg-light animate-pulse text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
 					Loading...
 				</button>
 			</div>
@@ -25,7 +25,7 @@ export function Profile (props) {
 
 
 	if (props.session) {
-		return <div className="shadow-lg bg-gray-800 p-4">
+		return <div className="shadow-lg bg-dark p-4">
 			<div className="flex-row gap-4 flex justify-center items-center">
 				<div className="flex-shrink-0">
 					{ /* eslint-disable-next-line @next/next/no-img-element */ }
@@ -43,17 +43,17 @@ export function Profile (props) {
 					</div>
 
 				</div>
-				<button type="button" className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+				<button type="button" className="py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
 					Manage Subscriptions
 				</button>
-				<button type="button" onClick={props.signOut} className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+				<button type="button" onClick={props.signOut} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
 					Log Out
 				</button>
 			</div>
 		</div>;
 
 	} else {
-		return <div className="shadow-lg bg-gray-800 p-4">
+		return <div className="shadow-lg bg-dark p-4">
 			<div className="flex-row gap-4 flex justify-center items-center">
 				<div className="flex-shrink-0">
 					<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
@@ -66,7 +66,7 @@ export function Profile (props) {
 						not logged in
 					</span>
 				</div>
-				<button type="button" onClick={props.signIn} className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+				<button type="button" onClick={props.signIn} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
 					Log In
 				</button>
 			</div>
