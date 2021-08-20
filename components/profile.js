@@ -3,11 +3,10 @@ function md5(d){return rstr2hex(binl2rstr(binl_md5(rstr2binl(d),8*d.length)))}fu
 
 export function Profile (props) {
 	if(props.loading) {
-		return <div className="shadow-lg rounded-2xl bg-gray-800 p-4">
+		return <div className="shadow-lg bg-gray-800 p-4">
 			<div className="flex-row gap-4 flex justify-center items-center">
 				<div className="flex-shrink-0">
-					{ /* eslint-disable-next-line @next/next/no-img-element */ }
-					<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src='/images/logo.png' />
+					<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
 				</div>
 				<div className=" flex flex-col">
 					<span className="text-gray-400 text-xs">
@@ -26,19 +25,23 @@ export function Profile (props) {
 
 
 	if (props.session) {
-		return <div className="shadow-lg rounded-2xl bg-gray-800 p-4">
+		return <div className="shadow-lg bg-gray-800 p-4">
 			<div className="flex-row gap-4 flex justify-center items-center">
 				<div className="flex-shrink-0">
 					{ /* eslint-disable-next-line @next/next/no-img-element */ }
-					<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={'https://www.gravatar.com/avatar/' + md5(props.session.user.email.trim().toLowerCase())} />
+					<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={props.session.user.image} />
+					{ /* <img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={'https://www.gravatar.com/avatar/' + md5(props.session.user.email.trim().toLowerCase())} /> */ }
 				</div>
-				<div className=" flex flex-col">
-					<span className="text-gray-400 text-xs">
+				<div className="hidden md:block">
+					<div className="flex flex-col">
+						<span className="text-gray-400 text-xs">
 						Logged in as
-					</span>
-					<span className="text-white text-lg font-medium">
-						{props.session.user.email}
-					</span>
+						</span>
+						<span className="text-white text-lg font-medium">
+							{props.session.user.email}
+						</span>
+					</div>
+
 				</div>
 				<button type="button" className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
 					Manage Subscriptions
@@ -50,15 +53,14 @@ export function Profile (props) {
 		</div>;
 
 	} else {
-		return <div className="shadow-lg rounded-2xl bg-gray-800 p-4">
+		return <div className="shadow-lg bg-gray-800 p-4">
 			<div className="flex-row gap-4 flex justify-center items-center">
 				<div className="flex-shrink-0">
-					{ /* eslint-disable-next-line @next/next/no-img-element */ }
-					<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src='/images/logo.png' />
+					<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
 				</div>
 				<div className=" flex flex-col">
 					<span className="text-gray-400 text-xs">
-						You are currently
+						You must log in with your email to check out
 					</span>
 					<span className="text-white text-lg font-medium">
 						not logged in

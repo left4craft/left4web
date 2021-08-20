@@ -23,7 +23,7 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(window.innerWidth-15, window.innerHeight);
 	container.appendChild(renderer.domElement);
 
 	scene = new THREE.Scene();
@@ -80,7 +80,7 @@ function getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
 function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(window.innerWidth-15, window.innerHeight);
 
 }
 
