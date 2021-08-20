@@ -1,12 +1,12 @@
 import Head from 'next/head';
-// import Image from 'next/image';
+import Script from 'next/script';
+import { Navbar } from '../components/navbar';
 
 export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Create Next App</title>
-				{/* <meta name="title" content="Left4Craft | Portal" />
+				<meta name="title" content="Left4Craft | Portal" />
 				<meta name="description"content="Left4Craft - a small community Minecraft server with Survival, Creative, and more." />
 				<meta name="keywords" content="Left4Craft, Minecraft, server, portal, wiki, rules, shop, donate" />
 				<meta name="author" content="Left4Craft, eartharoid@left4craft.org" />
@@ -22,16 +22,20 @@ export default function Home() {
 				<meta name="og:site_name" content="Left4Craft" />
 				<meta name="og:description" content="Left4Craft - a small community Minecraft server with Survival, Creative, and more." />
 				<meta name="theme-color" content="#66AA44" />
-				<link rel="icon" href="/favicon.ico" /> */}
+				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
 			<main>
-				<div id='panorama'></div>
-				<div className="container mx-auto">
-					<h1>Left4Craft</h1>
+				<Navbar />
+
+				<div id='panorama' />
+				<div className="absolute left-1/2 top-1/4">
+					<div className="absolute -left-16 bottom-0 bg-center bg-l4c-logo bg-cover w-32 h-32 transform hover:scale-110 duration-700">
+					</div>
 				</div>
+
 			</main>
-			<script type='module' src='/js/panorama.js' />
+			<Script type='module' src='/js/panorama.js' />
 		</div>
 	);
 }

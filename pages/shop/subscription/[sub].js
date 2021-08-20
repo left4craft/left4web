@@ -30,7 +30,7 @@ export default function Sub() {
 			<input id="mc_uuid" type="text" placeholder="Minecraft UUID" disabled /> <br />
 
 			<br /> <br />
-			<img id="mc_preview" src="//:0"></img>
+			<img id="mc_preview" src="//:0" /> { /* eslint-disable-line @next/next/no-img-element */ }
 			<br />
 			<div id="checkout_button_div" hidden>
 				<input id="checkout_button" type="button" value="Subscribe" onClick={() => load_stripe(sub)} />

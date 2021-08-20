@@ -1,16 +1,19 @@
 module.exports = {
-	darkMode: true, // or 'media' or 'class'
-	mode: 'jit',
+	darkMode: 'class', // or 'media' or 'class'
 	plugins: [],
-	purge: [
-		'./pages/**/*.{js,ts,jsx,tsx}',
-		'./components/**/*.{js,ts,jsx,tsx}'
-	],
-	theme: { // extend: {}
-		colors: {
-			l4c_dark_grey: '#2E2E2E',
-			l4c_green: '#66AA44',
-			l4c_light_grey: '#505050'
+	purge: [],
+	// eslint-disable-next-line no-unused-vars
+	theme: {
+
+		extend: {
+      	// eslint-disable-next-line no-unused-vars
+			backgroundImage: theme => ({ 'l4c-logo': 'url(\'/images/logo.png\')' }),
+  		colors: {
+				dark: '#2e2e2e',
+				light: '#505050',
+				primary: '#4caf50',
+				secondary: '#66aa44'
+			}
 		}
 	},
 	variants: { extend: {} }

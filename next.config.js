@@ -6,6 +6,7 @@ module.exports = {
 	 *   webpack5: true,
 	 * },
 	 */
+	images: { domains: ['www.gravatar.com'] },
 	target: 'serverless',
 	webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 		/*
