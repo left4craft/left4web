@@ -12,7 +12,7 @@
 # Happy Coding!
 
 left4web:
-  component: "@sls-next/serverless-component@1.19.0"
+  component: "@sls-next/serverless-component@3.2.0"
   inputs:
     bucketName: "left4web-static"
     runtime: "nodejs14.x"
