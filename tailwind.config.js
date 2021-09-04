@@ -6,9 +6,9 @@ module.exports = {
 	theme: {
 
 		extend: {
-      	// eslint-disable-next-line no-unused-vars
+			// eslint-disable-next-line no-unused-vars
 			backgroundImage: theme => ({ 'l4c-logo': 'url(\'/images/logo.png\')' }),
-  		colors: {
+			colors: {
 				dark: '#2e2e2e',
 				light: '#505050',
 				primary: '#4caf50',

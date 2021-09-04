@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import Script from 'next/script';
 import { Navbar } from '../components/navbar';
-import { Canvas } from "@react-three/fiber";
+import { Panorama } from '../components/panorama';
 
 export default function Home() {
 	return (
@@ -29,8 +28,7 @@ export default function Home() {
 			<main>
 				<Navbar />
 
-				<Canvas />
-
+				<Panorama />
 				{/* <div id='panorama' />
 				<div className="absolute left-1/2 top-1/4">
 					<div className="absolute -left-16 bottom-0 bg-center bg-l4c-logo bg-cover w-32 h-32 transform hover:scale-110 duration-700">

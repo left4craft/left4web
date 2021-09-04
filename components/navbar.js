@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useState } from 'react';
 
 export function Navbar (props) {
@@ -5,11 +7,12 @@ export function Navbar (props) {
 		setOpen] = useState(false);
 
 	return <div>
+		{/* eslint-disable-next-line react/prop-types */}
 		<nav className={'bg-dark shadow' + (props.fixed ? ' fixed w-full' : '') }>
 			<div className="max-w-7xl mx-auto px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className=" flex items-center">
-						<a className="flex-shrink-0" href="/">
+						<a className="flex-shrink-0" href="/" passHref>
 							<img className="h-8 w-8" src="/images/logo.png" alt="Logo"/>
 						</a>
 						<div className="hidden md:block">
