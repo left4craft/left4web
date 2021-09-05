@@ -12,7 +12,7 @@ export function Navbar (props) {
 			<div className="max-w-7xl mx-auto px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className=" flex items-center">
-						<a className="flex-shrink-0" href="/" passHref>
+						<a className="flex-shrink-0" href="/">
 							<img className="h-8 w-8" src="/images/logo.png" alt="Logo"/>
 						</a>
 						<div className="hidden md:block">
