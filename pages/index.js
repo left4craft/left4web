@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
-import { Panorama } from '../components/panorama_semi_working';
+import { Panorama } from '../components/panorama';
 
 export default function Home() {
 	return (
