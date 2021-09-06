@@ -25,16 +25,25 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<Navbar />
-				<div id='panorama' className='text-gray-300 h-screen'>
+
+				<div id='navbar' className='absolute z-10 top-0 left-0 w-full text-center'>
+					<Navbar />
+					<div className='h-screen'>
+						<p>Content 1</p>
+					</div>
+					<div className='h-screen'>
+						<p>Content 2</p>
+					</div>
+					<div className='h-screen'>
+						<p>Content 3</p>
+					</div>
+					<div className='h-24 bg-dark text-white'>
+						<p>Footer Text</p>
+					</div>
+				</div>
+				<div id='panorama' className='fixed z-0 top-0 left-0 h-screen w-screen'>
 					<Panorama />
 				</div>
-				{/* <div id='panorama' />
-				<div className="absolute left-1/2 top-1/4">
-					<div className="absolute -left-16 bottom-0 bg-center bg-l4c-logo bg-cover w-32 h-32 transform hover:scale-110 duration-700">
-					</div>
-				</div> */ }
-
 			</main>
 		</div>
 	);

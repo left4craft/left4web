@@ -6,6 +6,7 @@ import {
 import {
 	CubeTextureLoader, MathUtils
 } from 'three';
+import { useState } from 'react';
 
 let lon = 0;
 let lat = -15;
@@ -18,7 +19,23 @@ function SkyBox() {
 		gl, camera, scene
 	} = useThree();
 
-	// const [rotation, setRotation] = useState(0);
+	const [mounted,
+		setMounted] = useState(false);
+
+	function listenToScroll() {
+		const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+		const scrolled = winScroll / height;
+
+		lat = -25 + 40*scrolled;
+	}
+
+	if(!mounted){
+		window.addEventListener('scroll', listenToScroll);
+		listenToScroll();
+		setMounted(true);
+	}
 
 	const loader = new CubeTextureLoader();
 	// The CubeTextureLoader load method takes an array of urls representing all 6 sides of the cube.
