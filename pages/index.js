@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
-import { Panorama } from '../components/panorama';
+import { Panorama } from '../components/panorama_semi_working';
 
 export default function Home() {
 	return (
@@ -24,16 +24,16 @@ export default function Home() {
 				<meta name="theme-color" content="#66AA44" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
 			<main>
 				<Navbar />
-
-				<Panorama />
+				<div id='panorama' className='text-gray-300 h-screen'>
+					<Panorama />
+				</div>
 				{/* <div id='panorama' />
 				<div className="absolute left-1/2 top-1/4">
 					<div className="absolute -left-16 bottom-0 bg-center bg-l4c-logo bg-cover w-32 h-32 transform hover:scale-110 duration-700">
 					</div>
-				</div> */}
+				</div> */ }
 
 			</main>
 		</div>
