@@ -1,8 +1,12 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import { Navbar } from '../components/navbar';
 import { Panorama } from '../components/panorama';
 
 export default function Home() {
+	const [loaded,
+		setLoaded] = useState(false);
+
 	return (
 		<div>
 			<Head>
@@ -26,10 +30,10 @@ export default function Home() {
 			</Head>
 			<main>
 
-				<div id='navbar' className='absolute z-10 top-0 left-0 w-full text-center'>
+				<div id='content' className='absolute z-10 top-0 left-0 w-full text-center'>
 					<Navbar />
 					<div className='h-screen'>
-						<p>Content 1</p>
+						{!loaded && <h1>Loading...</h1>}
 					</div>
 					<div className='h-screen'>
 						<p>Content 2</p>
@@ -42,7 +46,7 @@ export default function Home() {
 					</div>
 				</div>
 				<div id='panorama' className='fixed z-0 top-0 left-0 h-screen w-screen'>
-					<Panorama />
+					<Panorama setLoaded={setLoaded} />
 				</div>
 			</main>
 		</div>

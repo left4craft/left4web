@@ -7,6 +7,7 @@ import {
 	CubeTextureLoader, MathUtils
 } from 'three';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 let lon = 0;
 let lat = -15;
@@ -14,7 +15,7 @@ let phi = 0;
 let theta = 0;
 
 // Loads the skybox texture and applies it to the scene.
-function SkyBox() {
+function SkyBox(props) {
 	const {
 		gl, camera, scene
 	} = useThree();
@@ -46,7 +47,11 @@ function SkyBox() {
 		'./images/panorama/5.png',
 		'./images/panorama/0.png',
 		'./images/panorama/2.png'
-	]);
+	],
+	// on texture load
+	() => {
+		props.setLoaded(true);
+	});
 	// Set the scene background property to the resulting texture.
 	scene.background = texture;
 
@@ -69,12 +74,12 @@ function SkyBox() {
 	return null;
 }
 
-export function Panorama() {
-	return (
+export function Panorama(props) {
+	return <>
 		<Canvas>
-			{/* <CameraControls /> */}
-			{/* <Sphere /> */}
-			<SkyBox />
+			<SkyBox setLoaded={props.setLoaded} />
 		</Canvas>
-	);
+	</>;
 }
+
+Panorama.propTypes = { setLoaded: PropTypes.func };
