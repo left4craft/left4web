@@ -27,7 +27,12 @@ function SkyBox(props) {
 		const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 		const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
-		const scrolled = winScroll / height;
+		let scrolled = winScroll / height;
+
+		// edge case when there is no scroll bar
+		if (isNaN(scrolled)) {
+			scrolled = 0;
+		}
 
 		lat = -25 + 40*scrolled;
 	}
