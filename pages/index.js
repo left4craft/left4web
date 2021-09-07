@@ -5,8 +5,9 @@ import { Navbar } from '../components/navbar';
 import { Panorama } from '../components/panorama';
 
 export default function Home() {
+	// state represents number of images loaded
 	const [loaded,
-		setLoaded] = useState(false);
+		setLoaded] = useState(0);
 
 	return (
 		<div>
@@ -36,7 +37,7 @@ export default function Home() {
 					<Homepage loaded={loaded} />
 				</div>
 				<div id='panorama' className='fixed z-0 top-0 left-0 h-screen w-screen bg-light'>
-					<Panorama setLoaded={setLoaded} />
+					<Panorama loaded={loaded} setLoaded={setLoaded} />
 				</div>
 			</main>
 		</div>

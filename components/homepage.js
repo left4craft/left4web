@@ -6,31 +6,35 @@ export function Homepage(props) {
 	const [transitionComplete,
 		setTransitionComplete] = useState(false);
 
-	if(!props.loaded) {
+	if(props.loaded < 6) {
 		return <>
 			<div className='fixed top-16 left-0 bg-light text-white w-screen h-screen'>
 				<br />
+				<noscript>This site works best with Javascript enabled.</noscript>
 				<br />
+				<b>Left4Craft</b>
+				<p>mc.left4craft.org</p>
 				<div className='flex flex-row justify-center'>
 					<Loader height={60} width={60} color={'4caf50'} />
 				</div>
-				<p>mc.left4craft.org</p>
+				<p>Loading ({ props.loaded }/6)</p>
 			</div>
 		</>;
-	} else if (props.loaded && !transitionComplete) {
+	} else if (props.loaded >= 6 && !transitionComplete) {
 		// display the same loading screen as above, but this time with the animate-fade attibute
 		setTimeout(() => {
-			scroll(0, -9999);
 			setTransitionComplete(true);
 		}, 1000);
 		return <>
 			<div className='fixed top-16 left-0 bg-light text-white w-100 w-screen h-screen animate-fade'>
 				<br />
 				<br />
+				<b>Left4Craft</b>
+				<p>mc.left4craft.org</p>
 				<div className='flex flex-row justify-center'>
 					<Loader height={60} width={60} color={'4caf50'} />
 				</div>
-				<p>mc.left4craft.org</p>
+				<p>Loading ({ props.loaded }/6)</p>
 			</div>
 		</>;
 	}
@@ -52,4 +56,4 @@ export function Homepage(props) {
 	</>;
 }
 
-Homepage.propTypes = { loaded: PropTypes.bool };
+Homepage.propTypes = { loaded: PropTypes.number };

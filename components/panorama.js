@@ -4,7 +4,7 @@ import {
 	Canvas, useThree, useFrame
 } from '@react-three/fiber';
 import {
-	CubeTextureLoader, MathUtils
+	CubeTextureLoader, LoadingManager, MathUtils
 } from 'three';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -43,7 +43,8 @@ function SkyBox(props) {
 		setMounted(true);
 	}
 
-	const loader = new CubeTextureLoader();
+	const loadManager = new LoadingManager();
+	const loader = new CubeTextureLoader(loadManager);
 	// The CubeTextureLoader load method takes an array of urls representing all 6 sides of the cube.
 	const texture = loader.load([
 		'./images/panorama/1.png',
@@ -52,11 +53,20 @@ function SkyBox(props) {
 		'./images/panorama/5.png',
 		'./images/panorama/0.png',
 		'./images/panorama/2.png'
-	],
+	]);
 	// on texture load
-	() => {
-		props.setLoaded(true);
-	});
+	loadManager.onLoad = () => {
+		props.setLoaded(6);
+	},
+
+	// eslint-disable-next-line no-unused-vars
+	loadManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+		if (itemsLoaded > props.loaded) {
+			console.log(itemsLoaded);
+			props.setLoaded(itemsLoaded);
+		}
+	};
+
 	// Set the scene background property to the resulting texture.
 	scene.background = texture;
 
@@ -82,9 +92,12 @@ function SkyBox(props) {
 export function Panorama(props) {
 	return <>
 		<Canvas>
-			<SkyBox setLoaded={props.setLoaded} />
+			<SkyBox loaded = {props.loaded} setLoaded={props.setLoaded} />
 		</Canvas>
 	</>;
 }
 
-Panorama.propTypes = { setLoaded: PropTypes.func };
+Panorama.propTypes = {
+	loaded: PropTypes.number,
+	setLoaded: PropTypes.func
+};
