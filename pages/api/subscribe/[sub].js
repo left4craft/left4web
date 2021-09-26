@@ -33,12 +33,15 @@ export default async (req, res) => {
 						quantity: 1
 					}
 				],
-				metadata: {
-					mc_username: user,
-					mc_uuid: uuid
-				},
 				mode: 'subscription',
 				payment_method_types: ['card'],
+				subscription_data: {
+					metadata: {
+						mc_username: user,
+						mc_uuid: uuid
+					},
+					trial_period_days: 30
+				},
 				success_url: process.env.NEXT_PUBLIC_URL + '/shop/success?session_id={CHECKOUT_SESSION_ID}'
 			});
 			return res.json({

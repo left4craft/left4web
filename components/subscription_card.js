@@ -55,10 +55,17 @@ const perks = {
 	]
 };
 
+const urls = {
+	'Donor': '/shop/subscription/donor',
+	'Patron': '/shop/subscription/patron',
+	'Patron+': '/shop/subscription/patronplus',
+	'User+': '/shop/subscription/userplus'
+};
+
 export function SubscriptionCard (props) {
 
 	return <div className="p-8">
-		<div className="shadow-lg rounded-2xl w-72 bg-gradient-to-r from-primary to-secondary dark:bg-gray-800 p-4">
+		<div className="shadow-lg rounded-2xl w-72 bg-gradient-to-r from-primary to-secondary p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
 			<div className="flex text-white  items-center justify-between">
 				<p className="text-4xl font-medium mb-4">
 					{props.rank}
@@ -80,7 +87,10 @@ export function SubscriptionCard (props) {
 			<ul className="text-sm text-white w-full mt-6 mb-6">
 				{perks[props.rank]}
 			</ul>
-			<button type="button" className="w-full px-3 py-3 text-sm shadow rounded-lg text-white bg-dark hover:bg-light transition ease-in duration-200">
+			<button type="button" onClick= { function f() {
+				document.location.href=urls[props.rank];
+			} }
+			className="w-full px-3 py-3 text-sm shadow rounded-lg text-white bg-dark hover:bg-light transition ease-in duration-200">
 				Subscribe
 			</button>
 		</div>
