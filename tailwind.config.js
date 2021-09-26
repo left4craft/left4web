@@ -29,5 +29,13 @@ module.exports = {
 			})
 		}
 	},
-	variants: { extend: {} }
+	variants: {
+		extend: {
+			backgroundColor: ['checked'],
+			borderColor: ['checked'],
+			inset: ['checked'],
+			zIndex: ['hover',
+				'active']
+		}
+	}
 };

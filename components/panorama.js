@@ -37,9 +37,16 @@ function SkyBox(props) {
 		lat = -25 + 40*scrolled;
 	}
 
+	function onWindowResize() {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+	}
+
 	if(!mounted){
 		window.addEventListener('scroll', listenToScroll);
+		window.addEventListener('resize', onWindowResize);
 		listenToScroll();
+		onWindowResize();
 		setMounted(true);
 	}
 
