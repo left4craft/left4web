@@ -3,72 +3,79 @@
 
 export function Profile (props) {
 	if(props.loading) {
-		return <div className="shadow-lg bg-dark p-4 justify-center">
-			<div className="flex-row gap-4 flex items-center max-w-3xl">
-				<div className="flex-shrink-0">
-					<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
-				</div>
-				<div className=" flex flex-col">
-					<span className="text-gray-400 text-xs">
+		return <div className="shadow-lg bg-dark p-4">
+			<div className="max-w-6xl mx-auto px-2">
+				<div className="flex-row gap-4 flex items-center max-w-3xl">
+					<div className="flex-shrink-0">
+						<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
+					</div>
+					<div className=" flex flex-col">
+						<span className="text-gray-400 text-xs">
 						Loading...
-					</span>
-					<span className="text-white text-lg font-medium">
+						</span>
+						<span className="text-white text-lg font-medium">
 						Loading...
-					</span>
-				</div>
-				<button type="button" onClick={props.signOut} className="py-2 px-4 bg-light animate-pulse text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
+						</span>
+					</div>
+					<button type="button" onClick={props.signOut} className="py-2 px-4 bg-light animate-pulse text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
 					Loading...
-				</button>
+					</button>
+				</div>
 			</div>
 		</div>;
 	}
 
 
 	if (props.session) {
-		return <div className="shadow-lg bg-dark p-4 justify-center">
-			<div className="flex-row gap-4 flex items-center max-w-3xl">
-				<div className="flex-shrink-0">
-					{ /* eslint-disable-next-line @next/next/no-img-element */ }
-					<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={props.session.user.image} />
-					{ /* <img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={'https://www.gravatar.com/avatar/' + md5(props.session.user.email.trim().toLowerCase())} /> */ }
-				</div>
-				<div className="hidden md:block">
-					<div className="flex flex-col">
-						<span className="text-gray-400 text-xs">
-						Logged in as
-						</span>
-						<span className="text-white text-lg font-medium">
-							{props.session.user.email}
-						</span>
+		return <div className="shadow-lg bg-dark p-4">
+			<div className="max-w-6xl mx-auto px-2">
+				<div className="flex-row items-center gap-4 flex max-w-3xl ">
+					<div className="flex-shrink-0">
+						{ /* eslint-disable-next-line @next/next/no-img-element */ }
+						<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={props.session.user.image} />
+						{ /* <img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={'https://www.gravatar.com/avatar/' + md5(props.session.user.email.trim().toLowerCase())} /> */ }
 					</div>
+					<div className="hidden md:block">
+						<div className="flex flex-col">
+							<span className="text-gray-400 text-xs">
+						Logged in as
+							</span>
+							<span className="text-white text-lg font-medium">
+								{props.session.user.email}
+							</span>
+						</div>
 
-				</div>
-				<button type="button" onClick={ redirect_to_manage } className="py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+					</div>
+					<button type="button" onClick={ redirect_to_manage } className="py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
 						Manage Subscriptions
-				</button>
-				<button type="button" onClick={props.signOut} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+					</button>
+					<button type="button" onClick={props.signOut} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
 					Log Out
-				</button>
-			</div>
+					</button>
+				</div>
+			</div>;
+
 		</div>;
 
 	} else {
-		return <div className="shadow-lg bg-dark p-4 justify-center">
-			<div className="flex-row gap-4 flex items-center max-w-3xl">
-				<div className="flex-shrink-0">
-					<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
-				</div>
-				<div className=" flex flex-col">
-					<span className="text-gray-400 text-xs">
+		return <div className="shadow-lg bg-dark p-4">
+			<div className="max-w-6xl mx-auto px-2">
+				<div className="flex-row gap-4 flex items-center max-w-3xl">
+					<div className="flex-shrink-0">
+						<div className="mx-auto object-cover rounded-full h-16 w-16 bg-black" />
+					</div>
+					<div className=" flex flex-col">
+						<span className="text-gray-400 text-xs">
 						You must log in with your email to check out
-					</span>
-					<span className="text-white text-lg font-medium">
+						</span>
+						<span className="text-white text-lg font-medium">
 						not logged in
-					</span>
-				</div>
-				<button type="button" onClick={props.signIn} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+						</span>
+					</div>
+					<button type="button" onClick={props.signIn} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
 					Log In
-				</button>
+					</button>
+				</div>
 			</div>
 		</div>;
 	}
