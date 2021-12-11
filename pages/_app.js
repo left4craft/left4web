@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 import 'tailwindcss/tailwind.css';
 
-// use nextauth provider for faster performance
-function App({
-	Component, pageProps
+
+export default function App({
+	Component,
+	pageProps: {
+		session, ...pageProps
+	}
 }) {
 	return (
-		<Provider session={pageProps.session}>
+		<SessionProvider session={session}>
 			<Component {...pageProps} />
-		</Provider>
+		</SessionProvider>
 	);
 }
 
-export default App;

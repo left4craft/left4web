@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import { ddb } from '../../../utils/aws';
 import { stripe } from '../../../utils/stripe';
 import { stripe_products } from '../../../utils/stripe_products';
