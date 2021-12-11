@@ -36,5 +36,6 @@ export default NextAuth({
 			clientId: process.env.DISCORD_CLIENT_ID,
 			clientSecret: process.env.DISCORD_CLIENT_SECRET
 		})    // ...add more providers here
-	]
+	],
+	secret: process.env.NEXTAUTH_SECRET
 });
