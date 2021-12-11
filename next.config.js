@@ -6,6 +6,20 @@ module.exports = {
 	 *   webpack5: true,
 	 * },
 	 */
+	env: {
+		DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
+		DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+		DYNAMODB_ACCESS_KEY_ID: process.env.DYNAMODB_ACCESS_KEY_ID,
+		DYNAMODB_ACCESS_KEY_SECRET: process.env.DYNAMODB_ACCESS_KEY_SECRET,
+		DYNAMODB_NEXTAUTH_TABLE: process.env.DYNAMODB_NEXTAUTH_TABLE,
+		DYNAMODB_REGION: process.env.DYNAMODB_REGION,
+		DYNAMODB_STRIPE_TABLE: process.env.DYNAMODB_STRIPE_TABLE,
+		JWT_SIGNING_PRIVATE_KEY: process.env.JWT_SIGNING_PRIVATE_KEY,
+		NEXT_PUBLIC_STRIPE_KEY: process.env.NEXT_PUBLIC_STRIPE_KEY,
+		NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+		NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY
+	},
 	images: { domains: ['www.gravatar.com'] }
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*
