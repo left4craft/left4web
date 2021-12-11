@@ -72,7 +72,7 @@ async function get_stripe_customer(session, stripe) {
 			.query({
 				ExpressionAttributeValues: { ':email': { S: session.user.email } },
 				KeyConditionExpression: 'email = :email',
-				TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE
+				TableName: process.env.DYNAMODB_STRIPE_TABLE
 			})
 			.promise()
 	).Items[0];
@@ -87,7 +87,7 @@ async function get_stripe_customer(session, stripe) {
 					email: { S: session.user.email },
 					stripe_customer_id: { S: customer.id }
 				},
-				TableName: process.env.AWS_DYNAMODB_STRIPE_TABLE
+				TableName: process.env.DYNAMODB_STRIPE_TABLE
 			})
 			.promise();
 	} else {

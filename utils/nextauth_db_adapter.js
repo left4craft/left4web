@@ -10,12 +10,12 @@ import AWS from 'aws-sdk';
  */
 
 export const DynamoDBAdapter = () => {
-	const TableName = process.env.AWS_DYNAMODB_NEXTAUTH_TABLE;
+	const TableName = process.env.DYNAMODB_NEXTAUTH_TABLE;
 
 	AWS.config.update({
-		accessKeyId: process.env.AWS_DYNAMODB_ACCESS_KEY_ID,
-		region: process.env.AWS_DYNAMODB_REGION,
-		secretAccessKey: process.env.AWS_DYNAMODB_ACCESS_KEY_SECRET
+		accessKeyId: process.env.DYNAMODB_ACCESS_KEY_ID,
+		region: process.env.DYNAMODB_REGION,
+		secretAccessKey: process.env.DYNAMODB_ACCESS_KEY_SECRET
 	});
 
 	return {
