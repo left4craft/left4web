@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 import {
 	signIn, useSession
-} from 'next-auth/client';
+} from 'next-auth/react';
 import { stripe_products } from '../../../utils/stripe_products';
 
 export default function Sub() {
 	const router = useRouter();
 	const { sub } = router.query;
-	const [session,
-		loading] = useSession();
+	const {
+		data: session, loading
+	} = useSession();
 
 	if(!(sub in stripe_products.subscriptions)) {
 		return <p>Product not found</p>;

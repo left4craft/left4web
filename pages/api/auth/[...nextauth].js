@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
+import DiscordProvider from 'next-auth/providers/discord';
 
 const { DynamoDBAdapter } = require('../../../utils/nextauth_db_adapter');
 
@@ -11,7 +11,7 @@ export default NextAuth({
 	},
 	// Configure one or more authentication providers
 	providers: [
-		Providers.Discord({
+		DiscordProvider({
 			clientId: process.env.DISCORD_CLIENT_ID,
 			clientSecret: process.env.DISCORD_CLIENT_SECRET
 		})    // ...add more providers here

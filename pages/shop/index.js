@@ -1,6 +1,6 @@
 import {
 	signIn, signOut, useSession
-} from 'next-auth/client';
+} from 'next-auth/react';
 import { Profile } from '../../components/profile';
 import { Navbar } from '../../components/navbar';
 import { SubscriptionCard } from '../../components/subscription_card';
@@ -8,8 +8,9 @@ import { OnlineTime } from '../../components/time_online';
 import { useState } from 'react';
 
 export default function Shop() {
-	const [session,
-		loading] = useSession();
+	const {
+		data: session, loading
+	} = useSession();
 
 	const [isAnnual,
 		setAnnual] = useState(false);
