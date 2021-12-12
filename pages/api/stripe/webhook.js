@@ -34,7 +34,7 @@ export default async (req, res) => {
 					await ddb
 						.putItem({
 							Item: { mcuuid: { S: event.data.object.metadata.mc_uuid } },
-							TableName: process.env.DYNAMODB_STRIPE_TABLE
+							TableName: process.env.DYNAMODB_STRIPE_TRIALS_TABLE
 						})
 						.promise();
 				}
