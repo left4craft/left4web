@@ -27,6 +27,19 @@ export default async (req, res) => {
 			const customer = await get_stripe_customer(session, stripe);
 
 			// step 4: create the session
+			const sub_data = {
+				metadata: {
+					mc_username: user,
+					mc_uuid: uuid
+				}
+			};
+
+			// console.log(free_trial);
+
+			if(free_trial) {
+				sub_data.trial_period_days = 30;
+			}
+
 			const checkout_session = await stripe.checkout.sessions.create({
 				cancel_url: process.env.NEXT_PUBLIC_URL + '/shop/subscription/' + sub,
 				customer: customer.id,
@@ -38,13 +51,7 @@ export default async (req, res) => {
 				],
 				mode: 'subscription',
 				payment_method_types: ['card'],
-				subscription_data: {
-					metadata: {
-						mc_username: user,
-						mc_uuid: uuid
-					},
-					trial_period_days: free_trial ? 30 : null
-				},
+				subscription_data: sub_data,
 				success_url: process.env.NEXT_PUBLIC_URL + '/shop/success?session_id={CHECKOUT_SESSION_ID}'
 			});
 			return res.json({
@@ -78,6 +85,9 @@ async function has_free_trial(uuid) {
 			})
 			.promise()
 	).Items[0];
+
+	// console.log(process.env.DYNAMODB_STRIPE_TRIALS_TABLE);
+	// console.log(account);
 
 	return account === undefined;
 }
