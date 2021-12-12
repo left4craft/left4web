@@ -17,6 +17,7 @@
 		"@react-three/fiber": "^7.0.6",
 		"autoprefixer": "^10.4.0",
 		"aws-sdk": "^2.1046.0",
+		"micro": "^9.3.4",
 		"next": "^12.0.7",
 		"next-auth": "^4.0.5",
 		"node-fetch": "^3.0.0",

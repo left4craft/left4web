@@ -60,7 +60,7 @@ async function get_stripe_customer(session, stripe) {
 			})
 			.promise();
 	} else {
-		console.log('Got stripe customer: ' + saved_stripe_customer.stripe_customer_id.S);
+		// console.log('Got stripe customer: ' + saved_stripe_customer.stripe_customer_id.S);
 		customer = await stripe.customers.retrieve(saved_stripe_customer.stripe_customer_id.S);
 	}
 

@@ -69,7 +69,7 @@ function SkyBox(props) {
 	// eslint-disable-next-line no-unused-vars
 	loadManager.onProgress = (url, itemsLoaded, itemsTotal) => {
 		if (itemsLoaded > props.loaded) {
-			console.log(itemsLoaded);
+			// console.log(itemsLoaded);
 			props.setLoaded(itemsLoaded);
 		}
 	};
