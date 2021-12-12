@@ -21,7 +21,8 @@ module.exports = {
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
 		NEXTAUTH_URL: process.env.NEXTAUTH_URL,
 		SQS_QUEUE_URL: process.env.SQS_QUEUE_URL,
-		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY
+		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+		STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET
 	},
 	images: { domains: ['www.gravatar.com'] }
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
