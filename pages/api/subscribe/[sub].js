@@ -20,10 +20,13 @@ export default async (req, res) => {
 		}
 
 		try {
-			// step 2: get the stripe customer
+			// step 2: check if user has free trial
+			const free_trial = await has_free_trial(uuid);
+
+			// step 3: get the stripe customer
 			const customer = await get_stripe_customer(session, stripe);
 
-			// step 3: create the session
+			// step 4: create the session
 			const checkout_session = await stripe.checkout.sessions.create({
 				cancel_url: process.env.NEXT_PUBLIC_URL + '/shop/subscription/' + sub,
 				customer: customer.id,
@@ -40,7 +43,7 @@ export default async (req, res) => {
 						mc_username: user,
 						mc_uuid: uuid
 					},
-					trial_period_days: 30
+					trial_period_days: free_trial ? 30 : null
 				},
 				success_url: process.env.NEXT_PUBLIC_URL + '/shop/success?session_id={CHECKOUT_SESSION_ID}'
 			});
@@ -63,6 +66,22 @@ export default async (req, res) => {
 		});
 	}
 };
+
+// helper function to determine whether a user is eligeble for a free trial
+async function has_free_trial(uuid) {
+	const account = (
+		await ddb
+			.query({
+				ExpressionAttributeValues: { ':mcuuid': { S: uuid } },
+				KeyConditionExpression: 'mcuuid = :mcuuid',
+				TableName: process.env.DYNAMODB_STRIPE_TRIALS_TABLE
+			})
+			.promise()
+	).Items[0];
+
+	return account === undefined;
+}
+
 
 // helper function to get a stripe customer, either from the database or creating a new one
 async function get_stripe_customer(session, stripe) {

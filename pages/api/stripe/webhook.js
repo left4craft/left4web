@@ -25,7 +25,20 @@ export default async (req, res) => {
 
 		try {
 			event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
-			event.environment = process.env.NODE_ENV;
+			// use "livemode" value instead
+			// event.environment = process.env.NODE_ENV;
+
+			// add uuid to free trials table to enforce one free trial per mc account
+			if(event.type === 'customer.subscription.created') {
+				if(event.data.object.status === 'trialing' && event.data.object.metadata !== undefined) {
+					await ddb
+						.putItem({
+							Item: { mcuuid: { S: event.data.object.metadata.mc_uuid } },
+							TableName: process.env.DYNAMODB_STRIPE_TABLE
+						})
+						.promise();
+				}
+			}
 
 			const saved_event = (
 				await ddb
@@ -61,7 +74,7 @@ export default async (req, res) => {
 				return;
 			}
 		} catch (err) {
-			console.log(err.message);
+			// console.log(err.message);
 			res.status(400).send(`Webhook Error: ${err.message}`);
 			return;
 		}
