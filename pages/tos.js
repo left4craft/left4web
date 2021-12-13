@@ -35,19 +35,25 @@ export default function Shop() {
 				<div className='text-center text-2xl font-bold p-4'>
 					<h1>Purchases</h1>
 				</div>
+				<p>You must be at least 18 years old to make a purchase. You may make a purchase on behalf of someone else by
+					specifying their Minecraft username during the checkout process. You are responsible for
+					ensuring the accuracy of the Minecraft account information before completing the transaction.
+				</p>
+				<br />
 				<p>By purchasing intangible items from Left4Craft, you agree to a no refund policy. Left4Craft is not required to
 					give a refund after items are purchased. Left4Craft will make a good-faith effort to deliver the
 					virtual items as described, but We cannot guarentee their delivery. All virtual items
 					purchased have no real world value. We reserve the right to transform or change any rank or any other virtual item,
 					at any time, without prior notice.</p>
 				<br />
-				<p>We reserve the right to restrict your access to any of Our services, including but not limited to Our Minecraft Server
-					and Website, for any reason, without refund.
+				<p>We reserve the right to restrict your access to any of our services, including but not limited to our Minecraft Server
+					and Website, for any reason, without refund. This would typically be the result of violating our rules, as specified
+					in https://wiki.left4craft.org/rules/.
 				</p>
 				<br />
 				<p>You are free to change or cancel subscription purchases at any time. To do so, log in at https://left4craft.org/shop and
 					click the &quot;Manage Account&quot; button. A prorated credit, based on the cost and remaining length of the subscription, may
-					be applied to future transactions with Us. This does not, however, constitute a refund.
+					be applied to future transactions with us. This does not, however, constitute a refund.
 				</p>
 
 				<div className='text-center text-2xl font-bold p-4'>
