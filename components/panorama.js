@@ -1,12 +1,10 @@
-// https://codeworkshop.dev/blog/2020-06-14-creating-a-skybox-with-reflections-in-react-three-fiber/
-
 import {
 	Canvas, useThree, useFrame
 } from '@react-three/fiber';
 import {
-	CubeTextureLoader, LoadingManager, MathUtils
+	MathUtils, Texture, ImageLoader, MeshBasicMaterial, Mesh, BoxGeometry
 } from 'three';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 let lon = 0;
@@ -20,8 +18,55 @@ function SkyBox(props) {
 		gl, camera, scene
 	} = useThree();
 
-	const [mounted,
-		setMounted] = useState(false);
+	useEffect(
+		() => {
+			const textures = getTexturesFromAtlasFile('/images/panorama.png', 6, props.setLoaded);
+
+			const materials = [];
+			for (let i = 0; i < 6; i++) {
+				materials.push(new MeshBasicMaterial({ map: textures[i] }));
+			}
+
+			const skyBox = new Mesh(new BoxGeometry(1, 1, 1), materials);
+			skyBox.geometry.scale(1, 1, - 1);
+			scene.add(skyBox);
+
+			camera.position.z = 0.01;
+
+			window.addEventListener('scroll', listenToScroll);
+			window.addEventListener('resize', onWindowResize);
+			listenToScroll();
+			onWindowResize();
+		},
+		[]
+	);
+
+	function getTexturesFromAtlasFile(atlasImgUrl, tilesNum, setLoaded) {
+		const textures = [];
+
+		for (let i = 0; i < tilesNum; i ++) {
+			textures[i] = new Texture();
+		}
+
+		new ImageLoader()
+			.load(atlasImgUrl, image => {
+
+				let canvas, context;
+				const tileWidth = image.height;
+
+				for (let i = 0; i < textures.length; i ++) {
+					canvas = document.createElement('canvas');
+					context = canvas.getContext('2d');
+					canvas.height = tileWidth;
+					canvas.width = tileWidth;
+					context.drawImage(image, tileWidth * i, 0, tileWidth, tileWidth, 0, 0, tileWidth, tileWidth);
+					textures[i].image = canvas;
+					textures[i].needsUpdate = true;
+					setLoaded(i+1);
+				}
+			});
+		return textures;
+	}
 
 	function listenToScroll() {
 		const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -41,41 +86,6 @@ function SkyBox(props) {
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 	}
-
-	if(!mounted){
-		window.addEventListener('scroll', listenToScroll);
-		window.addEventListener('resize', onWindowResize);
-		listenToScroll();
-		onWindowResize();
-		setMounted(true);
-	}
-
-	const loadManager = new LoadingManager();
-	const loader = new CubeTextureLoader(loadManager);
-	// The CubeTextureLoader load method takes an array of urls representing all 6 sides of the cube.
-	const texture = loader.load([
-		'./images/panorama/1.png',
-		'./images/panorama/3.png',
-		'./images/panorama/4.png',
-		'./images/panorama/5.png',
-		'./images/panorama/0.png',
-		'./images/panorama/2.png'
-	]);
-	// on texture load
-	loadManager.onLoad = () => {
-		props.setLoaded(6);
-	},
-
-	// eslint-disable-next-line no-unused-vars
-	loadManager.onProgress = (url, itemsLoaded, itemsTotal) => {
-		if (itemsLoaded > props.loaded) {
-			// console.log(itemsLoaded);
-			props.setLoaded(itemsLoaded);
-		}
-	};
-
-	// Set the scene background property to the resulting texture.
-	scene.background = texture;
 
 	// eslint-disable-next-line no-unused-vars
 	useFrame((state, delta) => {
@@ -97,8 +107,9 @@ function SkyBox(props) {
 }
 
 export function Panorama(props) {
+	// use <Canvas linear> instead of <Canvas> to fix color mapping issues with react-three-fiber
 	return <>
-		<Canvas>
+		<Canvas linear>
 			<SkyBox loaded = {props.loaded} setLoaded={props.setLoaded} />
 		</Canvas>
 	</>;
