@@ -25,7 +25,10 @@ module.exports = {
 		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 		STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET
 	},
-	images: { domains: ['www.gravatar.com'] }
+	images: {
+		domains: ['www.gravatar.com',
+			'cdn.discordapp.com']
+	}
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*
 	// 	 * Note: we provide webpack above so you should not `require` it

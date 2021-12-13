@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 
 export function Profile (props) {
 	if(props.loading) {
@@ -30,9 +31,7 @@ export function Profile (props) {
 			<div className="max-w-6xl mx-auto px-2">
 				<div className="flex-row items-center gap-4 flex max-w-3xl ">
 					<div className="flex-shrink-0">
-						{ /* eslint-disable-next-line @next/next/no-img-element */ }
-						<img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={props.session.user.image} />
-						{ /* <img className="mx-auto object-cover rounded-full h-16 w-16" alt="profile" src={'https://www.gravatar.com/avatar/' + md5(props.session.user.email.trim().toLowerCase())} /> */ }
+						<Image height={ 64 } width={ 64 } className="mx-auto object-cover rounded-full" alt="profile" src={props.session.user.image} />
 					</div>
 					<div className="hidden md:block">
 						<div className="flex flex-col">

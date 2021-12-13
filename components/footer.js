@@ -3,26 +3,26 @@ import Link from 'next/link';
 export function Footer() {
 	return <>
 		<div className='h-0.5 bg-gradient-to-r from-primary to-secondary' />
-		<footer className="px-3 py-8 bg-dark text-2 text-gray-200 transition-colors duration-200">
+		<footer className="px-3 py-8 bg-dark text-2 text-gray-300 transition-colors duration-200">
 			<div className="flex flex-col">
 				<div className="md:hidden mt-7 mx-auto w-11 h-px rounded-full">
 				</div>
 				<div className="mt-4 md:mt-0 flex flex-col md:flex-row">
-					<nav className="flex-1 flex flex-col items-center justify-center md:items-end md:border-r border-gray-100 md:pr-5">
-						<Link aria-current="page" href="/shop" className="hover:text-white">
-                        Store
+					<nav className="flex-1 flex flex-col items-center justify-center md:items-end md:border-r border-light md:pr-5">
+						<Link href="/shop">
+							<a aria-current="page" className="hover:text-white">Store</a>
 						</Link>
-						<Link aria-current="page" href="/tos" className="hover:text-white">
-						Terms of Service
+						<Link href="/tos">
+							<a aria-current="page" className="hover:text-white">Terms of Service</a>
 						</Link>
-						<Link aria-current="page" href="/privacy" className="hover:text-white">
-                        Privacy
+						<Link href="/privacy">
+							<a aria-current="page" className="hover:text-white">Privacy</a>
 						</Link>
 					</nav>
 					<div className="md:hidden mt-4 mx-auto w-11 h-px rounded-full">
 					</div>
-					<div className="mt-4 md:mt-0 flex-1 flex items-center justify-center md:border-r border-gray-100">
-						<a className="hover:text-primary-gray-20" href="https://github.com/Left4Craft/left4web/">
+					<div className="mt-4 md:mt-0 flex-1 flex items-center justify-center md:border-r border-light">
+						<a className="hover:text-white" href="https://github.com/Left4Craft/left4web/">
 							<span className="sr-only">
                             View on GitHub
 							</span>
@@ -31,7 +31,7 @@ export function Footer() {
 								</path>
 							</svg>
 						</a>
-						<a className="ml-4 hover:text-primary-gray-20" href="https://discord.left4craft.org">
+						<a className="ml-4 hover:text-white" href="https://discord.left4craft.org">
 							<span className="sr-only">
                             Discord
 							</span>
@@ -48,11 +48,11 @@ export function Footer() {
 						</span>
 						<span className="mt-7 md:mt-1">
                         Created by&nbsp;
-							<a className="underline hover:text-primary-gray-20" href="https://github.com/CaptnSisko/">
+							<a className="underline hover:text-white" href="https://github.com/CaptnSisko/">
                             Sisko
 							</a>
 						&nbsp;and&nbsp;
-							<a className="underline hover:text-primary-gray-20" href="https://github.com/eartharoid/">
+							<a className="underline hover:text-white" href="https://github.com/eartharoid/">
                             Earth
 							</a>
 

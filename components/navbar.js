@@ -1,34 +1,42 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export function Navbar (props) {
 	const [isOpen,
 		setOpen] = useState(false);
 
 	return <div>
-		{/* eslint-disable-next-line react/prop-types */}
 		<nav className={'bg-dark shadow' + (props.fixed ? ' fixed w-full' : 'absolute w-full') }>
 			<div className="max-w-6xl mx-auto px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center" >
-						<a className="flex-shrink-0" href="/">
-							<img className="h-8 w-8" src="/images/logo.png" alt="Logo"/>
-						</a>
+						<Link href="/">
+							<a className="flex-shrink-0">
+								<Image height={ 32 } width={ 32 } src="/images/logo.png" alt="Logo" />
+							</a>
+						</Link>
 						<div className="hidden md:block">
 							<div className="ml-10 flex items-baseline space-x-4">
-								<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/">
-                                Home
-								</a>
-								<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/shop">
-                                Shop
-								</a>
+								<Link href="/">
+									<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+										Home
+									</a>
+								</Link>
+								<Link href="/shop">
+									<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+										Shop
+									</a>
+								</Link>
 								<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="https://wiki.left4craft.org">
                                 Wiki
 								</a>
-								<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/vote">
-                                Vote
-								</a>
+								<Link href="/vote">
+									<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+										Vote
+									</a>
+								</Link>
 								<a className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="https://bans.left4craft.org">
                                 Bans
 								</a>
@@ -56,18 +64,24 @@ export function Navbar (props) {
 			</div>
 			<div className="md:hidden" hidden={!isOpen}>
 				<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/">
-                    Home
-					</a>
-					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/shop">
-                    Shop
-					</a>
+					<Link href="/">
+						<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+							Home
+						</a>
+					</Link>
+					<Link href="/shop">
+						<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+							Shop
+						</a>
+					</Link>
 					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="https://wiki.left4craft.org">
                     Wiki
 					</a>
-					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/vote">
-                    Vote
-					</a>
+					<Link href="/vote">
+						<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+							Vote
+						</a>
+					</Link>
 					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="https://bans.left4craft.org">
                     Bans
 					</a>
@@ -79,3 +93,6 @@ export function Navbar (props) {
 		</nav>
 	</div>;
 }
+
+Navbar.propTypes = { fixed: PropTypes.bool };
+

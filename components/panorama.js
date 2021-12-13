@@ -109,7 +109,7 @@ function SkyBox(props) {
 export function Panorama(props) {
 	// use <Canvas linear> instead of <Canvas> to fix color mapping issues with react-three-fiber
 	return <>
-		<Canvas linear>
+		<Canvas>
 			<SkyBox loaded = {props.loaded} setLoaded={props.setLoaded} />
 		</Canvas>
 	</>;
