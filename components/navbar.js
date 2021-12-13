@@ -11,7 +11,7 @@ export function Navbar (props) {
 		<nav className={'bg-dark shadow' + (props.fixed ? ' fixed w-full' : 'absolute w-full') }>
 			<div className="max-w-6xl mx-auto px-8">
 				<div className="flex items-center justify-between h-16">
-					<div className=" flex items-center">
+					<div className="flex items-center" >
 						<a className="flex-shrink-0" href="/">
 							<img className="h-8 w-8" src="/images/logo.png" alt="Logo"/>
 						</a>
