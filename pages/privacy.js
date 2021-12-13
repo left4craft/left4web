@@ -1,4 +1,5 @@
 import { Navbar } from '../components/navbar';
+import { Footer } from '../components/footer';
 
 export default function Shop() {
 	return <div>
@@ -8,7 +9,7 @@ export default function Shop() {
 			<h1>Privacy</h1>
 		</div>
 		<div className="text-white bg-dark center flex justify-center items-center">
-			<div className="max-w-4xl">
+			<div className="max-w-4xl p-8">
 				<div className='text-center text-4xl font-bold p-8'>
 					<h1>Privacy Policy for Left4Craft</h1>
 				</div>
@@ -139,5 +140,6 @@ export default function Shop() {
 			</div>
 		</div>
 
+		<Footer />
 	</div>;
 }

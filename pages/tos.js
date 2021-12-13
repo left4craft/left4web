@@ -1,14 +1,15 @@
 import { Navbar } from '../components/navbar';
+import { Footer } from '../components/footer';
 
 export default function Shop() {
 	return <div>
 		<Navbar />
 		<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
 			<div className="h-32" />
-			<h1>TOS</h1>
+			<h1>Terms</h1>
 		</div>
 		<div className="text-white bg-dark center flex justify-center items-center">
-			<div className="max-w-4xl">
+			<div className="max-w-4xl p-8">
 				<div className='text-center text-4xl font-bold p-8'>
 					<h1>Terms and Conditions</h1>
 				</div>
@@ -224,5 +225,6 @@ export default function Shop() {
 			</div>
 		</div>
 
+		<Footer />
 	</div>;
 }

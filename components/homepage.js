@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Loader } from './loader';
+import { Footer } from './footer';
 
 export function Homepage(props) {
 	const [transitionComplete,
@@ -38,9 +39,8 @@ export function Homepage(props) {
 		<div className='h-screen'>
 			<p>Content 3</p>
 		</div>
-		<div className='h-24 bg-dark text-white'>
-			<p>Footer Text</p>
-		</div>
+		{/* <div className='h-1 bg-gradient-to-r from-primary to-secondary' /> */}
+		<Footer />
 
 	</>;
 }

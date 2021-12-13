@@ -5,6 +5,7 @@ import { Profile } from '../../components/profile';
 import { Navbar } from '../../components/navbar';
 import { SubscriptionCard } from '../../components/subscription_card';
 import { OnlineTime } from '../../components/time_online';
+import { Footer } from '../../components/footer';
 import { useState } from 'react';
 
 export default function Shop() {
@@ -100,7 +101,7 @@ export default function Shop() {
 				</dl>
 			</div>
 		</div>
-
+		<Footer />
 	</div>;
 
 
