@@ -15,13 +15,14 @@ const perks = {
 	'Donor': [
 		<ListItem key='1' value='Donor Prefix' />,
 		<ListItem key='2' value='Blue nickname' />,
-		<ListItem key='3' value='/back and keep xp on death' />,
-		<ListItem key='4' value='6 homes in survival' />,
-		<ListItem key='5' value='6 creative plots' />,
-		<ListItem key='6' value='/hat, /craft, /enderchest' />,
-		<ListItem key='7' value='1000 cosmetic coins per month' />,
-		<ListItem key='8' value='1 Mythic key per month' />,
-		<ListItem key='9' value='Iron Golem, Squid, and Cow disguise' />
+		<ListItem key='3' value='/back on death' />,
+		<ListItem key='4' value='No teleport delay' />,
+		<ListItem key='5' value='6 homes in survival' />,
+		<ListItem key='6' value='6 creative plots' />,
+		<ListItem key='7' value='/hat, /craft, and /enderchest' />,
+		<ListItem key='8' value='1000 cosmetic coins per month' />,
+		<ListItem key='9' value='1 Mythic key per month' />,
+		<ListItem key='10' value='Iron Golem, Squid, and Cow disguise' />
 	],
 	'Patron': [
 		<ListItem key='1' value='Patron Prefix' />,

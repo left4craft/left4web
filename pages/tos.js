@@ -56,12 +56,17 @@ export default function Shop() {
 					click the &quot;Manage Account&quot; button. A prorated credit, based on the cost and remaining length of the subscription, may
 					be applied to future transactions with us. This does not, however, constitute a refund.
 				</p>
+				<br />
+				<p>A free trial may be offered for new Minecraft accounts. The length of this trial, and price thereafter, will be clearly specified
+					during the checkout process. You are solely responsible for cancelling the free trial before the first payment is due if you do
+					not wish to be charged.
+				</p>
 
 				<div className='text-center text-2xl font-bold p-4'>
 					<h1>Cookies</h1>
 				</div>
 				<p>We employ the use of cookies. By accessing Left4Craft, you agreed to use cookies in agreement
-					with the Left4Craft&quot;s Privacy Policy.</p>
+					with the Left4Craft&apos;s Privacy Policy.</p>
 				<br />
 				<p>Most interactive websites use cookies to let us retrieve the user&apos;s details for each visit.
 					Cookies are used by our website to enable the functionality of certain areas to make it easier
@@ -221,7 +226,7 @@ export default function Shop() {
 					be liable for any loss or damage of any nature.</p>
 
 				<div className='h-8' />
-				<p>Last updated: December 12, 2021</p>
+				<p>Last updated: December 16, 2021</p>
 			</div>
 		</div>
 

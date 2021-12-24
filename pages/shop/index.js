@@ -1,6 +1,7 @@
 import {
 	signIn, signOut, useSession
 } from 'next-auth/react';
+import Link from 'next/link';
 import { Profile } from '../../components/profile';
 import { Navbar } from '../../components/navbar';
 import { SubscriptionCard } from '../../components/subscription_card';
@@ -34,6 +35,8 @@ export default function Shop() {
 			<p>Left4Craft has been around for over 8 years, and the best way to support its continued growth is by purchasing a recurring rank.
 				<br />
 				All players get a 1 month free trial on their first subscription.</p>
+			<br />
+				Left4Craft is not affiliated with Mojang AB.
 			<div className="h-8" />
 		</div>
 
@@ -63,41 +66,63 @@ export default function Shop() {
 				<dl className="w-full md:w-2/3">
 					<dt className="mb-4">
 						<h3 className="text-xl font-semibold">
-                    We already have ongoing projects. Will Valohai easily integrate with them?
+                    Why does Left4Craft need money?
 						</h3>
 					</dt>
 					<dd className="mb-16">
 						<p>
-                    Running existing machine learning projects in Valohai is very simple!
-					Integration only requires adding a valohai.yaml configuration file.
-					Moving projects in and out of Valohai is easy – the integration is only the configuration file.
+                    Running a quality Minecraft server can be expensive in the long run. Many
+					costs, including domain registration, website hosting, and server hosting are
+					ongoing. Subscriptions are the only way to sustainably fund Left4Craft in the long run.
 						</p>
 					</dd>
 					<dt className="mb-4">
 						<h3 className="text-xl font-semibold">
-                    How do you compare to other data science platforms?
+                    Is there a free trial? Can I cancel at any time?
 						</h3>
 					</dt>
 					<dd className="mb-16">
 						<p>
-                    We don’t. Valohai isn’t a data science platform; it&#x27;s a Machine Learning Management Platform that
-					handles the whole ML pipeline from feature extraction,
-					to training of your model and to deploying it into production in a reproducible manner.
-					Data science platforms offer hosted notebooks and AutoML solutions.
+                    Yes and yes. All <b>Minecraft accounts</b> (not emails) who have not subscribed before will get a free
+					30-day trial of any rank, after which billing will begin. Subscriptions can be cancelled at any time,
+					for any reason, including during the trial period. For full details, see our <u><Link href="/tos">Terms of Service</Link></u>.
 						</p>
 					</dd>
 					<dt className="mb-4">
 						<h3 className="text-xl font-semibold">
-                    Does Valohai charge for computation?
+                    Can I buy / gift ranks for other people?
 						</h3>
 					</dt>
 					<dd className="mb-16">
 						<p>
-                    Depends. Most of our customers use their own cloud and thus pay for usage according to their own agreements.
-					Valohai doesn&#x27;t charge anything on top of the per-user license fee. If you don&#x27;t have a cloud provider,
-					you can use our AWS, GCP and Azure accounts, and we&#x27;ll only charge you for what you use.
+                    Yes! Simply enter their Minecraft username during the checkout process. You can manage multiple active subscriptions
+					at once.
 						</p>
 					</dd>
+					<dt className="mb-4">
+						<h3 className="text-xl font-semibold">
+                    What are cosmetic coins and keys used for? How do I use them?
+						</h3>
+					</dt>
+					<dd className="mb-16">
+						<p>
+                    Cosmetic coins and keys can be used to obtain cosmetic items in-game such as balloons, pets, and gadgets. To open the cosmetics
+					menu, go to hub, survival, or creative and use &quot;/cosmetics&quot;. To use a key, go to hub (by the party games portal),
+					survival spawn, or creative spawn, and right click the chest that says &quot;Open Treasure.&quot;
+						</p>
+					</dd>
+					<dt className="mb-4">
+						<h3 className="text-xl font-semibold">
+                    Where can I get help with my order?
+						</h3>
+					</dt>
+					<dd className="mb-16">
+						<p>
+                    You can reach out on the official Discord server linked in the footer of this page or email support@left4craft.org for
+					assistance.
+						</p>
+					</dd>
+
 				</dl>
 			</div>
 		</div>

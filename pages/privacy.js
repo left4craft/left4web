@@ -70,7 +70,7 @@ export default function Shop() {
 					<h1>Cookies and Web Beacons</h1>
 				</div>
 
-				<p>Like any other website, Left4Craft uses &apos;cookies&apos;. These cookies are used to store information including visitors&apos;
+				<p>Like any other website, Left4Craft uses &quot;cookies&quot;. These cookies are used to store information including visitors&apos;
 				preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users&apos;
 				experience by customizing our web page content based on visitors&apos; browser type and/or other information.</p>
 				<br />
@@ -136,7 +136,7 @@ export default function Shop() {
 				contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
 
 				<div className='h-8' />
-				<p>Last updated: December 12, 2021</p>
+				<p>Last updated: December 16, 2021</p>
 			</div>
 		</div>
 
