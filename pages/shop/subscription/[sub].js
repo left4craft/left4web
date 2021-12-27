@@ -26,6 +26,11 @@ export default function Shop() {
 	const [uuid,
 		setUUID] = useState('Minecraft UUID');
 
+	const [box1,
+		setBox1] = useState(false);
+	const [box2,
+		setBox2] = useState(false);
+
 	if(loading) {
 		return <>
 			<Navbar />
@@ -110,7 +115,9 @@ export default function Shop() {
 
 		<div className="flex flex-wrap justify-center text-white text-center text-l bg-dark p-8">
 
-			<div className="text-left max-w-2xl relative">
+			<div className="text-left w-96 relative">
+				<p>Cost: { stripe_products.subscriptions[sub].display_name }</p>
+				<div className='h-4' />
 				<label htmlFor="email" className="text-white">
 						Email
 				</label>
@@ -138,18 +145,27 @@ export default function Shop() {
 						Minecraft Skin:
 					</label>
 					<div className='rounded-lg border-2 border-primary flex flex-wrap justify-center p-8'	>
-						<Image id='mc-skin-preview' src={'/api/minecraft/getskin/' + uuid} height={ 432 } width={ 180 } draggable={false} />
+						<Image id='mc-skin-preview' src={'https://mc-heads.net/body/' + uuid + '/right/'} height={ 432 } width={ 180 } draggable={false} />
 					</div>
 					<div className='h-4' />
+					<p>Please check the following:</p>
+					<div className='h-4' />
 					<label className="flex items-center space-x-3 mb-3">
-						<input type="checkbox" name="checked-demo" className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-green-500 checked:border-transparent focus:outline-none"/>
+						<input type="checkbox" onChange={() => setBox1(!box1)} name="mc-check" className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-green-500 checked:border-transparent focus:outline-none"/>
 						<span className="text-white">
-                        Green
+                        This is the correct Minecraft account
 						</span>
 					</label>
-					<button type="button" id="checkout" onClick={() => validate_user(setCheckout, setValidating, setErrormessage, setUUID)} className="w-l py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
+					<label className="flex items-center space-x-3 mb-3">
+						<input type="checkbox" onChange={() => setBox2(!box2)} name="terms-check" className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-green-500 checked:border-transparent focus:outline-none"/>
+						<span className="text-white">
+                        I agree to the <u><Link href='/tos'>Terms of Service</Link></u> and <u><Link href='/privacy'>Privacy Policy</Link></u>
+						</span>
+					</label>
+					<button type="button" id="checkout" onClick={() => validate_user(setCheckout, setValidating, setErrormessage, setUUID)} className={`w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
 						Checkout
 					</button>
+					<p>Free trial details (if applicable) will be displayed on the checkout screen.</p>
 
 				</> }
 

@@ -27,7 +27,8 @@ module.exports = {
 	},
 	images: {
 		domains: ['www.gravatar.com',
-			'cdn.discordapp.com']
+			'cdn.discordapp.com',
+			'mc-heads.net']
 	}
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*

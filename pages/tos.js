@@ -24,7 +24,7 @@ export default function Shop() {
 					<p>These terms and conditions outline the rules and regulations for the use of Left4Craft&apos;s Website, located at https://www.left4craft.org.</p>
 					<br />
 					<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Left4Craft if you do not agree
-						to take all of the terms and conditions stated on this page.</p>
+						to all of the terms and conditions stated on this page.</p>
 					<br />
 					<p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements:
 						&quot;Client&quot;, &quot;You&quot; and &quot;Your&quot; refers to you, the person log on this website and compliant to the

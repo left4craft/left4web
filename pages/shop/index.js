@@ -56,10 +56,10 @@ export default function Shop() {
 			</div>
 
 			<div className="flex flex-wrap bg-dark justify-center">
-				< SubscriptionCard rank="User+" annual={ isAnnual } />
-				< SubscriptionCard rank="Donor" annual={ isAnnual } />
-				< SubscriptionCard rank="Patron" annual={ isAnnual } />
-				< SubscriptionCard rank="Patron+" annual={ isAnnual } />
+				< SubscriptionCard rank="userplus" annual={ isAnnual } />
+				< SubscriptionCard rank="donor" annual={ isAnnual } />
+				< SubscriptionCard rank="patron" annual={ isAnnual } />
+				< SubscriptionCard rank="patronplus" annual={ isAnnual } />
 			</div>
 			<OnlineTime />
 			<div className="bg-gradient-to-r from-primary to-secondary py-20 px-4 text-white">
@@ -129,8 +129,8 @@ export default function Shop() {
 
 					</dl>
 				</div>
-				<Footer />
 			</div>
+			<Footer />
 		</div>
 	);
 }
