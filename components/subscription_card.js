@@ -79,7 +79,10 @@ export function SubscriptionCard (props) {
 			<ul className="text-sm text-white w-full mt-6 mb-6">
 				{getPerks(props.rank)}
 			</ul>
-			<Link href={'/shop/subscription/' + props.rank} passHref>
+			<Link href={{
+				pathname: '/shop/subscription/' + props.rank,
+				query: { annual: props.annual }
+			}}  passHref>
 				<button type="button" className="w-full px-3 py-3 text-sm shadow rounded-lg text-white bg-dark hover:bg-light transition ease-in duration-200">
 					Subscribe
 				</button>
