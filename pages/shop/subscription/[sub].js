@@ -9,10 +9,13 @@ import { Footer } from '../../../components/footer';
 import { stripe_products } from '../../../utils/stripe_products';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Spinner } from '../../../components/loader';
 
 export default function Shop() {
 	const router = useRouter();
-	const { sub } = router.query;
+	const {
+		sub, annual
+	} = router.query;
 	const {
 		data: session, loading
 	} = useSession();
@@ -21,8 +24,8 @@ export default function Shop() {
 		setCheckout] = useState(false);
 	const [validating,
 		setValidating] = useState(false);
-	const [errorMessage,
-		setErrormessage] = useState('');
+	const [mcErrorMessage,
+		setMcErrormessage] = useState('');
 	const [uuid,
 		setUUID] = useState('Minecraft UUID');
 
@@ -30,6 +33,13 @@ export default function Shop() {
 		setBox1] = useState(false);
 	const [box2,
 		setBox2] = useState(false);
+
+	const [stripeErrorMessage,
+		setStripeErrorMessage] = useState('');
+	const [stripeLoading,
+		setStripeLoading] = useState(false);
+
+	const isAnnual = annual === 'true';
 
 	if(loading) {
 		return <>
@@ -46,7 +56,7 @@ export default function Shop() {
 				<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
 			</div>
 			<div className="text-white text-center text-l bg-dark p-8">
-				Loading...
+				<Spinner /> Loading...
 				<div className="h-8" />
 			</div>
 			<Footer />
@@ -116,7 +126,8 @@ export default function Shop() {
 		<div className="flex flex-wrap justify-center text-white text-center text-l bg-dark p-8">
 
 			<div className="text-left w-96 relative">
-				<p>Cost: { stripe_products.subscriptions[sub].display_name }</p>
+				<p>Cost: ${ stripe_products.subscriptions[sub].price[isAnnual ? 1 : 0] } / {isAnnual ? 'year' : 'month'} </p>
+				<p>One month free for Minecraft accounts which have never subscribed before.</p>
 				<div className='h-4' />
 				<label htmlFor="email" className="text-white">
 						Email
@@ -130,9 +141,9 @@ export default function Shop() {
 					<input type="text" id="mc-username" onChange={() => setCheckout(false)} className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Minecraft Username" />
 				</div>
 				<div className='h-4' />
-				{errorMessage !== '' && <label htmlFor="validate-username" className="text-red-500">{errorMessage}</label>}
-				<button type="button" id="validate-username" disabled={validating} onChange={() => console.log('hi')} onClick={() => validate_user(setCheckout, setValidating, setErrormessage, setUUID)} className="w-l py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
-					{validating ? 'Loading...' : 'Check Username'}
+				{mcErrorMessage !== '' && <label htmlFor="validate-username" className="text-red-500">{mcErrorMessage}</label>}
+				<button type="button" id="validate-username" disabled={validating} onClick={() => validate_user(setCheckout, setValidating, setMcErrormessage, setUUID)} className="flex justify-center items-center w-l py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
+					{validating ? <><Spinner /> <p>Loading...</p></>: 'Check Username'}
 				</button>
 				{(!loading && canCheckout) && <>
 					<div className='h-4' />
@@ -162,8 +173,9 @@ export default function Shop() {
                         I agree to the <u><Link href='/tos'>Terms of Service</Link></u> and <u><Link href='/privacy'>Privacy Policy</Link></u>
 						</span>
 					</label>
-					<button type="button" id="checkout" onClick={() => validate_user(setCheckout, setValidating, setErrormessage, setUUID)} className={`w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
-						Checkout
+					{stripeErrorMessage !== '' && <label htmlFor="checkout" className="text-red-500">{stripeErrorMessage}</label>}
+					<button type="button" id="checkout" onClick={() => load_stripe(sub, (box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
+						{stripeLoading ? <><Spinner /> <p>Loading...</p></>: 'Checkout'}
 					</button>
 					<p>Free trial details (if applicable) will be displayed on the checkout screen.</p>
 
@@ -179,6 +191,7 @@ export default function Shop() {
 
 function validate_user(setCheckout, setValidating, setErrormessage, setUUID) {
 	setValidating(true);
+	setErrormessage('');
 	const username = document.getElementById('mc-username').value;
 
 	const uuid_request = new XMLHttpRequest();
@@ -199,7 +212,6 @@ function validate_user(setCheckout, setValidating, setErrormessage, setUUID) {
 				uuid = uuid.slice(0, 8) + '-' + uuid.slice(8, 12) + '-' + uuid.slice(12, 16) + '-' + uuid.slice(16, 20) + '-' + uuid.slice(20);
 
 				setUUID(uuid.toString());
-				setErrormessage('');
 				setCheckout(true);
 				setValidating(false);
 			} else {
@@ -216,3 +228,48 @@ function validate_user(setCheckout, setValidating, setErrormessage, setUUID) {
 	};
 
 }
+
+function load_stripe(sub, canCheckout, setLoading, setErrormessage) {
+	if(!canCheckout) return;
+
+	setLoading(true);
+	setErrormessage('');
+
+	const stripe_script = document.getElementById('stripe_script');
+	if (!stripe_script) {
+		const script = document.createElement('script');
+		script.src = 'https://js.stripe.com/v3/'; // Stripe must be loaded externally
+		script.id = 'stripe_script';
+		document.body.appendChild(script);
+
+		script.onload = () => {
+			checkout(sub);
+		};
+	} else {
+		checkout(sub);
+	}
+}
+
+function checkout(sub, setLoading, setErrormessage) {
+	const checkout_request = new XMLHttpRequest();
+	checkout_request.open('get', '/api/subscribe/' + sub +
+        '?user=' + encodeURIComponent(document.getElementById('mc-username').value) +
+        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value));
+
+	checkout_request.send();
+
+	checkout_request.onload = () => {
+		const checkout_response = JSON.parse(checkout_request.response);
+
+		if(!checkout_response.success) {
+			setErrormessage('Error: ' + checkout_response.error);
+			setLoading(false);
+		} else {
+			/* eslint-disable no-undef */
+			const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+			stripe.redirectToCheckout({ sessionId: checkout_response.session_id });
+		}
+
+	};
+}
+
