@@ -145,6 +145,7 @@ export default function Shop() {
 				<button type="button" id="validate-username" disabled={validating} onClick={() => validate_user(setCheckout, setValidating, setMcErrormessage, setUUID)} className="flex justify-center items-center w-l py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
 					{validating ? <><Spinner /> <p>Loading...</p></>: 'Check Username'}
 				</button>
+				<Image id='mc-skin-preview' src={'https://mc-heads.net/body/d8d5a923-7b20-43d8-883b-1150148d6955/right/'} height={ 432 } width={ 180 } draggable={false} />
 				{(!loading && canCheckout) && <>
 					<div className='h-4' />
 					<label htmlFor="mc-uuid" className="text-white">
@@ -157,6 +158,7 @@ export default function Shop() {
 					</label>
 					<div className='rounded-lg border-2 border-primary flex flex-wrap justify-center p-8'	>
 						<Image id='mc-skin-preview' src={'https://mc-heads.net/body/' + uuid + '/right/'} height={ 432 } width={ 180 } draggable={false} />
+						{/* <img id='mc-skin-preview' src={ 'https://crafatar.com/renders/body/' + uuid } height={ 432 } width={ 180 } draggable={false} /> */}
 					</div>
 					<div className='h-4' />
 					<p>Please check the following:</p>
