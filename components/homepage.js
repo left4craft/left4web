@@ -5,9 +5,9 @@ import { Footer } from './footer';
 
 export function Homepage(props) {
 	const [transitionComplete,
-		setTransitionComplete] = useState(false);
+		setTransitionComplete] = useState();
 
-	if (!transitionComplete && props.loaded >= 6) {
+	if (!transitionComplete && props.loaded) {
 		setTimeout(() => {
 			setTransitionComplete(true);
 		}, 1000);
@@ -15,7 +15,7 @@ export function Homepage(props) {
 
 	if(!transitionComplete) {
 		return <>
-			<div className={'fixed top-16 left-0 bg-light text-white w-screen h-screen' + (props.loaded >= 6 ? ' animate-fade' : '') } >
+			<div className={'fixed top-16 left-0 bg-light text-white w-screen h-screen' + (props.loaded ? ' animate-fade' : '') } >
 				<br />
 				<noscript>This site works best with Javascript enabled.</noscript>
 				<br />
@@ -24,7 +24,7 @@ export function Homepage(props) {
 				<div className='flex flex-row justify-center'>
 					<Loader height={60} width={60} color={'4caf50'} />
 				</div>
-				<p>Loading ({ props.loaded }/6)</p>
+				<p>Loading...</p>
 			</div>
 		</>;
 	}
@@ -45,4 +45,13 @@ export function Homepage(props) {
 	</>;
 }
 
-Homepage.propTypes = { loaded: PropTypes.number };
+Homepage.propTypes = { loaded: PropTypes.bool };
+
+// // https://stackoverflow.com/questions/2446740/post-loading-check-if-an-image-is-in-the-browser-cache/50111407#50111407
+// function isCached(src) {
+// 	const img = document.createElement('img');
+// 	img.src = src;
+// 	const complete = img.complete;
+// 	img.src = '';
+// 	return complete;
+// }

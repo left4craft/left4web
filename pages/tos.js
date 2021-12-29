@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
 import { Footer } from '../components/footer';
+import Link from 'next/link';
 
 export default function Shop() {
 	return (
@@ -21,23 +22,28 @@ export default function Shop() {
 					</div>
 					<p>Welcome to Left4Craft!</p>
 					<br />
-					<p>These terms and conditions outline the rules and regulations for the use of Left4Craft&apos;s Website, located at https://www.left4craft.org.</p>
+					<p>These terms and conditions outline the rules and regulations for the use of Left4Craft&apos;s Website, located at <Link href='/'>https://www.left4craft.org</Link>.
+						Left4Craft is not affiliated with Mojang AB.
+					</p>
 					<br />
-					<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Left4Craft if you do not agree
-						to all of the terms and conditions stated on this page.</p>
+					<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use
+						Left4Craft if you do not agree to all of the terms and conditions stated on this page.</p>
 					<br />
 					<p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements:
 						&quot;Client&quot;, &quot;You&quot; and &quot;Your&quot; refers to you, the person log on this website and compliant to the
 						Company&apos;s terms and conditions. &quot;The Company&quot;, &quot;Ourselves&quot;, &quot;We&quot;, &quot;Our&quot;
 						and &quot;Us&quot;, refers
-						to our Company. &quot;Party&quot;, &quot;Parties&quot;, or &quot;Us&quot;, refers to both the Client and ourselves. All terms refer
-						to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most
+						to our Company. &quot;Party&quot;, &quot;Parties&quot;, or &quot;Us&quot;, refers to both the Client and ourselves.
+						All terms refer
+						to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance
+						to the Client in the most
 						appropriate manner for the express purpose of meeting the Client&apos;s needs in respect of provision
 						of the Company&apos;s stated services,
-						in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular,
+						in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words
+						in the singular,
 						plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same. Our Terms and
 						Conditions were created with the help of the <a href="https://www.privacypolicyonline.com/terms-conditions-generator/">Terms
-							& Conditions Generator</a>.</p>
+						&amp; Conditions Generator</a>.</p>
 
 					<div className='text-center text-2xl font-bold p-4'>
 						<h1>Purchases</h1>
@@ -49,17 +55,18 @@ export default function Shop() {
 					<br />
 					<p>By purchasing intangible items from Left4Craft, you agree to a no refund policy. Left4Craft is not required to
 						give a refund after items are purchased. Left4Craft will make a good-faith effort to deliver the
-						virtual items as described, but We cannot guarentee their delivery. All virtual items
-						purchased have no real world value. We reserve the right to transform or change any rank or any other virtual item,
+						virtual items as described, but we cannot guarentee their delivery. All virtual items
+						purchased have no real world value. we reserve the right to transform or change any rank or any other virtual item,
 						at any time, without prior notice.</p>
 					<br />
 					<p>We reserve the right to restrict your access to any of our services, including but not limited to our Minecraft Server
 						and Website, for any reason, without refund. This would typically be the result of violating our rules, as specified
-						in https://wiki.left4craft.org/rules/.
+						at <a href='https://wiki.left4craft.org/rules/'>https://wiki.left4craft.org/rules/</a>.
 					</p>
 					<br />
-					<p>You are free to change or cancel subscription purchases at any time. To do so, log in at https://left4craft.org/shop and
-						click the &quot;Manage Account&quot; button. A prorated credit, based on the cost and remaining length of the subscription, may
+					<p>You are free to change or cancel subscription purchases at any time. To do so, log in at <Link href='/shop'>https://left4craft.org/shop</Link> and
+						click the &quot;Manage Account&quot; button. A prorated credit, based on the cost and remaining length of
+						the subscription, may
 						be applied to future transactions with us. This does not, however, constitute a refund.
 					</p>
 
@@ -227,7 +234,7 @@ export default function Shop() {
 						be liable for any loss or damage of any nature.</p>
 
 					<div className='h-8' />
-					<p>Last updated: December 12, 2021</p>
+					<p>Last updated: December 28, 2021</p>
 				</div>
 			</div>
 

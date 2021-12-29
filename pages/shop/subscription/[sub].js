@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import {
@@ -43,6 +44,10 @@ export default function Shop() {
 
 	if(loading) {
 		return <>
+			<Head>
+				<title>Left4Craft | Subscribe</title>
+				<meta name="title" content="Left4Craft | Subscribe" />
+			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
@@ -66,6 +71,10 @@ export default function Shop() {
 
 	if(!(sub in stripe_products.subscriptions)) {
 		return <>
+			<Head>
+				<title>Left4Craft | Subscribe</title>
+				<meta name="title" content="Left4Craft | Subscribe" />
+			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
@@ -88,6 +97,10 @@ export default function Shop() {
 
 	if(!session) {
 		return <>
+			<Head>
+				<title>Left4Craft | Subscribe</title>
+				<meta name="title" content="Left4Craft | Subscribe" />
+			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
@@ -110,6 +123,10 @@ export default function Shop() {
 
 
 	return <div>
+		<Head>
+			<title>Left4Craft | Subscribe</title>
+			<meta name="title" content="Left4Craft | Subscribe" />
+		</Head>
 		<Navbar />
 		<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 

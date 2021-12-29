@@ -62,8 +62,8 @@ function SkyBox(props) {
 					context.drawImage(image, tileWidth * i, 0, tileWidth, tileWidth, 0, 0, tileWidth, tileWidth);
 					textures[i].image = canvas;
 					textures[i].needsUpdate = true;
-					setLoaded(i+1);
 				}
+				setLoaded(true);
 			});
 		return textures;
 	}
@@ -116,6 +116,6 @@ export function Panorama(props) {
 }
 
 Panorama.propTypes = {
-	loaded: PropTypes.number,
+	loaded: PropTypes.bool,
 	setLoaded: PropTypes.func
 };

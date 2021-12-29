@@ -7,13 +7,13 @@ import { Panorama } from '../components/panorama';
 export default function Home() {
 	// state represents number of images loaded
 	const [loaded,
-		setLoaded] = useState(0);
+		setLoaded] = useState(false);
 
 	return (
 		<div>
 			<Head>
-				<title>Left4Craft | Portal</title>
-				<meta name="title" content="Left4Craft | Portal" />
+				<title>Left4Craft | Home</title>
+				<meta name="title" content="Left4Craft | Home" />
 			</Head>
 			<main>
 

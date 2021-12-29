@@ -43,11 +43,11 @@ export function Footer() {
 					<div className="md:hidden mt-4 mx-auto w-11 h-px rounded-full ">
 					</div>
 					<div className="mt-7 md:mt-0 flex-1 flex flex-col items-center justify-center md:items-start md:pl-5">
-						<span className="">
+						<span>
                         © { new Date().getFullYear() }
 						</span>
 						<span className="mt-7 md:mt-1">
-                        Created by&nbsp;
+                        Website by&nbsp;
 							<a className="underline hover:text-white" href="https://github.com/CaptnSisko/">
                             Sisko
 							</a>
