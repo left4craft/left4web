@@ -31,6 +31,7 @@ export function Homepage(props) {
 
 	return <>
 		<div className='h-screen'>
+			<h1>Hello World</h1>
 			<p>Content 1</p>
 		</div>
 		<div className='h-screen'>
