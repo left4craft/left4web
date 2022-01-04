@@ -27,12 +27,12 @@ export default function Shop() {
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
-			<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
+			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
 				<div className="h-32" />
 				<h1>Shop</h1>
 			</div>
 
-			<div className="text-white text-center text-bold text-4xl bg-dark font-bold">
+			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
 				<h2>Ranks</h2>
 			</div>

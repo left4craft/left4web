@@ -11,7 +11,7 @@ export default function Terms() {
 				<meta name="title" content="Left4Craft | Terms" />
 			</Head>
 			<Navbar />
-			<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
+			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
 				<div className="h-32" />
 				<h1>Terms</h1>
 			</div>

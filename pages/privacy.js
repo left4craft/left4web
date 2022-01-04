@@ -10,7 +10,7 @@ export default function Privacy() {
 				<meta name="title" content="Left4Craft | Privacy" />
 			</Head>
 			<Navbar />
-			<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
+			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
 				<div className="h-32" />
 				<h1>Privacy</h1>
 			</div>
