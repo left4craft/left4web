@@ -3,7 +3,7 @@ import { Navbar } from '../components/navbar';
 import { Footer } from '../components/footer';
 import Link from 'next/link';
 
-export default function Shop() {
+export default function Terms() {
 	return (
 		<div>
 			<Head>

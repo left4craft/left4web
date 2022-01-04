@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Navbar } from '../components/navbar';
 import { Footer } from '../components/footer';
 
-export default function Shop() {
+export default function Privacy() {
 	return (
 		<div>
 			<Head>
