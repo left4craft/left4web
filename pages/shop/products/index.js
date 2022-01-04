@@ -50,6 +50,25 @@ export default function Shop() {
 					/>
 				</div>
 			</div>
+
+			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
+				<h2 className="text-white font-bold text-4xl my-8">Cosmetic chest keys</h2>
+				<div className="flex overflow-x-scroll pb-2 snap-x snap-mandatory touch-pan-x scroll-smooth">
+				</div>
+			</div>
+
+			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
+				<h2 className="text-white font-bold text-4xl my-8">Cosmetic coins</h2>
+				<div className="flex overflow-x-scroll pb-2 snap-x snap-mandatory touch-pan-x scroll-smooth">
+				</div>
+			</div>
+
+			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
+				<h2 className="text-white font-bold text-4xl my-8">Other</h2>
+				<div className="flex overflow-x-scroll pb-2 snap-x snap-mandatory touch-pan-x scroll-smooth">
+				</div>
+			</div>
+
 			<Footer />
 		</div>
 	);
