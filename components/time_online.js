@@ -1,6 +1,7 @@
 import {
 	useEffect, useState
 } from 'react';
+import Link from 'next/link';
 
 // midnight on november 27, 2013
 const server_founded = 1385532000000;
@@ -61,15 +62,21 @@ export function OnlineTime () {
 					</div>
 				</div>
 			</div>
-			<h3 className="font-bold font-heading text-lg md:text-xl md:py-0 text-primary py-4">
-						Only want to pay once?
-			</h3>
-			<div className="mt-4 w-full md:w-44">
-				<button type="button" className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ">
-							One-Time Purchase
-				</button>
+			<div className="mx-auto w-full lg:w-2/5 text-center">
+				<h3 className="font-bold font-heading text-lg md:text-xl md:py-0 text-primary py-4">
+					Only want to pay once?
+				</h3>
+				<div className="mt-4">
+					<p className="my-4 text-white"> {/* font-semibold */}
+						If you don&apos;t want to subscribe to a rank, you can buy lifetime ranks, cosmetics keys and coins with a one-time purchase.
+					</p>
+					<Link href="/shop/products" passHref>
+						<button type="button" className="py-2 px-4 bg-primary hover:bg-secondary active:bg-secondary focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
+							View products
+						</button>
+					</Link>
+				</div>
 			</div>
-
 		</div>
 	</section>;
 

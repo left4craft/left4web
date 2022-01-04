@@ -26,10 +26,14 @@ module.exports = {
 		STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET
 	},
 	images: {
-		domains: ['www.gravatar.com',
+		domains: [
+			'www.gravatar.com',
 			'cdn.discordapp.com',
 			'crafatar.com',
-			'mc-heads.net']
+			'mc-heads.net',
+			'd1wqzb5bdbcre6.cloudfront.net', // stripe product icons
+			'static.eartharoid.me' // temp
+		]
 	}
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*
