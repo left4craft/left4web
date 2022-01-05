@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 
 export default async (req, res) => {
 	const { uuid } = req.query;
-	const sharp = require("sharp");
+	const sharp = require('sharp');
 
 
 	try {
@@ -18,14 +18,28 @@ export default async (req, res) => {
 		const skin_response = await fetch(skin_url);
 		const skin_arraybuf = await skin_response.arrayBuffer();
 		const skin_buf = Buffer.from(skin_arraybuf);
-		
+
+		const edited_mask_buf = await sharp(skin_buf)
+			.extract({ left: 40, top: 8, width: 8, height: 8}).toBuffer();
+
 		const edited_skin_buf = await sharp(skin_buf)
-									.extract({ left: 8, top: 8, width: 8, height: 8 })
-									.toBuffer();
+			.extract({ left: 8, top: 8, width: 8, height: 8 })
+			.composite([
+				{
+					input: edited_mask_buf
+				}
+			])
+			.toBuffer();
+		const skin_face = Buffer.from(edited_skin_buf);
+		
+		// res.send(skin_face);
+		
+		res.writeHead(200, {
+			'Content-Type': 'image/png',
+			'Content-Length': skin_face.length
+        });
+        res.end(skin_face);
 
-		const skin_face = Buffer.from(edited_skin_buf).toString('base64');
-
-		res.send(skin_face);
 	} catch (e) {
 		res.send({ success: false });
 	}
