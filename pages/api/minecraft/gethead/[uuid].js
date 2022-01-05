@@ -20,25 +20,33 @@ export default async (req, res) => {
 		const skin_buf = Buffer.from(skin_arraybuf);
 
 		const edited_mask_buf = await sharp(skin_buf)
-			.extract({ left: 40, top: 8, width: 8, height: 8}).toBuffer();
+			.extract({
+				height: 8,
+				left: 40,
+				top: 8,
+				width: 8
+			}).toBuffer();
 
 		const edited_skin_buf = await sharp(skin_buf)
-			.extract({ left: 8, top: 8, width: 8, height: 8 })
+			.extract({
+				height: 8,
+				left: 8,
+				top: 8,
+				width: 8
+			})
 			.composite([
-				{
-					input: edited_mask_buf
-				}
+				{ input: edited_mask_buf }
 			])
 			.toBuffer();
 		const skin_face = Buffer.from(edited_skin_buf);
-		
+
 		// res.send(skin_face);
-		
+
 		res.writeHead(200, {
-			'Content-Type': 'image/png',
-			'Content-Length': skin_face.length
-        });
-        res.end(skin_face);
+			'Content-Length': skin_face.length,
+			'Content-Type': 'image/png'
+		});
+		res.end(skin_face);
 
 	} catch (e) {
 		res.send({ success: false });
