@@ -3,8 +3,12 @@ import fetch from 'node-fetch';
 
 export default async (req, res) => {
 	const { uuid } = req.query;
-	const sharp = require('sharp');
 
+	if(!/^[0-9a-zA-Z-]{32,36}$/.test(uuid)) {
+		res.send({ success: false });
+	}
+
+	const sharp = require('sharp');
 
 	try {
 		const response = await fetch('https://sessionserver.mojang.com/session/minecraft/profile/' + uuid);
@@ -42,6 +46,7 @@ export default async (req, res) => {
 
 		// res.send(skin_face);
 
+		res.setHeader('Cache-Control', 'max-age=86400, public');
 		res.writeHead(200, {
 			'Content-Length': skin_face.length,
 			'Content-Type': 'image/png'
