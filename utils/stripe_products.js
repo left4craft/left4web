@@ -16,7 +16,8 @@ export const stripe_products = {
 			],
 			price: [4.99,
 				44.99],
-			price_id: 'price_1IwyWpI0WsrTFIiyMSc0X87W'
+			price_id: ['price_1IwyWpI0WsrTFIiyMSc0X87W',
+				'price_1KFU7NI0WsrTFIiykBFCFK05']
 		},
 
 		patron: {
@@ -34,7 +35,8 @@ export const stripe_products = {
 			],
 			price: [7.99,
 				74.99],
-			price_id: 'price_1IwyWpI0WsrTFIiyMSc0X87W'
+			price_id: ['price_1KFUEvI0WsrTFIiyQsKbcUVw',
+				'price_1KFUEvI0WsrTFIiyWT777DsN']
 		},
 
 		patronplus: {
@@ -50,7 +52,8 @@ export const stripe_products = {
 			],
 			price: [14.99,
 				149.99],
-			price_id: 'price_1IwyWpI0WsrTFIiyMSc0X87W'
+			price_id: ['price_1KFUPBI0WsrTFIiyXhlzIMzu',
+				'price_1KFUPBI0WsrTFIiy47xmz8Yu']
 		},
 
 		userplus: {
@@ -68,7 +71,8 @@ export const stripe_products = {
 			],
 			price: [1.49,
 				13.99],
-			price_id: 'price_1Ir9DQI0WsrTFIiyo7ZMR1OQ'
+			price_id: ['price_1Ir9DQI0WsrTFIiyo7ZMR1OQ',
+				'price_1KFR2eI0WsrTFIiy6rASST5N']
 		}
 	}
 };
