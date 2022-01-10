@@ -62,7 +62,10 @@ export default async (req, res) => {
 		// res.send(skin_face);
 
 	} catch (e) {
-		res.send({ success: false });
+		res.send({
+			exception: e,
+			success: false
+		});
 		console.error(e);
 	}
 };

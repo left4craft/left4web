@@ -36,15 +36,15 @@ module.exports = {
 			'd1wqzb5bdbcre6.cloudfront.net', // stripe product icons
 			'static.eartharoid.me' // temp
 		]
-	},
-	webpack: config => {
-		config.module.rules.push({
-			loader: 'node-loader',
-			test: /\.node$/
-		});
-		// config.externals.sharp = 'commonjs sharp';
-		return config;
 	}
+	// webpack: config => {
+	// 	config.module.rules.push({
+	// 		loader: 'node-loader',
+	// 		test: /\.node$/
+	// 	});
+	// 	// config.externals.sharp = 'commonjs sharp';
+	// 	return config;
+	// }
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*
 	// 	 * Note: we provide webpack above so you should not `require` it
