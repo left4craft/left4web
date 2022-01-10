@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-
+const sharp = require('sharp');
 
 export default async (req, res) => {
 	const { uuid } = req.query;
@@ -7,8 +7,6 @@ export default async (req, res) => {
 	if(!/^[0-9a-zA-Z-]{32,36}$/.test(uuid)) {
 		res.send({ success: false });
 	}
-
-	const sharp = require('sharp');
 
 	try {
 		const response = await fetch('https://sessionserver.mojang.com/session/minecraft/profile/' + uuid);

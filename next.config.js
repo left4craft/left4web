@@ -42,6 +42,7 @@ module.exports = {
 			loader: 'node-loader',
 			test: /\.node$/
 		});
+		config.externals.sharp = 'commonjs sharp';
 		return config;
 	}
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
