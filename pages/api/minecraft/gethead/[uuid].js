@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-const sharp = require('sharp');
+import Jimp from 'jimp/es';
 
 export default async (req, res) => {
 	const { uuid } = req.query;
@@ -17,32 +17,19 @@ export default async (req, res) => {
 		// data.success = true;
 
 		const skin_url = second_json.textures.SKIN.url;
-		const skin_response = await fetch(skin_url);
-		const skin_arraybuf = await skin_response.arrayBuffer();
-		const skin_buf = Buffer.from(skin_arraybuf);
+		// const skin_response = await fetch(skin_url);
+		// const skin_arraybuf = await skin_response.arrayBuffer();
+		// const skin_buf = Buffer.from(skin_arraybuf);
 
-		const edited_mask_buf = await sharp(skin_buf)
-			.extract({
-				height: 8,
-				left: 40,
-				top: 8,
-				width: 8
-			}).toBuffer();
+		const skin = await Jimp.read(skin_url);
 
-		const edited_skin_buf = await sharp(skin_buf)
-			.extract({
-				height: 8,
-				left: 8,
-				top: 8,
-				width: 8
-			})
-			.composite([
-				{ input: edited_mask_buf }
-			])
-			.toBuffer();
-		const skin_face = Buffer.from(edited_skin_buf);
+		const mask = await Jimp.read(skin);
+		mask.crop(40, 8, 8, 8);
 
-		// res.send(skin_face);
+		skin.crop(8, 8, 8, 8);
+		skin.composite(mask, 0, 0);
+
+		const skin_face = await skin.getBufferAsync(Jimp.MIME_PNG);
 
 		res.setHeader('Cache-Control', 'max-age=86400, public');
 		res.writeHead(200, {
@@ -51,7 +38,31 @@ export default async (req, res) => {
 		});
 		res.end(skin_face);
 
+		// const edited_mask_buf = await sharp(skin_buf)
+		// 	.extract({
+		// 		height: 8,
+		// 		left: 40,
+		// 		top: 8,
+		// 		width: 8
+		// 	}).toBuffer();
+
+		// const edited_skin_buf = await sharp(skin_buf)
+		// 	.extract({
+		// 		height: 8,
+		// 		left: 8,
+		// 		top: 8,
+		// 		width: 8
+		// 	})
+		// 	.composite([
+		// 		{ input: edited_mask_buf }
+		// 	])
+		// 	.toBuffer();
+		// const skin_face = Buffer.from(edited_skin_buf);
+
+		// res.send(skin_face);
+
 	} catch (e) {
 		res.send({ success: false });
+		console.error(e);
 	}
 };
