@@ -104,9 +104,9 @@ export function InfoRow({
 	return(
 		<tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
 			<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Player</span><span className='md:hidden'>{rowData.name}</span><div className="items-center hidden md:flex">
-				<div className='mr-2'><Image src={`/api/minecraft/gethead/${rowData.uuid}`} height={32} width={32} className='pixelated rounded-md' draggable={false}/></div>{rowData.name}</div></td>
+				<div className='mr-2'><Image src={`/api/minecraft/gethead/${rowData.uuid}`} height={32} width={32} className='pixelated rounded-md' draggable={false} unoptimized/></div>{rowData.name}</div></td>
 			<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">{`${action} by`}</span><span className='md:hidden'>{rowData.banned_by}</span><div className="items-center hidden md:flex">
-				<div className='mr-2'><Image src={rowData.banned_by_uuid === 'CONSOLE' ? '/images/console.png' : `/api/minecraft/gethead/${rowData.banned_by_uuid}`} height={32} width={32} className='pixelated rounded-md' draggable={false}/></div>{rowData.banned_by}</div></td>
+				<div className='mr-2'><Image src={rowData.banned_by_uuid === 'CONSOLE' ? '/images/console.png' : `/api/minecraft/gethead/${rowData.banned_by_uuid}`} height={32} width={32} className='pixelated rounded-md' draggable={false} unoptimized/></div>{rowData.banned_by}</div></td>
 			<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Reason</span>{rowData.reason}</td>
 			<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Date</span>{new Date(rowData.time).toLocaleString()}</td>
 			<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Expires</span>{(rowData.until === -1 ? 'Permanent' : new Date(rowData.until).toLocaleString()) + removed_by}</td>

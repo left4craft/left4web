@@ -63,7 +63,7 @@ export default async (req, res) => {
 
 	} catch (e) {
 		res.send({
-			exception: e,
+			// exception: e,
 			success: false
 		});
 		console.error(e);
