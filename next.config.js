@@ -36,6 +36,13 @@ module.exports = {
 			'd1wqzb5bdbcre6.cloudfront.net', // stripe product icons
 			'static.eartharoid.me' // temp
 		]
+	},
+	webpack: config => {
+		config.module.rules.push({
+			loader: 'node-loader',
+			test: /\.node$/
+		});
+		return config;
 	}
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*
