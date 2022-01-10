@@ -33,4 +33,7 @@ jobs:
           eslint: true
 
       - name: Build project
+        env:
+          LITEBANS_API: ${{ secrets.LITEBANS_API }}
+          LITEBANS_API_KEY: ${{ secrets.LITEBANS_API_KEY }}
         run: npm run build

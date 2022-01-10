@@ -8,9 +8,14 @@ export default async (req, res) => {
 	const session = await getSession({ req });
 
 	const {
-		sub, user, uuid
+		sub, user, uuid, annual
 	} = req.query;
-	if (session && sub && user && uuid) {
+
+	// use regex to protect against injection attacks
+	if (session && sub && user && uuid &&
+		/^[0-9a-zA-Z_]{1,16}$/.test(user) &&
+		/^[0-9a-zA-Z-]{36}/.test(uuid)) {
+
 		// step 1: validate the product exists
 		if (stripe_products.subscriptions[sub] === undefined) {
 			return res.json({
@@ -41,11 +46,12 @@ export default async (req, res) => {
 			}
 
 			const checkout_session = await stripe.checkout.sessions.create({
-				cancel_url: process.env.NEXT_PUBLIC_URL + '/shop/subscription/' + sub,
+				allow_promotion_codes: true,
+				cancel_url: process.env.NEXT_PUBLIC_URL + '/shop/subscription/' + sub + '?annual=' + annual,
 				customer: customer.id,
 				line_items: [
 					{
-						price: stripe_products.subscriptions[sub].price_id,
+						price: stripe_products.subscriptions[sub].price_id[annual === 'true' ? 1 : 0],
 						quantity: 1
 					}
 				],

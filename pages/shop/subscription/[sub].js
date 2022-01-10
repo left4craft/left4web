@@ -192,7 +192,7 @@ export default function Shop() {
 						</span>
 					</label>
 					{stripeErrorMessage !== '' && <label htmlFor="checkout" className="text-red-500">{stripeErrorMessage}</label>}
-					<button type="button" id="checkout" onClick={() => load_stripe(sub, (box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
+					<button type="button" id="checkout" onClick={() => load_stripe(sub, annual, (box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
 						{stripeLoading ? <><Spinner /> <p>Loading...</p></>: 'Checkout'}
 					</button>
 					<p>Free trial details (if applicable) will be displayed on the checkout screen.</p>
@@ -247,7 +247,7 @@ function validate_user(setCheckout, setValidating, setErrormessage, setUUID) {
 
 }
 
-function load_stripe(sub, canCheckout, setLoading, setErrormessage) {
+function load_stripe(sub, annual, canCheckout, setLoading, setErrormessage) {
 	if(!canCheckout) return;
 
 	setLoading(true);
@@ -261,18 +261,19 @@ function load_stripe(sub, canCheckout, setLoading, setErrormessage) {
 		document.body.appendChild(script);
 
 		script.onload = () => {
-			checkout(sub);
+			checkout(sub, annual, setLoading, setErrormessage);
 		};
 	} else {
-		checkout(sub);
+		checkout(sub, annual, setLoading, setErrormessage);
 	}
 }
 
-function checkout(sub, setLoading, setErrormessage) {
+function checkout(sub, annual, setLoading, setErrormessage) {
 	const checkout_request = new XMLHttpRequest();
 	checkout_request.open('get', '/api/subscribe/' + sub +
         '?user=' + encodeURIComponent(document.getElementById('mc-username').value) +
-        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value));
+        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value) +
+		'&annual=' + annual);
 
 	checkout_request.send();
 
