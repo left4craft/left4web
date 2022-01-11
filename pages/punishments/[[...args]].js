@@ -1,12 +1,18 @@
 import fetch from 'node-fetch';
 import Head from 'next/head';
+import Link from 'next/link';
+
 import PropTypes from 'prop-types';
+import {
+	useState, useEffect
+} from 'react';
 
 import { Navbar } from '../../components/navbar';
 import { Footer } from '../../components/footer';
-import {
-	InfoTable, SearchBar
-} from '../../components/punishment';
+import { InfoTable } from '../../components/info_table';
+import { HistoryTable } from '../../components/history_table';
+import { SearchBar } from '../../components/ban_search';
+import { Loader } from '../../components/loader';
 
 // type: type of info to display (bans, mutes, info, punishments, etc)
 // data: data to display
@@ -14,6 +20,90 @@ import {
 export default function Bans({
 	data, success, type
 }) {
+	const [errorMessage,
+		setErrorMessage] = useState('');
+	const [title,
+		setTitle] = useState('Recent Punishments');
+
+	useEffect(() => {
+		if(type === undefined) return;
+		if(type[0] === 'list') {
+			if(type[1] === 'bans') {
+				setTitle('Recent Bans');
+			} else if(type[1] === 'mutes') {
+				setTitle('Recent Mutes');
+			} else if(type[1] === 'kicks') {
+				setTitle('Recent Kicks');
+			} else if(type[1] === 'warnings') {
+				setTitle('Recent Warnings');
+			}
+		} else if(type[0] === 'history') {
+			setTitle(`Punishments ${type[1]} ${data.minecraft.username}`);
+		}
+	}, [type]);
+
+	if(success === undefined) {
+		return(
+			<div>
+				<Head>
+					<title>Left4Craft | Bans</title>
+					<meta name="title" content="Left4Craft | Bans" />
+				</Head>
+				<Navbar />
+
+				<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
+					<div className="h-32" />
+					<h1>Punishments</h1>
+				</div>
+				<div className="text-white text-center text-4xl bg-dark font-bold">
+					<div className="h-8" />
+					<h2>Loading</h2>
+				</div>
+				<div className="h-8" />
+				<div className="h-96" >
+					<div className='flex flex-row justify-center w-screen'>
+						<Loader height={60} width={60} color={'4caf50'} />
+					</div>
+					{/* <div className='text-white text-center w-screen'>
+						<p>Loading...</p>
+					</div> */}
+				</div>
+				<Footer />
+			</div>
+		);
+	} else if (success === false) {
+		return(
+			<div>
+				<Head>
+					<title>Left4Craft | Bans</title>
+					<meta name="title" content="Left4Craft | Bans" />
+				</Head>
+				<Navbar />
+
+				<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
+					<div className="h-32" />
+					<h1>Punishments</h1>
+				</div>
+				<div className="text-white text-center text-4xl bg-dark font-bold">
+					<div className="h-8" />
+					<h2>Error</h2>
+				</div>
+				<div className="h-8" />
+				<div className="h-96" >
+					<div className='text-white text-center w-screen'>
+						<p>Invalid URL</p>
+						<div className="h-8" />
+						<div className="h-16 flex justify-center text-white">
+							<Link href="/punishments" passHref>
+								<button className="bg-light hover:bg-primary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
+							</Link>
+						</div>
+					</div>
+				</div>
+				<Footer />
+			</div>
+		);
+	}
 	return (
 		<div>
 			<Head>
@@ -24,27 +114,34 @@ export default function Bans({
 
 			<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
 				<div className="h-32" />
-				<h1>Bans</h1>
+				<h1>Punishments</h1>
 			</div>
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
-				<h2>Recent Punishments</h2>
+				<h2>{title}</h2>
 			</div>
 			<div className="h-8" />
 			<div className="flex justify-center">
-				<div className="w-1/6 text-white">
-					Last updated {data === undefined ? 'loading' : new Date(data.timestamp).toLocaleString()}
-				</div>
-				<div className="w-1/3" />
-				<SearchBar />
+				<SearchBar setErrorText={setErrorMessage} />
+			</div>
+			<div className="text-red-500 text-center" >
+				{errorMessage}
 			</div>
 			<div className="h-8" />
 			<div className='flex justify-center'>
 				<div className='w-11/12'>
-					<InfoTable data={data} success={success} type={type} />
+					{type[0] === 'list' && <InfoTable data={data} success={success} type={type} />}
+					{type[0] === 'history' && <HistoryTable data={data} success={success} type={type} />}
 				</div>
 
 			</div>
+			<div className="h-8" />
+			<div className="flex justify-center">
+				<div className="text-white">
+					Last updated {data === undefined ? 'loading' : new Date(data.timestamp).toLocaleString()}
+				</div>
+			</div>
+			<div className="h-8" />
 			{/* <div>
 				<p>Type: {type ? type.join(', ') : ''}</p>
 				<p>Data: {JSON.stringify(data)}</p>
