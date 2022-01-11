@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import { Navbar } from '../../components/navbar';
 import { Footer } from '../../components/footer';
-import { InfoTable } from '../../components/punishment';
+import {
+	InfoTable, SearchBar
+} from '../../components/punishment';
 
 // type: type of info to display (bans, mutes, info, punishments, etc)
 // data: data to display
@@ -24,17 +26,30 @@ export default function Bans({
 				<div className="h-32" />
 				<h1>Bans</h1>
 			</div>
+			<div className="text-white text-center text-4xl bg-dark font-bold">
+				<div className="h-8" />
+				<h2>Recent Punishments</h2>
+			</div>
+			<div className="h-8" />
+			<div className="flex justify-center">
+				<div className="w-1/6 text-white">
+					Last updated {data === undefined ? 'loading' : new Date(data.timestamp).toLocaleString()}
+				</div>
+				<div className="w-1/3" />
+				<SearchBar />
+			</div>
+			<div className="h-8" />
 			<div className='flex justify-center'>
 				<div className='w-11/12'>
 					<InfoTable data={data} success={success} type={type} />
 				</div>
 
 			</div>
-			<div>
+			{/* <div>
 				<p>Type: {type ? type.join(', ') : ''}</p>
 				<p>Data: {JSON.stringify(data)}</p>
 				<p>Success: {success ? 'true' : 'false'} </p>
-			</div>
+			</div> */}
 			<Footer />
 		</div>
 	);
@@ -64,6 +79,7 @@ export async function getStaticProps({ params }) {
 		if(/^[0-9]{1,5}$/.test(args[1])) {
 			const response = await fetch(`${process.env.LITEBANS_API}/list?type=${args[0]}&page=${Number(args[1])-1}&perPage=15&apiKey=${process.env.LITEBANS_API_KEY}`);
 			const data = await response.json();
+			data.timestamp = Date.now();
 
 			return {
 				props: {
@@ -80,6 +96,7 @@ export async function getStaticProps({ params }) {
 			const response = await fetch(`${process.env.LITEBANS_API}/info?type=${args[0]}&id=${args[2]}&apiKey=${process.env.LITEBANS_API_KEY}`);
 			const data = await response.json();
 
+			data.timestamp = Date.now();
 			return {
 				props: {
 					data: data,
@@ -106,6 +123,7 @@ export async function getStaticProps({ params }) {
 		if(/^[0-9]{1,5}$/.test(args[2])) {
 			const response = await fetch(`${process.env.LITEBANS_API}/history?type=${args[0]}&page=${Number(args[2])-1}&perPage=15&uuid=${args[1]}&apiKey=${process.env.LITEBANS_API_KEY}`);
 			const data = await response.json();
+			data.timestamp = Date.now();
 
 			return {
 				props: {
