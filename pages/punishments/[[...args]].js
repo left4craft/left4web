@@ -9,8 +9,9 @@ import {
 
 import { Navbar } from '../../components/navbar';
 import { Footer } from '../../components/footer';
-import { InfoTable } from '../../components/info_table';
+import { ListTable } from '../../components/list_table';
 import { HistoryTable } from '../../components/history_table';
+import { InfoTable } from '../../components/info_table';
 import { SearchBar } from '../../components/ban_search';
 import { Loader } from '../../components/loader';
 
@@ -39,6 +40,16 @@ export default function Bans({
 			}
 		} else if(type[0] === 'history') {
 			setTitle(`Punishments ${type[1]} ${data.minecraft.username}`);
+		} else if(type[0] === 'info' && type[2]) {
+			if(type[1] === 'bans') {
+				setTitle(`Ban #${type[2]}`);
+			} else if(type[1] === 'mutes') {
+				setTitle(`Mute #${type[2]}`);
+			} else if(type[1] === 'kicks') {
+				setTitle(`Kick #${type[2]}`);
+			} else if(type[1] === 'warnings') {
+				setTitle(`Warning #${type[2]}`);
+			}
 		}
 	}, [type]);
 
@@ -130,8 +141,9 @@ export default function Bans({
 			<div className="h-8" />
 			<div className='flex justify-center'>
 				<div className='w-11/12'>
-					{type[0] === 'list' && <InfoTable data={data} success={success} type={type} />}
+					{type[0] === 'list' && <ListTable data={data} success={success} type={type} />}
 					{type[0] === 'history' && <HistoryTable data={data} success={success} type={type} />}
+					{type[0] === 'info' && <InfoTable data={data} success={success} type={type} />}
 				</div>
 
 			</div>
@@ -199,7 +211,8 @@ export async function getStaticProps({ params }) {
 					data: data,
 					success: true,
 					type: ['info',
-						args[0]]
+						args[0],
+						args[2]]
 				}, // will be passed to the page component as props
 				revalidate: 300
 			};
@@ -209,7 +222,7 @@ export async function getStaticProps({ params }) {
 	// /punishments/by/[uuid]/[page] or /punishments/for/[uuid]/[page]
 	if((args[0] === 'by' || args[0] === 'for') &&
         args.length >= 2 &&
-        /^[0-9a-zA-Z-]{36}$/.test(args[1])) {
+        (/^[0-9a-zA-Z-]{36}$/.test(args[1]) || args[1].toLowerCase() === 'console')) {
 
 		// default to first page
 		if(args.length === 2) {
