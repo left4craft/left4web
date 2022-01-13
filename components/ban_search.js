@@ -49,7 +49,7 @@ export function SearchBar({ setErrorText }) {
 				<input id="search-query-mobile" type="search" placeholder="Username or UUID" className="h-8 border border-primary pl-2 pr-7 bg-light rounded-lg focus:outline-none" />
 			</div>
 			<div className="flex justify-center">
-				<button id="search-mobile" onClick={() => search(true)} type="button" className="h-8 py-2 px-4 border border-primary pl-2 pr-7 bg-light rounded-lg focus:outline-none hover:bg-primary transition ease-in duration-200">
+				<button id="search-mobile" onClick={() => search(true)} type="button" className="h-8 py-2 px-4 border border-primary pl-2 pr-7 bg-light rounded-lg focus:outline-none hover:bg-secondary transition ease-in duration-200">
 				Search
 				</button>
 			</div>
@@ -66,7 +66,7 @@ export function SearchBar({ setErrorText }) {
 				</option>
 			</select>
 			<input id="search-query" type="search" placeholder="Username or UUID" className="py-2 px-4 border-t border-b border-primary h-full pl-2 pr-7 bg-light focus:outline-none" />
-			<button type="button" onClick={() => search(false)} id="search" className="py-2 px-4 border-t border-r border-b border-primary h-full pl-2 pr-7 bg-light rounded-r-lg focus:outline-none hover:bg-primary transition ease-in duration-200">
+			<button type="button" onClick={() => search(false)} id="search" className="py-2 px-4 border-t border-r border-b border-primary h-full pl-2 pr-7 bg-light rounded-r-lg focus:outline-none hover:bg-secondary transition ease-in duration-200">
 				Search
 			</button>
 		</div>
