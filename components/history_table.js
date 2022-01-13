@@ -31,7 +31,7 @@ export function HistoryTable({
 			<div className="h-8" />
 			<div className="h-16 flex justify-center text-white">
 				<Link href="/punishments" passHref>
-					<button className="bg-light hover:bg-primary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
+					<button className="bg-light hover:bg-secondary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
 				</Link>
 			</div>
 		</>;
@@ -63,7 +63,7 @@ export function HistoryTable({
 		</table>
 		<div className="flex items-center text-white h-12">
 			<Link href={`/punishments/${type[1]}/${data.minecraft.uuid}/${Math.max(1, data.pragnation.page)}`} scroll={false} passHref>
-				<button type="button" className="w-full text-base font-medium rounded-bl-lg bg-light hover:bg-primary h-full px-4 focus:outline-none transition ease-in duration-200">
+				<button type="button" className="w-full text-base font-medium rounded-bl-lg bg-light hover:bg-secondary h-full px-4 focus:outline-none transition ease-in duration-200">
 					Previous Page
 				</button>
 			</Link>
@@ -71,7 +71,7 @@ export function HistoryTable({
 				Page {data.pragnation.page+1}/{data.pragnation.pages+1}
 			</button>
 			<Link href={`/punishments/${type[1]}/${data.minecraft.uuid}/${Math.min(data.pragnation.pages+1, data.pragnation.page+2)}`} scroll={false} passHref>
-				<button type="button" className="w-full text-base font-medium rounded-br-lg bg-light hover:bg-primary h-full px-4 focus:outline-none transition ease-in duration-200">
+				<button type="button" className="w-full text-base font-medium rounded-br-lg bg-light hover:bg-secondary h-full px-4 focus:outline-none transition ease-in duration-200">
 					Next Page
 				</button>
 			</Link>
@@ -79,7 +79,7 @@ export function HistoryTable({
 		<div className="h-8" />
 		<div className="h-16 flex justify-center text-white">
 			<Link href="/punishments" passHref>
-				<button className="bg-light hover:bg-primary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
+				<button className="bg-light hover:bg-secondary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
 			</Link>
 		</div>
 	</>;

@@ -19,7 +19,7 @@ export function InfoTable({
 			<div className="h-8" />
 			<div className="h-16 flex justify-center text-white">
 				<Link href="/punishments" passHref>
-					<button className="bg-light hover:bg-primary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
+					<button className="bg-light hover:bg-secondary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
 				</Link>
 			</div>
 		</>;
@@ -107,7 +107,7 @@ export function InfoTable({
 		<div className="h-8" />
 		<div className="h-16 flex justify-center text-white">
 			<Link href="/punishments" passHref>
-				<button className="bg-light hover:bg-primary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
+				<button className="bg-light hover:bg-secondary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
 			</Link>
 		</div>
 

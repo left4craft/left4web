@@ -19,7 +19,7 @@ export function ListTable({
 			<div className="h-8" />
 			<div className="h-16 flex justify-center text-white">
 				<Link href="/punishments" passHref>
-					<button className="bg-light hover:bg-primary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
+					<button className="bg-light hover:bg-secondary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
 				</Link>
 			</div>
 		</>;
@@ -45,22 +45,22 @@ export function ListTable({
 	return <>
 		<div className="h-12 flex items-center text-white border-b border-primary text-base font-medium">
 			<Link href='/punishments/bans/1' scroll={false} passHref>
-				<button type="button" className={`w-full rounded-tl-lg h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'bans' ? 'bg-primary hover:bg-secondary' : 'bg-light hover:bg-primary'}`}>
+				<button type="button" className={`w-full rounded-tl-lg h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'bans' ? 'bg-primary' : 'bg-light'} hover:bg-secondary`}>
 					Bans
 				</button>
 			</Link>
 			<Link href='/punishments/mutes/1' scroll={false} passHref>
-				<button type="button" className={`w-full h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'mutes' ? 'bg-primary hover:bg-secondary' : 'bg-light hover:bg-primary'}`}>
+				<button type="button" className={`w-full h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'mutes' ? 'bg-primary' : 'bg-light'} hover:bg-secondary`}>
 					Mutes
 				</button>
 			</Link>
 			<Link href='/punishments/kicks/1' scroll={false} passHref>
-				<button type="button" className={`w-full h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'kicks' ? 'bg-primary hover:bg-secondary' : 'bg-light hover:bg-primary'}`}>
+				<button type="button" className={`w-full h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'kicks' ? 'bg-primary' : 'bg-light'} hover:bg-secondary`}>
 					Kicks
 				</button>
 			</Link>
 			<Link href='/punishments/warnings/1' scroll={false} passHref>
-				<button type="button" className={`w-full rounded-tr-lg h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'warnings' ? 'bg-primary hover:bg-secondary' : 'bg-light hover:bg-primary'}`}>
+				<button type="button" className={`w-full rounded-tr-lg h-full px-4 transition ease-in duration-200 focus:outline-none ${type[1] === 'warnings' ? 'bg-primary' : 'bg-light'} hover:bg-secondary`}>
 					Warnings
 				</button>
 			</Link>
@@ -84,7 +84,7 @@ export function ListTable({
 		</table>
 		<div className="flex items-center text-white h-12">
 			<Link href={`/punishments/${type[1]}/${Math.max(1, data.pragnation.page)}`} scroll={false} passHref>
-				<button type="button" className="w-full text-base font-medium rounded-bl-lg bg-light hover:bg-primary h-full px-4 focus:outline-none transition ease-in duration-200">
+				<button type="button" className="w-full text-base font-medium rounded-bl-lg bg-light hover:bg-secondary h-full px-4 focus:outline-none transition ease-in duration-200">
 					Previous Page
 				</button>
 			</Link>
@@ -92,7 +92,7 @@ export function ListTable({
 				Page {data.pragnation.page+1}/{data.pragnation.pages+1}
 			</button>
 			<Link href={`/punishments/${type[1]}/${Math.min(data.pragnation.pages+1, data.pragnation.page+2)}`} scroll={false} passHref>
-				<button type="button" className="w-full text-base font-medium rounded-br-lg bg-light hover:bg-primary h-full px-4 focus:outline-none transition ease-in duration-200">
+				<button type="button" className="w-full text-base font-medium rounded-br-lg bg-light hover:bg-secondary h-full px-4 focus:outline-none transition ease-in duration-200">
 					Next Page
 				</button>
 			</Link>
