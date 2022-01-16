@@ -13,20 +13,21 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 const responsive = {
-	superLargeDesktop: {
-		// the naming can be any, depends on you.
-		breakpoint: {
-			max: 4000,
-			min: 3000
-		},
-		items: 5
-	},
 	desktop: {
 		breakpoint: {
-			max: 3000,
-			min: 1024
+			max: 4000,
+			min: 1920
 		},
-		items: 3
+		items: 4,
+		slidesToSlide: 3
+	},
+	laptop: {
+		breakpoint: {
+			max: 1920,
+			min: 1300
+		},
+		items: 3,
+		slidesToSlide: 2
 	},
 	tablet: {
 		breakpoint: {
@@ -65,6 +66,7 @@ export default function Shop() {
 			<div id="ranks-list" className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 				<h2 className="text-white font-bold text-4xl my-8">Ranks</h2>
 				<Carousel
+					// centerMode={true}
 					swipeable={true}
 					draggable={true}
 					showDots={true}
@@ -95,6 +97,7 @@ export default function Shop() {
 			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 				<h2 className="text-white font-bold text-4xl my-8">Cosmetic chest keys</h2>
 				<Carousel
+					// centerMode={true}
 					swipeable={true}
 					draggable={true}
 					showDots={true}
@@ -143,6 +146,7 @@ export default function Shop() {
 			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 				<h2 className="text-white font-bold text-4xl my-8">Cosmetic coins</h2>
 				<Carousel
+					// centerMode={true}
 					swipeable={true}
 					draggable={true}
 					showDots={true}
@@ -185,6 +189,7 @@ export default function Shop() {
 			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 				<h2 className="text-white font-bold text-4xl my-8">Other</h2>
 				<Carousel
+					// centerMode={true}
 					swipeable={true}
 					draggable={true}
 					showDots={true}

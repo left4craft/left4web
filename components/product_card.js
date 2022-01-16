@@ -3,17 +3,18 @@ import Image from 'next/image';
 
 export default function ProductCard(props) {
 	return (
-		<div className="flex flex-nowrap mx-2 sm:mx-4 md:mx-6 lg:mx-6 pb-6">
+		<div className="mx-6 sm:mx-8 md:mx-12 lg:mx-16 pb-6">
 			<style>{`
 				#img-${props.slug} {
 					background-image: url("${props.image}");
 					height: 150px;
 					mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%);
+					-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%);
 					padding: 0px;
 				}
 			`}</style>
 			<div className="inline-block px-1">
-				<div className="p-4 min-w-max sm:min-w-min max-w-xs overflow-hidden rounded-lg shadow-sm bg-light text-center"> {/* w-72 h-96 */}
+				<div className="p-4 sm:min-w-min max-w-xs overflow-hidden rounded-lg shadow-sm bg-light text-center"> {/* w-72 h-96 */}
 					<div id={`img-${props.slug}`} className="bg-no-repeat bg-top bg-cover m- op-0"></div>
 					{/* <Image src={props.image} width="110%" height="100%" className="bg-no-repeat bg-top bg-cover p-0"></Image> */}
 					<div className="p-1 text-white">
