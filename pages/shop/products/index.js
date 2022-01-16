@@ -24,7 +24,7 @@ const responsive = {
 	laptop: {
 		breakpoint: {
 			max: 1920,
-			min: 1300
+			min: 1024
 		},
 		items: 3,
 		slidesToSlide: 2
@@ -214,10 +214,4 @@ export default function Shop() {
 			<Footer />
 		</div>
 	);
-}
-
-function scroll(reverse, id) {
-	const scroller = document.getElementById(id);
-	console.log(reverse ? -50 : 50, id, scroller);
-	scroller.scrollBy(reverse ? -250 : 250, 0);
 }
