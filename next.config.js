@@ -17,6 +17,8 @@ module.exports = {
 		DYNAMODB_STRIPE_TABLE: process.env.DYNAMODB_STRIPE_TABLE,
 		DYNAMODB_STRIPE_TRIALS_TABLE: process.env.DYNAMODB_STRIPE_TRIALS_TABLE,
 		JWT_SIGNING_PRIVATE_KEY: process.env.JWT_SIGNING_PRIVATE_KEY,
+		LITEBANS_API: process.env.LITEBANS_API,
+		LITEBANS_API_KEY: process.env.LITEBANS_API_KEY,
 		NEXT_PUBLIC_STRIPE_KEY: process.env.NEXT_PUBLIC_STRIPE_KEY,
 		NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
@@ -35,6 +37,14 @@ module.exports = {
 			'static.eartharoid.me' // temp
 		]
 	}
+	// webpack: config => {
+	// 	config.module.rules.push({
+	// 		loader: 'node-loader',
+	// 		test: /\.node$/
+	// 	});
+	// 	// config.externals.sharp = 'commonjs sharp';
+	// 	return config;
+	// }
 	// webpack: config => { // { buildId, dev, isServer, defaultLoaders, webpack }
 	// 	/*
 	// 	 * Note: we provide webpack above so you should not `require` it

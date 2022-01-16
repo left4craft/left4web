@@ -13,6 +13,7 @@ export default async (req, res) => {
 		// res.writeHead(200, {
 		// 	'Content-Length': imageResp.length
 		// });
+		res.setHeader('Cache-Control', 'max-age=86400, public');
 		res.send('data:image/png;base64, ' + b64);
 	} catch (e) {
 		res.status(500).send('Error fetching skin');
