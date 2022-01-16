@@ -3,10 +3,11 @@ import Image from 'next/image';
 
 export default function ProductCard(props) {
 	return (
-		<div className="flex flex-nowrap mx-2 sm:mx-4 md:mx-6 lg:mx-6">
-			<div className="inline-block px-1 scroll-pl-4 snap-center sm:snap-start snap-always">
+		<div className="flex flex-nowrap mx-2 sm:mx-4 md:mx-6 lg:mx-6 pb-6">
+			<div className="inline-block px-1">
 				<div className="p-4 min-w-max sm:min-w-min max-w-xs overflow-hidden rounded-lg shadow-sm bg-light text-center"> {/* w-72 h-96 */}
-					<Image src={props.image} width="100%" height="100%" className="m-0 mx-auto"></Image>
+					{/* <div className="bg-no-repeat bg-top bg-cover p-0" style="background-image: url('https://static.eartharoid.me/sharex/22/01/VIP%20Orange.png');"></div> */}
+					<Image src={props.image} width="110%" height="100%" className="bg-no-repeat bg-top bg-cover p-0"></Image>
 					<div className="p-1 text-white">
 						<h3 className="font-semibold text-2xl">{props.name}</h3>
 						<h4 className="text-lg text-gray-300">{props.price}</h4>

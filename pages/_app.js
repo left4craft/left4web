@@ -2,6 +2,7 @@
 import { SessionProvider } from 'next-auth/react';
 import Layout from '../components/layout';
 import 'tailwindcss/tailwind.css';
+import '../public/extra.css';
 import Head from 'next/head';
 
 export default function App({
