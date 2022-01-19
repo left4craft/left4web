@@ -76,7 +76,7 @@ export default function Shop() {
 							<div className="text-center">
 								<h3 className="font-bold text-2xl">{selected.name}</h3>
 								<h4 className="text-lg font-semibold text-gray-300">{selected.price}</h4>
-								<button type="button" className="py-2 px-4 m-4 bg-primary hover:bg-secondary active:bg-secondary focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
+								<button type="button" className="py-2 px-4 m-4 bg-primary hover:bg-secondary active:bg-secondary focus:outline-none focus:ring focus:ring-white text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
 									Add to cart
 								</button>
 							</div>
