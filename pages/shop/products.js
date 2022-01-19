@@ -64,7 +64,7 @@ export default function Shop() {
 				isOpen={!!selected}
 				onRequestClose={() => setSelected(null)}
 				contentLabel="Product info"
-				className="bg-light py-4 z-50 absolute inset-8 sm:inset-16md:inset-24 lg:inset-32 xl:inset-y-44 xl:inset-x-72 2xl:inset-y-64 2xl:inset-x-96 text-white overflow-y-scroll"
+				className="bg-light py-4 z-50 absolute inset-8 sm:inset-16md:inset-24 lg:inset-32 xl:inset-y-44 xl:inset-x-72 2xl:inset-y-64 2xl:inset-x-96 text-white overflow-y-auto"
 				overlayClassName="bg-black/75 z-40 fixed top-0 left-0 right-0 bottom-0"
 			>
 				{!!selected && (
