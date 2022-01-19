@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import Image from 'next/image';
-
 export default function ProductCard(props) {
 	return (
 		<div className="mx-6 sm:mx-8 md:mx-12 lg:mx-16 pb-6">
@@ -21,11 +18,9 @@ export default function ProductCard(props) {
 						<h3 className="font-semibold text-2xl">{props.name}</h3>
 						<h4 className="text-lg text-gray-300">{props.price}</h4>
 						<div className="mt-2">
-							<Link href={`/shop/products/${props.slug}`} passHref>
-								<button type="button" className="py-2 px-4 bg-primary hover:bg-secondary active:bg-secondary focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
-									Details
-								</button>
-							</Link>
+							<button type="button" onClick={() => props.select(props)} className="py-2 px-4 bg-primary hover:bg-secondary active:bg-secondary focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
+								Details
+							</button>
 							<button type="button" className="mt-2 py-2 px-4 bg-dark focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
 								Add to cart <span className="text-gray-400">($0)</span>
 							</button>
