@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Navbar } from '../../../components/navbar';
 import { Footer } from '../../../components/footer';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 export default function Shop() {
 	return (

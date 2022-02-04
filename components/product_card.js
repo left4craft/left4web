@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 
 export default function ProductCard(props) {
 	return (
@@ -26,3 +27,10 @@ export default function ProductCard(props) {
 		</div>
 	);
 }
+
+ProductCard.propTypes = {
+	image: PropTypes.string,
+	name: PropTypes.string,
+	price: PropTypes.string,
+	slug: PropTypes.string
+};
