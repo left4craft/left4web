@@ -2,6 +2,7 @@
 import { SessionProvider } from 'next-auth/react';
 import Layout from '../components/layout';
 import 'tailwindcss/tailwind.css';
+import '../public/extra.css';
 import Head from 'next/head';
 
 export default function App({
@@ -23,7 +24,6 @@ export default function App({
 					<meta name="distribution" content="Global" />
 					<meta name="owner" content="Left4Craft" />
 					<meta name="url" content="https://www.left4craft.org" />
-					<meta name="og:title" content="Left4Craft | Home" />
 					<meta name="og:url" content="https://www.left4craft.org" />
 					<meta name="og:image" content="/public/images/logo.png" />
 					<meta name="og:site_name" content="Left4Craft" />
