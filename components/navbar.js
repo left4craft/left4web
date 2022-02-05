@@ -8,7 +8,7 @@ export function Navbar (props) {
 		setOpen] = useState(false);
 
 	return <div>
-		<nav className={'bg-dark shadow' + (props.fixed ? ' fixed w-full' : 'absolute w-full') }>
+		<nav className={'select-none bg-dark shadow' + (props.fixed ? ' fixed w-full' : 'absolute w-full') }>
 			<div className="max-w-6xl mx-auto px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center" >

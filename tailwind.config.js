@@ -8,7 +8,11 @@ module.exports = {
 
 		extend: {
 			// that is animation class
-			animation: { fade: 'fadeOut 1s ease-in-out' },
+			animation: {
+				fade: 'fadeOut 1s ease-in-out',
+				'fade-in': 'fade-in-down 1s ease-out',
+				'fade-out': 'fade-out-up 1s ease-out'
+			},
 
 			// eslint-disable-next-line no-unused-vars
 			backgroundImage: theme => ({ 'l4c-logo': 'url(\'/images/logo.png\')' }),
@@ -22,6 +26,26 @@ module.exports = {
 			// that is actual animation
 			// eslint-disable-next-line no-unused-vars
 			keyframes: theme => ({
+				'fade-in-down': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(-10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-out-up': {
+					'from': {
+						opacity: '1',
+						transform: 'translateY(0px)'
+					},
+					'to': {
+						opacity: '0',
+						transform: 'translateY(-10px)'
+					}
+				},
 				fadeOut: {
 					'0%': { opacity: 1 },
 					'100%': { opacity: 0 }

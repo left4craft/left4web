@@ -50,7 +50,7 @@ function Box(props) {
 	return (
 		<mesh
 			ref={mesh}
-			scale={1}>
+			scale={props.scale}>
 			{/* onClick={event => setActive(!active)}
 			onPointerOver={event => setHover(true)}
 			onPointerOut={event => setHover(false)}> */}
@@ -62,7 +62,10 @@ function Box(props) {
 	);
 }
 
-Box.propTypes = { rotation: PropTypes.object };
+Box.propTypes = {
+	rotation: PropTypes.object,
+	scale: PropTypes.number
+};
 
 export function PlayerHead(props) {
 	// store the HTML element to be able to extract its position
@@ -109,12 +112,13 @@ export function PlayerHead(props) {
 	);
 
 	return (
-		<div ref={el => {
-			if(el === null || headElem === el) return;
-			setHeadElem(el);
-		}
-		}>
-			<Canvas linear>
+		<div
+			ref={el => {
+				if(el === null || headElem === el) return;
+				setHeadElem(el);
+			}
+			}>
+			<Canvas linear className='z-10'>
 				<ambientLight />
 				<pointLight position={[10,
 					10,
@@ -128,7 +132,7 @@ export function PlayerHead(props) {
 					0]} /> */}
 				<Box position={[0,
 					0,
-					0]} rotation={rotation} />
+					0]} rotation={rotation} scale={props.scale} />
 			</Canvas>
 
 		</div>
@@ -137,5 +141,6 @@ export function PlayerHead(props) {
 
 PlayerHead.propTypes = {
 	mousePos: PropTypes.object,
+	scale: PropTypes.number,
 	scroll: PropTypes.number
 };

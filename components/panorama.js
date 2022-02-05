@@ -7,7 +7,7 @@ import {
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-let lon = 0;
+let lon = 180;
 let lat = -15;
 let phi = 0;
 let theta = 0;
