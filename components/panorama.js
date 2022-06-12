@@ -119,3 +119,5 @@ Panorama.propTypes = {
 	loaded: PropTypes.bool,
 	setLoaded: PropTypes.func
 };
+
+SkyBox.propTypes = { setLoaded: PropTypes.func };

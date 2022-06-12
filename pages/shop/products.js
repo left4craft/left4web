@@ -13,7 +13,7 @@ import ProductCard from '../../components/product_card';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Modal from 'react-modal';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 Modal.setAppElement('#__next');
 

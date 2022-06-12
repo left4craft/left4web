@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {
 	Canvas, useFrame
 } from '@react-three/fiber';
+// import {useCubeTexture} from '@react-three/drei'
 import {
 	TextureLoader, MeshBasicMaterial, NearestFilter
 } from 'three';

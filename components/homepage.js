@@ -161,7 +161,7 @@ export function Homepage(props) {
 						<p className="text-md text-gray-300 py-4">
 							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
 							aSDKJA  paskd ioasd aiosd oasijd iouwh euihqwebsxcnb ajskdh asjkhd ajkd asjkhd
-							iaushd asuihd ashuid auisd iasdh uasuidh aiuhsd aid aisdh asuidh 
+							iaushd asuihd ashuid auisd iasdh uasuidh aiuhsd aid aisdh asuidh
 
 						</p>
 					</div>
@@ -210,7 +210,7 @@ export function Homepage(props) {
 						<p className="text-md text-gray-300 py-4">
 							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
 							aSDKJA  paskd ioasd aiosd oasijd iouwh euihqwebsxcnb ajskdh asjkhd ajkd asjkhd
-							iaushd asuihd ashuid auisd iasdh uasuidh aiuhsd aid aisdh asuidh 
+							iaushd asuihd ashuid auisd iasdh uasuidh aiuhsd aid aisdh asuidh
 
 						</p>
 					</div>

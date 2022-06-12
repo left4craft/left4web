@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function ProductCard(props) {
 	return (
 		<div className="mx-6 sm:mx-8 md:mx-12 lg:mx-16 pb-6">
@@ -32,9 +34,10 @@ export default function ProductCard(props) {
 	);
 }
 
-// ProductCard.propTypes = {
-// 	image: PropTypes.string,
-// 	name: PropTypes.string,
-// 	price: PropTypes.string,
-// 	slug: PropTypes.string
-// };
+ProductCard.propTypes = {
+	image: PropTypes.string,
+	name: PropTypes.string,
+	price: PropTypes.string,
+	select: PropTypes.func,
+	slug: PropTypes.string
+};
