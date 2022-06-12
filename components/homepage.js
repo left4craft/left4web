@@ -5,6 +5,7 @@ import {
 import { Loader } from './loader';
 import { Footer } from './footer';
 import { PlayerHead } from './3d_head';
+import Link from 'next/link';
 
 export function Homepage(props) {
 	// state to store whether homepage fully revealed
@@ -47,7 +48,6 @@ export function Homepage(props) {
 			const delta =  scroll - prevScroll;
 			setPrevScroll(scroll);
 
-			console.log(`Scroll: ${scroll}, Prevscroll: ${prevScroll}`);
 			if(!fadeTextbox && scroll > 240) {
 				setFadeTextBox(true);
 			}
@@ -243,14 +243,74 @@ export function Homepage(props) {
 
 		</div>
 
-		{/* <div className='h-screen flex justify-center'>
-			<p>Content 2</p>
-			<PlayerHead mousePos={mousePos} scroll={scroll} />
-		</div> */}
-		<div className='h-screen'>
-			<p>Content 3</p>
+		<div className='h-[60vh]' />
+		<div className='container mx-auto px-6 md:px-12 relative z-10 flex items-center'>
+			<div className="lg:flex lg:items-center lg:justify-between w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
+				<h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+					<span className="block">
+						Ready to join Left4Craft?
+					</span>
+				</h2>
+				<div className="lg:mt-0 lg:flex-shrink-0 py-8">
+					<div className="inline-flex rounded-md">
+						<div className="relative flex flex-col items-center group cursor-pointer"
+							onClick={() => {
+								const elem = document.getElementById('l4c-ip-address');
+								const select = window.getSelection();
+								const range = document.createRange();
+
+								range.selectNodeContents(elem);
+								select.addRange(range);
+								try {
+									navigator.clipboard.writeText('mc.left4craft.org').then(() => {
+										setCopyText('Copied!');
+										setTimeout(() => {
+											setCopyText('Click to copy');
+										}, 2000);
+									}, () => {
+										setCopyText('Failed to copy');
+										setTimeout(() => {
+											setCopyText('Click to copy');
+										}, 2000);
+									});
+									// in case the user has an extremely old browser
+									// or clipboard permissions change in a future version of Chromium/Firefox
+								} catch (e) {
+									setCopyText('Failed to copy');
+									setTimeout(() => {
+										setCopyText('Click to copy');
+									}, 2000);
+								}
+							}}>
+							<div id='l4c-ip-address' className="block bg-primary hover:bg-secondary py-3 px-4 rounded-lg text-lg text-white font-bold uppercase mt-10 transition ease-in duration-200">
+							mc.left4craft.org
+							</div>
+							<div className="absolute bottom-0 flex-col items-center mb-6 flex opacity-0 group-hover:opacity-100 transition ease-in duration-500">
+								<span className="select-none relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">{copyText}</span>
+								<div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+								<div className="h-8" />
+							</div>
+						</div>
+
+					</div>
+					<div className="px-5 inline-flex rounded-md">
+						<div className="cursor-pointer">
+							<Link href="https://discord.left4craft.org" className="relative flex flex-col items-center group" passHref>
+								<div id='l4c-ip-address' className="block bg-dark hover:bg-light py-3 px-4 rounded-lg text-lg text-white font-bold uppercase mt-10 transition ease-in duration-200">
+									Discord
+								</div>
+							</Link>
+						</div>
+
+					</div>
+				</div>
+			</div>
 		</div>
-		{/* <div className='h-1 bg-gradient-to-r from-primary to-secondary' /> */}
+		<div className='h-24' />
+
+		<div className='h-1 bg-gradient-to-r from-primary to-secondary' />
+
+
 		<Footer />
 
 	</div>;
