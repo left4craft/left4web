@@ -139,7 +139,7 @@ export function Homepage(props) {
 		<div className="flex flex-wrap justify-center items-center text-center gap-8">
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
-					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} />
+					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='eartharoid' />
 					<div className="absolute top-16 bg-dark px-4 py-6 mt-6 shadow-lg rounded-lg bg-opacity-80">
 						<h3 className="text-2xl sm:text-xl font-semibold text-white py-4">
 							Survival
@@ -153,7 +153,7 @@ export function Homepage(props) {
 			<div className='w-screen h-20 lg:hidden' />
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
-					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} />
+					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='captain_sisko' />
 					<div className="absolute top-16 bg-dark px-4 py-6 mt-6 shadow-lg rounded-lg bg-opacity-80">
 						<h3 className="text-2xl sm:text-xl font-semibold text-white py-4">
 							Creative
@@ -170,7 +170,7 @@ export function Homepage(props) {
 			<div className='w-screen h-40 lg:hidden' />
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
-					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} />
+					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='cpt_myles' />
 					<div className="absolute top-16 bg-dark px-4 py-6 mt-6 shadow-lg rounded-lg bg-opacity-80">
 						<h3 className="text-2xl sm:text-xl font-semibold text-white py-4">
 							Party Games
@@ -188,7 +188,7 @@ export function Homepage(props) {
 		<div className="flex flex-wrap justify-center items-center text-center gap-8">
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
-					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} />
+					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='snickreny' />
 					<div className="absolute top-16 bg-dark px-4 py-6 mt-6 shadow-lg rounded-lg bg-opacity-80">
 						<h3 className="text-2xl sm:text-xl font-semibold text-white py-4">
 							Since 2013
@@ -202,7 +202,7 @@ export function Homepage(props) {
 			<div className='w-screen h-20 lg:hidden' />
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
-					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} />
+					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='twigo' />
 					<div className="absolute top-16 bg-dark px-4 py-6 mt-6 shadow-lg rounded-lg bg-opacity-80">
 						<h3 className="text-2xl sm:text-xl font-semibold text-white py-4">
 							Custom Code
@@ -219,7 +219,7 @@ export function Homepage(props) {
 			<div className='w-screen h-40 lg:hidden' />
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
-					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} />
+					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='xtimbo' />
 					<div className="absolute top-16 bg-dark px-4 py-6 mt-6 shadow-lg rounded-lg bg-opacity-80">
 						<h3 className="text-2xl sm:text-xl font-semibold text-white py-4">
 							Blazing Fast

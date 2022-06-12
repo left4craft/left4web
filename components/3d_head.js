@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {
 	Canvas, useFrame
 } from '@react-three/fiber';
-// import {useCubeTexture} from '@react-three/drei'
 import {
 	TextureLoader, MeshBasicMaterial, NearestFilter
 } from 'three';
@@ -18,7 +17,7 @@ function Box(props) {
 	useEffect(
 		() => {
 			const loader = new TextureLoader();
-			loader.setPath('/images/heads/captain_sisko/');
+			loader.setPath(`/images/heads/${props.player}/`);
 
 			const materials = [];
 			for(const texture of ['px.png',
@@ -64,6 +63,7 @@ function Box(props) {
 }
 
 Box.propTypes = {
+	player: PropTypes.string,
 	rotation: PropTypes.object,
 	scale: PropTypes.number
 };
@@ -133,7 +133,7 @@ export function PlayerHead(props) {
 					0]} /> */}
 				<Box position={[0,
 					0,
-					0]} rotation={rotation} scale={props.scale} />
+					0]} rotation={rotation} scale={props.scale} player={props.player} />
 			</Canvas>
 
 		</div>
@@ -142,6 +142,7 @@ export function PlayerHead(props) {
 
 PlayerHead.propTypes = {
 	mousePos: PropTypes.object,
+	player: PropTypes.string,
 	scale: PropTypes.number,
 	scroll: PropTypes.number
 };
