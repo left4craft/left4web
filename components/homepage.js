@@ -9,7 +9,11 @@ import { PlayerHead } from './3d_head';
 export function Homepage(props) {
 	// state to store whether homepage fully revealed
 	const [transitionComplete,
-		setTransitionComplete] = useState();
+		setTransitionComplete] = useState(false);
+
+	// state to store whether to fade out the text boxes
+	const [fadeTextbox,
+		setFadeTextBox] = useState(false);
 
 	// state for copy to clipboard text
 	const [copyText,
@@ -42,6 +46,11 @@ export function Homepage(props) {
 		() => {
 			const delta =  scroll - prevScroll;
 			setPrevScroll(scroll);
+
+			console.log(`Scroll: ${scroll}, Prevscroll: ${prevScroll}`);
+			if(!fadeTextbox && scroll > 240) {
+				setFadeTextBox(true);
+			}
 
 			setMousePos({
 				x: mousePos.x,
@@ -136,7 +145,7 @@ export function Homepage(props) {
 				<path fillRule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
 			</svg>
 		</div>
-		<div className="flex flex-wrap justify-center items-center text-center gap-8">
+		<div className={`${scroll > 240 ? 'animate-fade-in opacity-100' : `opacity-0 cursor-default ${fadeTextbox ? 'animate-fade-out' : ''}`} flex flex-wrap justify-center items-center text-center gap-8`}>
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
 					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='eartharoid' />
@@ -185,7 +194,7 @@ export function Homepage(props) {
 
 		</div>
 		<div className="h-64" />
-		<div className="flex flex-wrap justify-center items-center text-center gap-8">
+		<div className={`${scroll > 240 ? 'animate-fade-in opacity-100' : `opacity-0 cursor-default ${fadeTextbox ? 'animate-fade-out' : ''}`} flex flex-wrap justify-center items-center text-center gap-8`}>
 			<div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
 				<div className='relative'>
 					<PlayerHead mousePos={mousePos} scroll={scroll} scale={3} player='snickreny' />
