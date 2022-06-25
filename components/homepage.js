@@ -38,6 +38,12 @@ export function Homepage(props) {
 			document.addEventListener('scroll', () => {
 				setScroll(window.scrollY);
 			});
+
+			return () => {
+				document.removeEventListener('scroll', () => {
+					setScroll(window.scrollY);
+				});
+			};
 		},
 		[]
 	);
@@ -95,7 +101,7 @@ export function Homepage(props) {
 			<div className={`${scroll < 80 ? 'animate-fade-in opacity-100' : 'animate-fade-out opacity-0 cursor-default'} container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40`}>
 				<div className="lg:w-4/5 xl:w-3/5 flex flex-col items-start relative z-10">
 
-					<h1 className="select-none text-left font-bold text-6xl sm:text-7xl text-white outline-4 outline-black leading-tight mt-4">
+					<h1 className="select-none text-left font-bold text-6xl sm:text-7xl text-white leading-tight mt-4 drop-shadow-lg">
 						Small Community Minecraft
 					</h1>
 					<div className="relative flex flex-col items-center group cursor-pointer"
@@ -246,7 +252,7 @@ export function Homepage(props) {
 		<div className='h-[60vh]' />
 		<div className='container mx-auto px-6 md:px-12 relative z-10 flex items-center'>
 			<div className="lg:flex lg:items-center lg:justify-between w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
-				<h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+				<h2 className="text-3xl font-extrabold text-white sm:text-4xl drop-shadow-lg">
 					<span className="block">
 						Ready to join Left4Craft?
 					</span>

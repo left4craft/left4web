@@ -37,6 +37,13 @@ function SkyBox(props) {
 			window.addEventListener('resize', onWindowResize);
 			listenToScroll();
 			onWindowResize();
+
+			// clean up useEffect stuff on unmount
+			return () => {
+				scene.remove(skyBox);
+				window.removeEventListener('scroll', listenToScroll);
+				window.removeEventListener('resize', onWindowResize);
+			};
 		},
 		[]
 	);
