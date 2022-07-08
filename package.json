@@ -18,7 +18,7 @@
 		"@react-three/fiber": "^8.0.27",
 		"autoprefixer": "^10.4.0",
 		"aws-sdk": "^2.1170.0",
-		"jimp": "^0.16.0",
+		"jimp-compact": "^0.16.1-2",
 		"micro": "^9.3.4",
 		"next": "^12.2.1",
 		"next-auth": "^4.9.0",

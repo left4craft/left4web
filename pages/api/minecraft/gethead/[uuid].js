@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import Jimp from 'jimp/es';
+import Jimp from 'jimp-compact';
 
 export default async (req, res) => {
 	const { uuid } = req.query;
