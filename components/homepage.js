@@ -160,7 +160,8 @@ export function Homepage(props) {
 							Survival
 						</h3>
 						<p className="text-md text-gray-300 py-4">
-							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
+							Semi-vanilla Survival is by far the most popular game-mode. The server features
+							a balanced economy, advanced anti-griefing tools, and a vibrant community.
 						</p>
 					</div>
 				</div>
@@ -174,10 +175,8 @@ export function Homepage(props) {
 							Creative
 						</h3>
 						<p className="text-md text-gray-300 py-4">
-							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
-							aSDKJA  paskd ioasd aiosd oasijd iouwh euihqwebsxcnb ajskdh asjkhd ajkd asjkhd
-							iaushd asuihd ashuid auisd iasdh uasuidh aiuhsd aid aisdh asuidh
-
+							Left4Craft&apos;s creative server offers large plots and free worldedit. Years of
+							builds have accumulated to provide plenty of inspiration.
 						</p>
 					</div>
 				</div>
@@ -191,8 +190,8 @@ export function Homepage(props) {
 							Party Games
 						</h3>
 						<p className="text-md text-gray-300 py-4">
-							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
-							Longggg
+							Party Games is a completely custom gamemode designed for 4-8 players. Over
+							a dozen unique minigames provide hours of fast-paced fun.
 						</p>
 					</div>
 				</div>
@@ -209,7 +208,8 @@ export function Homepage(props) {
 							Since 2013
 						</h3>
 						<p className="text-md text-gray-300 py-4">
-							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
+							Left4Craft has been operated continuously since 2013 and will continue to operate
+							for years to come. You can rest assured this community is here to stay.
 						</p>
 					</div>
 				</div>
@@ -223,10 +223,8 @@ export function Homepage(props) {
 							Custom Code
 						</h3>
 						<p className="text-md text-gray-300 py-4">
-							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
-							aSDKJA  paskd ioasd aiosd oasijd iouwh euihqwebsxcnb ajskdh asjkhd ajkd asjkhd
-							iaushd asuihd ashuid auisd iasdh uasuidh aiuhsd aid aisdh asuidh
-
+							A lot of the code, including this website, is completely custom written and open source.
+							You can read it on the <a target="_blank" rel="noreferrer" className='underline' href="https://github.com/left4craft">official Left4Craft Github</a>.
 						</p>
 					</div>
 				</div>
@@ -240,8 +238,8 @@ export function Homepage(props) {
 							Blazing Fast
 						</h3>
 						<p className="text-md text-gray-300 py-4">
-							Encompassing today&apos;s website design technology to integrated and build solutions relevant to your business.
-							Longggg
+							Left4Craft utilizes modern hardware and networking topology to deliver high TPS and low latency. We even publish
+							performance metrics on our <a target="_blank" rel="noreferrer" className='underline' href="https://status.left4craft.org">status page</a>.
 						</p>
 					</div>
 				</div>
