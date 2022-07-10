@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import {
 	signIn, signOut, useSession
@@ -7,19 +6,30 @@ import {
 import { Profile } from '../../../components/profile';
 import { Navbar } from '../../../components/navbar';
 import { Footer } from '../../../components/footer';
-import { stripe_products } from '../../../utils/stripe_products';
 import Link from 'next/link';
-import { useState } from 'react';
+import {
+	useState,
+	useEffect
+} from 'react';
+import {
+	getCookie, hasCookie
+} from 'cookies-next';
 import { Spinner } from '../../../components/loader';
+import Cart from '../../../components/cart';
 
 export default function Shop() {
-	const router = useRouter();
-	const {
-		sub, annual
-	} = router.query;
 	const {
 		data: session, loading
 	} = useSession();
+
+	// initialize the state to {} to ensure unhydrated page renders the same on the client and server
+	const [cart,
+		setCart] = useState('{}');
+
+	// when the page is hydrated, then load the cookies
+	useEffect(() => {
+		if(hasCookie('cart')) setCart(getCookie('cart'));
+	}, []);
 
 	const [canCheckout,
 		setCheckout] = useState(false);
@@ -40,7 +50,7 @@ export default function Shop() {
 	const [stripeLoading,
 		setStripeLoading] = useState(false);
 
-	const isAnnual = annual === 'true';
+	const toReadablePrice = price => `$${Math.floor(price/100)}.${price%100 === 0 ? '00' : price%100}`;
 
 	if(loading) {
 		return <>
@@ -58,7 +68,7 @@ export default function Shop() {
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
-				<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
+				<h2>Checkout</h2>
 			</div>
 			<div className="text-white text-center text-l bg-dark p-8">
 				<Spinner /> Loading...
@@ -69,7 +79,7 @@ export default function Shop() {
 		</>;
 	}
 
-	if(!(sub in stripe_products.subscriptions)) {
+	if(!cart || cart === '{}') {
 		return <>
 			<Head>
 				<title>Left4Craft | Subscribe</title>
@@ -85,10 +95,14 @@ export default function Shop() {
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
-				<h2>Subscription not found.</h2>
+				<h2>Checkout</h2>
+			</div>
+			<div className="text-white text-center text-4xl bg-dark font-bold">
+				<div className="h-8" />
+				<h2>Your cart is empty.</h2>
 			</div>
 			<div className="text-white text-center text-l bg-dark p-8">
-				<u><Link href="/shop">Return to store</Link></u>
+				<u><Link href="/shop/products">Return to store</Link></u>
 				<div className="h-8" />
 			</div>
 			<Footer />
@@ -111,7 +125,7 @@ export default function Shop() {
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
-				<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
+				<h2>Checkout</h2>
 			</div>
 			<div className="text-white text-center text-l bg-dark p-8">
 				You must <u><Link href="/api/auth/signin">log in</Link></u> to check out.
@@ -137,15 +151,15 @@ export default function Shop() {
 
 		<div className="text-white text-center text-4xl bg-dark font-bold">
 			<div className="h-8" />
-			<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
+			<h2>Checkout</h2>
 		</div>
 
 		<div className="flex flex-wrap justify-center text-white text-center text-l bg-dark p-8">
 
 			<div className="text-left w-96 relative">
-				<p>Cost: ${ stripe_products.subscriptions[sub].price[isAnnual ? 1 : 0] } / {isAnnual ? 'year' : 'month'} </p>
+				<Cart cart={cart} removeFromCart={() => {}} toReadablePrice={toReadablePrice} canRemove={false} />
+
 				<p>The exact total, including coupons, currency conversions and transaction fees, will be computed in the next step.</p>
-				<p>One month is free for Minecraft accounts which have never subscribed before.</p>
 				<div className='h-4' />
 				<label htmlFor="email" className="text-white">
 						Email
@@ -193,17 +207,16 @@ export default function Shop() {
 						</span>
 					</label>
 					{stripeErrorMessage !== '' && <label htmlFor="checkout" className="text-red-500">{stripeErrorMessage}</label>}
-					<button type="button" id="checkout" onClick={() => load_stripe(sub, annual, (box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
+					<button type="button" id="checkout" onClick={() => load_stripe((box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
 						{stripeLoading ? <><Spinner /> <p>Loading...</p></>: 'Checkout'}
 					</button>
-					<p>Free trial and coupon details (if applicable) will be displayed on the checkout screen.</p>
+					<p>Coupon details (if applicable) will be displayed on the checkout screen.</p>
 					<div className='h-4' />
 				</> }
 
 			</div>
-
 			<div className="text-white text-center text-l bg-dark p-8 w-screen">
-				<u><Link href="/shop">Return to store</Link></u>
+				<u><Link href="/shop/products">Return to store</Link></u>
 			</div>
 		</div>
 
@@ -251,7 +264,7 @@ function validate_user(setCheckout, setValidating, setErrormessage, setUUID) {
 
 }
 
-function load_stripe(sub, annual, canCheckout, setLoading, setErrormessage) {
+function load_stripe(canCheckout, setLoading, setErrormessage) {
 	if(!canCheckout) return;
 
 	setLoading(true);
@@ -265,25 +278,19 @@ function load_stripe(sub, annual, canCheckout, setLoading, setErrormessage) {
 		document.body.appendChild(script);
 
 		script.onload = () => {
-			checkout(sub, annual, setLoading, setErrormessage);
+			checkout(setLoading, setErrormessage);
 		};
 	} else {
-		checkout(sub, annual, setLoading, setErrormessage);
+		checkout(setLoading, setErrormessage);
 	}
 }
 
-function checkout(sub, annual, setLoading, setErrormessage) {
+function checkout(setLoading, setErrormessage) {
 	const checkout_request = new XMLHttpRequest();
-	checkout_request.open('get', '/api/subscribe/' + sub +
-        '?user=' + encodeURIComponent(document.getElementById('mc-username').value) +
-        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value) +
-		'&annual=' + annual);
-
+	checkout_request.open('get', '/api/stripe/checkout');
 	checkout_request.send();
-
 	checkout_request.onload = () => {
 		const checkout_response = JSON.parse(checkout_request.response);
-
 		if(!checkout_response.success) {
 			setErrormessage('Error: ' + checkout_response.error);
 			setLoading(false);
@@ -292,7 +299,5 @@ function checkout(sub, annual, setLoading, setErrormessage) {
 			const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 			stripe.redirectToCheckout({ sessionId: checkout_response.session_id });
 		}
-
 	};
 }
-
