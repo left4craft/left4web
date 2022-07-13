@@ -23,7 +23,7 @@ export default function ProductCard(props) {
 							<button type="button" onClick={() => props.select(props)} className="py-2 px-4 bg-primary hover:bg-secondary active:bg-secondary focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
 								Details
 							</button>
-							<button type="button" onClick={props.addItem} className="mt-2 py-2 px-4 bg-dark focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
+							<button type="button" onClick={props.addItem} className="mt-2 py-2 px-4 bg-dark hover:bg-secondary focus:outline-none focus:ring focus:ring-white text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg md:w-56">
 								Add to cart {props.quantity && <span className="text-gray-400">({props.quantity})</span>}
 							</button>
 						</div>
