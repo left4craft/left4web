@@ -62,7 +62,7 @@ export default function Shop() {
 				< SubscriptionCard rank="patronplus" annual={ isAnnual } />
 			</div>
 			<OnlineTime />
-			<div className="bg-gradient-to-r from-primary to-secondary py-20 px-4 text-white">
+			<div className="bg-primary bg-grass-pattern bg-repeat bg-fixed animate-pan motion-reduce:animate-none py-20 px-4 text-white">
 				<div className="mx-auto max-w-6xl flex flex-col md:flex-row">
 					<h2 className="mr-8 w-full md:w-1/3 text-3xl font-extrabold leading-9">
             Frequently-asked questions

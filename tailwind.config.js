@@ -11,11 +11,15 @@ module.exports = {
 			animation: {
 				fade: 'fadeOut 1s ease-in-out',
 				'fade-in': 'fade-in-down 1s ease-out',
-				'fade-out': 'fade-out-up 1s ease-out'
+				'fade-out': 'fade-out-up 1s ease-out',
+				pan: 'pan 20s linear infinite'
 			},
 
 			// eslint-disable-next-line no-unused-vars
-			backgroundImage: theme => ({ 'l4c-logo': 'url(\'/images/logo.png\')' }),
+			backgroundImage: theme => ({
+				'grass-pattern': 'url(\'/images/grass.png\')',
+				'l4c-logo': 'url(\'/images/logo.png\')'
+			}),
 			colors: {
 				dark: '#2e2e2e',
 				light: '#505050',
@@ -49,6 +53,11 @@ module.exports = {
 				fadeOut: {
 					'0%': { opacity: 1 },
 					'100%': { opacity: 0 }
+				},
+				pan: {
+					'0%': { 'background-position': 'left bottom' },
+					'50%': { 'background-position': 'right top' },
+					'100%': { 'background-position': 'left bottom' }
 				}
 			})
 		}
