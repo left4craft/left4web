@@ -29,9 +29,13 @@ const sites = [
 export default function Vote() {
 	const [opened,
 		setOpened] = useState(null);
+	const [error,
+		setError] = useState(false);
 	useEffect(() => {
 		if (opened === null) return;
 		const popup = window.open(sites[opened].url);
+		if (popup === null) return setError(true);
+		else setError(false);
 		const pollTimer = window.setInterval(() => {
 			if (popup.closed !== false) {
 				window.clearInterval(pollTimer);
@@ -74,6 +78,13 @@ export default function Vote() {
 									</span>
 								</button>
 							</p>
+							{ error && (
+								<p className='text-red-400 p-2'>
+									<span className='font-semibold'>Your browser blocked the popup.</span>
+									<br></br>
+									Please allow popups from this website or use the links below instead.
+								</p>
+							)}
 							<hr className='m-4 border-light'></hr>
 							<div>
 								Alternatively, you can open each site yourself using the links below.
