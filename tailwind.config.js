@@ -12,7 +12,7 @@ module.exports = {
 				fade: 'fadeOut 1s ease-in-out',
 				'fade-in': 'fade-in-down 1s ease-out',
 				'fade-out': 'fade-out-up 1s ease-out',
-				pan: 'pan 20s linear infinite'
+				pan: 'pan 60s linear infinite'
 			},
 
 			// eslint-disable-next-line no-unused-vars
