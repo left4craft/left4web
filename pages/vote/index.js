@@ -75,7 +75,7 @@ export default function Vote() {
 								</button>
 							</p>
 							<hr className='m-4 border-light'></hr>
-							<p>
+							<div>
 								Alternatively, you can open each site yourself using the links below.
 								<ol className='p-4'>
 									{sites.map((site, i) => (
@@ -91,18 +91,18 @@ export default function Vote() {
 										</li>
 									))}
 								</ol>
-							</p>
+							</div>
 						</div>
 						<div>
 							<div className='bg-light shadow-md mx-4 sm:mx-16 p-4 sm:p-8 max-w rounded-lg grid grid-cols-1 gap-6'>
-								<p className='text-gray-300'>
+								<div className='text-gray-300'>
 									<h6 className='text-white text-lg font-semibold'>Why vote?</h6>
 									Hello.
-								</p>
-								<p className='text-gray-300'>
+								</div>
+								<div className='text-gray-300'>
 									<h6 className='text-white text-lg font-semibold'>Rewards</h6>
 									Hello.
-								</p>
+								</div>
 							</div>
 						</div>
 					</div>
