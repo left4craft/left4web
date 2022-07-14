@@ -19,7 +19,7 @@ module.exports = {
 			backgroundImage: theme => ({
 				// 'grass-pattern': 'url(\'/images/grass.png\')',
 				'grass-pattern': 'linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url(\'/images/grass.png\')',
-				hero: 'linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url(\'/images/avalon-sunrise.png\')',
+				hero: 'linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url(\'/images/avalon-sunrise.webp\')',
 				'l4c-logo': 'url(\'/images/logo.png\')'
 			}),
 			colors: {
