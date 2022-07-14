@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Navbar } from '../../components/navbar';
+import { Hero } from '../../components/hero';
 import { Footer } from '../../components/footer';
 import {
 	FaExternalLinkAlt,
@@ -64,10 +65,7 @@ export default function Vote() {
 				<meta name="title" content="Left4Craft | Vote" />
 			</Head>
 			<Navbar />
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Vote</h1>
-			</div>
+			<Hero title='Vote' />
 			<div className="text-white bg-dark">
 				<div className="max-w-5xl p-8 mx-auto">
 					<div className='grid grid-cols-1 sm:grid-cols-2'>

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
+import { Hero } from '../components/hero';
 import { Footer } from '../components/footer';
 import Link from 'next/link';
 
@@ -11,10 +12,7 @@ export default function Terms() {
 				<meta name="title" content="Left4Craft | Terms" />
 			</Head>
 			<Navbar />
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Terms</h1>
-			</div>
+			<Hero title='Terms' />
 			<div className="text-white bg-dark center flex justify-center items-center">
 				<div className="max-w-4xl p-8">
 					<div className='text-center text-4xl font-bold p-8'>

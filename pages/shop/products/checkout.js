@@ -5,6 +5,7 @@ import {
 } from 'next-auth/react';
 import { Profile } from '../../../components/profile';
 import { Navbar } from '../../../components/navbar';
+import { Hero } from '../../../components/hero';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
 import {
@@ -61,10 +62,7 @@ export default function Shop() {
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Shop</h1>
-			</div>
+			<Hero title='Shop' />
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
@@ -88,10 +86,7 @@ export default function Shop() {
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Shop</h1>
-			</div>
+			<Hero title='Shop' />
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
@@ -118,10 +113,7 @@ export default function Shop() {
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Shop</h1>
-			</div>
+			<Hero title='Shop' />
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
@@ -144,10 +136,7 @@ export default function Shop() {
 		<Navbar />
 		<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
-		<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-			<div className="h-32" />
-			<h1>Shop</h1>
-		</div>
+		<Hero title='Shop' />
 
 		<div className="text-white text-center text-4xl bg-dark font-bold">
 			<div className="h-8" />

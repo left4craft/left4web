@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { Navbar } from '../../../components/navbar';
 import { Profile } from '../../../components/profile';
+import { Hero } from '../../../components/hero';
 import { Footer } from '../../../components/footer';
 import ProductCard from '../../../components/product_card';
 import Carousel from 'react-multi-carousel';
@@ -144,10 +145,7 @@ export default function Shop() {
 			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Shop</h1>
-			</div>
+			<Hero title='Shop' />
 
 			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 				<h2 className="text-white font-bold text-4xl my-8">Ranks</h2>

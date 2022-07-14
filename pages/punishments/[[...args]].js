@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { Navbar } from '../../components/navbar';
+import { Hero } from '../../components/hero';
 import { Footer } from '../../components/footer';
 import { ListTable } from '../../components/list_table';
 import { HistoryTable } from '../../components/history_table';
@@ -61,11 +62,7 @@ export default function Bans({
 					<meta name="title" content="Left4Craft | Bans" />
 				</Head>
 				<Navbar />
-
-				<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-					<div className="h-32" />
-					<h1>Punishments</h1>
-				</div>
+				<Hero title='Punishments' />
 				<div className="text-white text-center text-4xl bg-dark font-bold">
 					<div className="h-8" />
 					<h2>Loading</h2>
@@ -90,11 +87,7 @@ export default function Bans({
 					<meta name="title" content="Left4Craft | Bans" />
 				</Head>
 				<Navbar />
-
-				<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-					<div className="h-32" />
-					<h1>Punishments</h1>
-				</div>
+				<Hero title='Punishments' />
 				<div className="text-white text-center text-4xl bg-dark font-bold">
 					<div className="h-8" />
 					<h2>Error</h2>
@@ -122,11 +115,7 @@ export default function Bans({
 				<meta name="title" content="Left4Craft | Bans" />
 			</Head>
 			<Navbar />
-
-			<div className="text-white text-center text-bold text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Punishments</h1>
-			</div>
+			<Hero title='Punishments' />
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
 				<h2>{title}</h2>

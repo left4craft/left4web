@@ -5,6 +5,7 @@ import {
 import Link from 'next/link';
 import { Profile } from '../../components/profile';
 import { Navbar } from '../../components/navbar';
+import { Hero } from '../../components/hero';
 import { SubscriptionCard } from '../../components/subscription_card';
 import { OnlineTime } from '../../components/time_online';
 import { Footer } from '../../components/footer';
@@ -27,10 +28,7 @@ export default function Shop() {
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Shop</h1>
-			</div>
+			<Hero title='Shop' />
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />

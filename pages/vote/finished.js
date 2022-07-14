@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Navbar } from '../../components/navbar';
+import { Hero } from '../../components/hero';
 import { Footer } from '../../components/footer';
 
 export default function VoteFinished() {
@@ -10,10 +11,7 @@ export default function VoteFinished() {
 				<meta name="title" content="Left4Craft | Vote" />
 			</Head>
 			<Navbar />
-			<div className="text-white text-center text-6xl bg-gradient-to-r from-primary to-secondary h-80 font-bold">
-				<div className="h-32" />
-				<h1>Vote</h1>
-			</div>
+			<Hero title='Vote' />
 			<div className="text-white bg-dark center flex justify-center items-center">
 				<div className="max-w-4xl p-8">
 					<div className='font-bold m-4 sm:m-12'>
