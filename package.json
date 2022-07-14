@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"preinstall": "npx npm-force-resolutions",
-		"dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint .",
@@ -20,6 +20,7 @@
 		"autoprefixer": "^10.4.0",
 		"aws-sdk": "^2.1170.0",
 		"cookies-next": "^2.1.1",
+		"estraverse": "^5.3.0",
 		"jimp-compact": "^0.16.1-2",
 		"micro": "^9.3.4",
 		"next": "^12.2.1",
