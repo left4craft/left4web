@@ -9,6 +9,8 @@ export default function Privacy() {
 			<Head>
 				<title>Left4Craft | Privacy</title>
 				<meta name="title" content="Left4Craft | Privacy" />
+				<meta name="og:title" content="Left4Craft | Privacy" />
+				<meta name="twitter:title" content="Left4Craft | Privacy" />
 			</Head>
 			<Navbar />
 			<Hero title='Privacy' />

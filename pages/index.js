@@ -14,6 +14,8 @@ export default function Home() {
 			<Head>
 				<title>Left4Craft | Home</title>
 				<meta name="title" content="Left4Craft | Home" />
+				<meta name="og:title" content="Left4Craft | Home" />
+				<meta name="twitter:title" content="Left4Craft | Home" />
 			</Head>
 			<main>
 

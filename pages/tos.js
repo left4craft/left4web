@@ -10,6 +10,8 @@ export default function Terms() {
 			<Head>
 				<title>Left4Craft | Terms</title>
 				<meta name="title" content="Left4Craft | Terms" />
+				<meta name="og:title" content="Left4Craft | Terms" />
+				<meta name="twitter:title" content="Left4Craft | Terms" />
 			</Head>
 			<Navbar />
 			<Hero title='Terms' />

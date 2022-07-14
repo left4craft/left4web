@@ -60,6 +60,8 @@ export default function Bans({
 				<Head>
 					<title>Left4Craft | Bans</title>
 					<meta name="title" content="Left4Craft | Bans" />
+					<meta name="og:title" content="Left4Craft | Bans" />
+					<meta name="twitter:title" content="Left4Craft | Bans" />
 				</Head>
 				<Navbar />
 				<Hero title='Punishments' />
@@ -85,6 +87,8 @@ export default function Bans({
 				<Head>
 					<title>Left4Craft | Bans</title>
 					<meta name="title" content="Left4Craft | Bans" />
+					<meta name="og:title" content="Left4Craft | Bans" />
+					<meta name="twitter:title" content="Left4Craft | Bans" />
 				</Head>
 				<Navbar />
 				<Hero title='Punishments' />
@@ -113,6 +117,8 @@ export default function Bans({
 			<Head>
 				<title>Left4Craft | Bans</title>
 				<meta name="title" content="Left4Craft | Bans" />
+				<meta name="og:title" content="Left4Craft | Bans" />
+				<meta name="twitter:title" content="Left4Craft | Bans" />
 			</Head>
 			<Navbar />
 			<Hero title='Punishments' />

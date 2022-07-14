@@ -58,6 +58,8 @@ export default function Shop() {
 			<Head>
 				<title>Left4Craft | Subscribe</title>
 				<meta name="title" content="Left4Craft | Subscribe" />
+				<meta name="og:title" content="Left4Craft | Subscribe" />
+				<meta name="twitter:title" content="Left4Craft | Subscribe" />
 			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
@@ -82,6 +84,8 @@ export default function Shop() {
 			<Head>
 				<title>Left4Craft | Subscribe</title>
 				<meta name="title" content="Left4Craft | Subscribe" />
+				<meta name="og:title" content="Left4Craft | Subscribe" />
+				<meta name="twitter:title" content="Left4Craft | Subscribe" />
 			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
@@ -109,6 +113,8 @@ export default function Shop() {
 			<Head>
 				<title>Left4Craft | Subscribe</title>
 				<meta name="title" content="Left4Craft | Subscribe" />
+				<meta name="og:title" content="Left4Craft | Subscribe" />
+				<meta name="twitter:title" content="Left4Craft | Subscribe" />
 			</Head>
 			<Navbar />
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
@@ -132,6 +138,8 @@ export default function Shop() {
 		<Head>
 			<title>Left4Craft | Subscribe</title>
 			<meta name="title" content="Left4Craft | Subscribe" />
+			<meta name="og:title" content="Left4Craft | Subscribe" />
+			<meta name="twitter:title" content="Left4Craft | Subscribe" />
 		</Head>
 		<Navbar />
 		<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />

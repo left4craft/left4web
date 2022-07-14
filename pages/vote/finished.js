@@ -9,6 +9,8 @@ export default function VoteFinished() {
 			<Head>
 				<title>Left4Craft | Vote</title>
 				<meta name="title" content="Left4Craft | Vote" />
+				<meta name="og:title" content="Left4Craft | Vote" />
+				<meta name="twitter:title" content="Left4Craft | Vote" />
 			</Head>
 			<Navbar />
 			<Hero title='Vote' />
