@@ -85,9 +85,11 @@ export function Navbar (props) {
 							Vote
 						</a>
 					</Link>
-					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="https://bans.left4craft.org">
-                    Bans
-					</a>
+					<Link href="/punishments">
+						<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="https://bans.left4craft.org">
+						Bans
+						</a>
+					</Link>
 					<a className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="https://status.left4craft.org">
                     Status
 					</a>

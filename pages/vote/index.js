@@ -14,15 +14,19 @@ import {
 const sites = [
 	{
 		name: 'Planet Minecraft',
-		url: 'https://www.planetminecraft.com/server/left4craft-survival-horde-no-lag-247'
+		url: 'https://www.planetminecraft.com/server/left4craft-survival-horde-no-lag-247/vote/'
 	},
 	{
-		name: 'Google',
-		url: 'https://google.com'
+		name: 'TopG',
+		url: 'https://topg.org/minecraft-servers/server-373900'
 	},
 	{
-		name: 'Bing',
-		url: 'https://bing.com'
+		name: 'Minecraft Server List',
+		url: 'https://minecraft-server-list.com/server/394241/vote/'
+	},
+	{
+		name: 'Minecraft MP',
+		url: 'https://minecraft-mp.com/server/27140/vote/'
 	}
 ];
 
@@ -108,11 +112,16 @@ export default function Vote() {
 							<div className='bg-light shadow-md mx-4 sm:mx-16 p-4 sm:p-8 max-w rounded-lg grid grid-cols-1 gap-6'>
 								<div className='text-gray-300'>
 									<h6 className='text-white text-lg font-semibold'>Why vote?</h6>
-									Hello.
+									<p>Voting grants in-game rewards and helps Left4Craft expand its community.</p>
 								</div>
 								<div className='text-gray-300'>
 									<h6 className='text-white text-lg font-semibold'>Rewards</h6>
-									Hello.
+									<p>You are given a random reward when you vote, and the possible rewards are:</p>
+									<ul className='list-disc list-inside'>
+										<li>70% $100 in-game currency</li>
+										<li>25% 1x Normal Key</li>
+										<li>5% 1x Mythic Key</li>
+									</ul>
 								</div>
 							</div>
 						</div>
