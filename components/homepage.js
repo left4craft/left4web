@@ -6,6 +6,7 @@ import { Loader } from './loader';
 import { Footer } from './footer';
 import { PlayerHead } from './3d_head';
 import Link from 'next/link';
+import { FaDiscord } from 'react-icons/fa';
 
 export function Homepage(props) {
 	// state to store whether homepage fully revealed
@@ -300,7 +301,8 @@ export function Homepage(props) {
 					<div className="px-5 inline-flex rounded-md">
 						<div className="cursor-pointer">
 							<Link href="https://discord.left4craft.org" className="relative flex flex-col items-center group" passHref>
-								<div id='l4c-ip-address' className="block bg-dark hover:bg-light py-3 px-4 rounded-lg text-lg text-white font-bold uppercase mt-10 transition ease-in duration-200">
+								<div id='l4c-discord' className="bg-dark hover:bg-light py-3 px-4 rounded-lg text-lg text-white font-bold uppercase mt-10 transition ease-in duration-200 flex items-center gap-1">
+									<FaDiscord />
 									Discord
 								</div>
 							</Link>
