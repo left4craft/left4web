@@ -38,8 +38,12 @@ export default function Vote() {
 	useEffect(() => {
 		if (opened === null) return;
 		const popup = window.open(sites[opened].url);
-		if (popup === null) return setError(true);
-		else setError(false);
+		if (popup === null) {
+			setError(true);
+			return;
+		} else {
+			setError(false);
+		}
 		const pollTimer = window.setInterval(() => {
 			if (popup.closed !== false) {
 				window.clearInterval(pollTimer);
