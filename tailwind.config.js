@@ -17,7 +17,8 @@ module.exports = {
 
 			// eslint-disable-next-line no-unused-vars
 			backgroundImage: theme => ({
-				'grass-pattern': 'url(\'/images/grass.png\')',
+				// 'grass-pattern': 'url(\'/images/grass.png\')',
+				'grass-pattern': 'linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url(\'/images/grass.png\')',
 				hero: 'linear-gradient(45deg, rgba(76, 175, 80, 0.85), rgba(102,170,68, 0.85)), url(\'/images/avalon-sunrise.png\')',
 				'l4c-logo': 'url(\'/images/logo.png\')'
 			}),
