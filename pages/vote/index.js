@@ -48,7 +48,7 @@ export default function Vote() {
 		const pollTimer = window.setInterval(() => {
 			if (popup.closed !== false) {
 				window.clearInterval(pollTimer);
-				console.log('closed');
+				// console.log('closed');
 				if (opened === sites.length - 1) {
 					Router.push('/vote/finished');
 				} else {
