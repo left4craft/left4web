@@ -1,8 +1,25 @@
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
+import {
+	useEffect, useState
+} from 'react';
 
 export function Hero({ title }) {
+	const [bg,
+		setBg] = useState(null);
+
+	const { pathname } = useRouter();
+
+	useEffect(() => {
+		setBg((Math.floor(Math.random()*3)+1).toString());
+		console.log(pathname);
+	}, [pathname]);
+
 	return <>
-		<div className="text-white text-center text-6xl bg-hero bg-center bg-cover h-40 sm:h-80 font-bold">
+		<div className='hidden bg-hero-1' />
+		<div className='hidden bg-hero-2' />
+		<div className='hidden bg-hero-3' />
+		<div id={`${title}-hero`} className={`text-white text-center text-6xl bg-hero-${bg === null ? 'loading' : bg} bg-center bg-cover h-40 sm:h-80 font-bold`}>
 			<div className="h-12 sm:h-32" />
 			<h1>{title}</h1>
 		</div>

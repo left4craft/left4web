@@ -51,7 +51,7 @@ export function Profile (props) {
 					Log Out
 					</button>
 				</div>
-			</div>;
+			</div>
 
 		</div>;
 
