@@ -33,7 +33,7 @@ module.exports = {
 			'cdn.discordapp.com',
 			'crafatar.com',
 			'mc-heads.net',
-			'd1wqzb5bdbcre6.cloudfront.net', // stripe product icons
+			'files.stripe.com', // stripe product icons
 			'static.eartharoid.me' // temp
 		]
 	}

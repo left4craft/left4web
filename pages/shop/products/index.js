@@ -17,13 +17,14 @@ import ProductCard from '../../../components/product_card';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Modal from 'react-modal';
-import { stripe_products } from '../../../utils/stripe_products';
 import { toReadablePrice } from '../../../utils/readable_price';
 import Image from 'next/image';
 import {
 	getCookie, hasCookie, setCookie
 } from 'cookies-next';
 import Cart from '../../../components/cart';
+import PropTypes from 'prop-types';
+import { stripe } from '../../../utils/stripe';
 
 Modal.setAppElement('#__next');
 
@@ -60,7 +61,7 @@ const responsive = {
 	}
 };
 
-export default function Shop() {
+export default function ProductPage(props) {
 	const {
 		data: session, loading
 	} = useSession();
@@ -147,19 +148,18 @@ export default function Shop() {
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 			<Hero title='Shop' />
 
-			{/* <p>{JSON.stringify(Object.keys(stripe_products.one_time))}</p> */}
-
-			{Object.keys(stripe_products.one_time).map(category =>
+			{Object.keys(props.stripe_products).map(category =>
 				<div key={category} className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 					<h2 className="text-white font-bold text-4xl my-8">{category}</h2>
 					<Carousel
+						arrows={!selected}
 						swipeable={true}
 						draggable={true}
 						showDots={true}
 						keyBoardControl={true}
 						responsive={responsive}
 					>
-						{stripe_products.one_time[category].map(product =>
+						{props.stripe_products[category].map(product =>
 							<ProductCard
 								key={product.id}
 								addItem={() => addToCart(product)}
@@ -198,3 +198,41 @@ export default function Shop() {
 		</div>
 	);
 }
+
+ProductPage.propTypes = { stripe_products: PropTypes.object };
+
+export async function getServerSideProps() {
+
+	const products = await stripe.products.list({ limit: 99 });
+
+	const stripe_products = {};
+	for(const product of products.data) {
+		// skip product if it's missing one-time purchase data
+		if(!product.default_price || !product.metadata.category) continue;
+
+		// get the price
+		const price = await stripe.prices.retrieve(
+			product.default_price
+		);
+		// skip the product if the default price is recurring
+		if(price.recurring !== null) continue;
+
+		// create the product object
+		if(!stripe_products[product.metadata.category]) stripe_products[product.metadata.category] = [];
+		stripe_products[product.metadata.category].push({
+			description: product.description === null ? 'No Description' : product.description,
+			id: product.default_price,
+			image: product.images && product.images.length > 0 ? product.images[0] : 'https://static.eartharoid.me/sharex/22/01/Star%20Red.png',
+			limit_one: !!product.metadata.limit_one,
+			unlimited_quantity: !!product.metadata.unlimited_quantity,
+			name: product.name,
+			price: price.unit_amount
+		});
+	}
+
+	console.log(JSON.stringify(stripe_products, null, 2));
+
+
+	return { props: { stripe_products: stripe_products } };
+}
+
