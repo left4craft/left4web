@@ -51,8 +51,6 @@ export default function Shop() {
 	const [stripeLoading,
 		setStripeLoading] = useState(false);
 
-	const toReadablePrice = price => `$${Math.floor(price/100)}.${price%100 === 0 ? '00' : price%100}`;
-
 	if(loading) {
 		return <>
 			<Head>
@@ -154,7 +152,7 @@ export default function Shop() {
 		<div className="flex flex-wrap justify-center text-white text-center text-l bg-dark p-8">
 
 			<div className="text-left w-96 relative">
-				<Cart cart={cart} removeFromCart={() => {}} toReadablePrice={toReadablePrice} canRemove={false} />
+				<Cart cart={cart} removeFromCart={() => {}} canRemove={false} />
 
 				<p>The exact total, including coupons, currency conversions and transaction fees, will be computed in the next step.</p>
 				<div className='h-4' />

@@ -18,7 +18,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Modal from 'react-modal';
 import { stripe_products } from '../../../utils/stripe_products';
-
+import { toReadablePrice } from '../../../utils/readable_price';
 import Image from 'next/image';
 import {
 	getCookie, hasCookie, setCookie
@@ -101,8 +101,6 @@ export default function Shop() {
 		setCart(JSON.stringify(curr_cart));
 	};
 
-	const toReadablePrice = price => `$${Math.floor(price/100)}.${price%100 === 0 ? '00' : price%100}`;
-
 	return (
 		<div>
 			<Modal
@@ -149,97 +147,38 @@ export default function Shop() {
 			<Profile loading={loading} session={session} signIn={signIn} signOut={signOut} />
 			<Hero title='Shop' />
 
-			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
-				<h2 className="text-white font-bold text-4xl my-8">Ranks</h2>
-				<Carousel
-					swipeable={true}
-					draggable={true}
-					showDots={true}
-					keyBoardControl={true}
-					responsive={responsive}
-				>
-					{stripe_products.one_time.ranks.map(product =>
-						<ProductCard
-							key={product.id}
-							addItem={() => addToCart(product)}
-							product={product}
-							price={toReadablePrice(product.price)}
-							select={setSelected}
-							quantity={JSON.parse(cart)[product.id]?.quantity}
-						/>
-					)}
-				</Carousel>
-			</div>
-			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
-				<h2 className="text-white font-bold text-4xl my-8">Cosmetic Chest Keys</h2>
-				<Carousel
-					swipeable={true}
-					draggable={true}
-					showDots={true}
-					keyBoardControl={true}
-					responsive={responsive}
-				>
-					{stripe_products.one_time.keys.map(product =>
-						<ProductCard
-							key={product.id}
-							addItem={() => addToCart(product)}
-							product={product}
-							price={toReadablePrice(product.price)}
-							select={setSelected}
-							quantity={JSON.parse(cart)[product.id]?.quantity}
-						/>
-					)}
-				</Carousel>
-			</div>
-			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
-				<h2 className="text-white font-bold text-4xl my-8">Cosmetic Coins</h2>
-				<Carousel
-					swipeable={true}
-					draggable={true}
-					showDots={true}
-					keyBoardControl={true}
-					responsive={responsive}
-				>
-					{stripe_products.one_time.coins.map(product =>
-						<ProductCard
-							key={product.id}
-							addItem={() => addToCart(product)}
-							product={product}
-							price={toReadablePrice(product.price)}
-							select={setSelected}
-							quantity={JSON.parse(cart)[product.id]?.quantity}
-						/>
-					)}
-				</Carousel>
-			</div>
-			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
-				<h2 className="text-white font-bold text-4xl my-8">Other</h2>
-				<Carousel
-					swipeable={true}
-					draggable={true}
-					showDots={true}
-					keyBoardControl={true}
-					responsive={responsive}
-				>
-					{stripe_products.one_time.other.map(product =>
-						<ProductCard
-							key={product.id}
-							addItem={() => addToCart(product)}
-							product={product}
-							price={toReadablePrice(product.price)}
-							select={setSelected}
-							quantity={JSON.parse(cart)[product.id]?.quantity}
-						/>
-					)}
-				</Carousel>
-			</div>
+			{/* <p>{JSON.stringify(Object.keys(stripe_products.one_time))}</p> */}
+
+			{Object.keys(stripe_products.one_time).map(category =>
+				<div key={category} className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
+					<h2 className="text-white font-bold text-4xl my-8">{category}</h2>
+					<Carousel
+						swipeable={true}
+						draggable={true}
+						showDots={true}
+						keyBoardControl={true}
+						responsive={responsive}
+					>
+						{stripe_products.one_time[category].map(product =>
+							<ProductCard
+								key={product.id}
+								addItem={() => addToCart(product)}
+								product={product}
+								price={toReadablePrice(product.price)}
+								select={setSelected}
+								quantity={JSON.parse(cart)[product.id]?.quantity}
+							/>
+						)}
+					</Carousel>
+				</div>
+			)}
 			<div className="container mx-auto my-8 px-4 sm:px-6 lg:px-8 xl:px-24">
 				<h2 className="text-white font-bold text-4xl my-8">Cart</h2>
 			</div>
 			<div className="flex flex-wrap justify-center">
 				<div className="w-96 relative text-white">
 					{cart !== '{}' ? <>
-						<Cart cart={cart} removeFromCart={removeFromCart} toReadablePrice={toReadablePrice} canRemove={true} />
+						<Cart cart={cart} removeFromCart={removeFromCart} canRemove={true} />
 						<Link href={{ pathname: '/shop/products/checkout' }}  passHref>
 							<button type="button" className="w-96 px-3 py-3 text-sm shadow rounded-lg text-white bg-primary hover:bg-secondary transition ease-in duration-200">
 								Checkout

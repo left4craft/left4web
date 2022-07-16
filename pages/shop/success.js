@@ -31,7 +31,7 @@ export default function ShopFinished() {
 				<p>You will recieve an email with your recipt shortly.</p>
 			</div>
 			<div className="text-white text-center text-l p-8">
-				<u><Link href="/shop/products">View Order History</Link></u>
+				<u><Link href="/shop/history">View Order History</Link></u>
 			</div>
 			<div className="text-white text-center text-l p-8">
 				<u><Link href="/shop">Return to store</Link></u>

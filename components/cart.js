@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { toReadablePrice } from '../utils/readable_price';
+
 export default function Cart(props) {
 	const getTotalCost = () => {
 		let cost = 0;
@@ -40,13 +42,13 @@ export default function Cart(props) {
 						<span className="inline-block w-1/3 md:hidden font-bold">Name</span>{product.name}
 					</td>
 					<td className="p-2 md:border md:border-light text-left block md:table-cell">
-						<span className="inline-block w-1/3 md:hidden font-bold">Price</span>{props.toReadablePrice(product.price)}
+						<span className="inline-block w-1/3 md:hidden font-bold">Price</span>{toReadablePrice(product.price)}
 					</td>
 					<td className="p-2 md:border md:border-light text-left block md:table-cell">
 						<span className="inline-block w-1/3 md:hidden font-bold">Quantity</span>{product.quantity}
 					</td>
 					<td className="p-2 md:border md:border-light text-left block md:table-cell">
-						<span className="inline-block w-1/3 md:hidden font-bold">Total</span>{props.toReadablePrice(product.price*product.quantity)}
+						<span className="inline-block w-1/3 md:hidden font-bold">Total</span>{toReadablePrice(product.price*product.quantity)}
 					</td>
 					{props.canRemove && <td className="p-2 md:border md:border-light text-left block md:table-cell">
 						<svg xmlns="http://www.w3.org/2000/svg" className="ml-4 h-8 w-8 hover:cursor-pointer hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" onClick={() => props.removeFromCart(product)}>
@@ -57,7 +59,7 @@ export default function Cart(props) {
 			</tbody>
 		</table>
 		<div className="py-8 text-left text-white">
-			<p>Subtotal: {props.toReadablePrice(getTotalCost(props.cart))}</p>
+			<p>Subtotal: {toReadablePrice(getTotalCost(props.cart))}</p>
 		</div>
 	</>;
 }
@@ -65,6 +67,5 @@ export default function Cart(props) {
 Cart.propTypes = {
 	canRemove: PropTypes.bool,
 	cart: PropTypes.string,
-	removeFromCart: PropTypes.func,
-	toReadablePrice: PropTypes.func
+	removeFromCart: PropTypes.func
 };
