@@ -251,6 +251,10 @@ export default function Shop() {
 				</div>
 			</div>
 			<div className="h-16" />
+			<div className="text-white text-center text-l p-8">
+				<u><Link href="/shop">Return to store</Link></u>
+			</div>
+			<div className="h-16" />
 			<Footer />
 		</div>
 	);
