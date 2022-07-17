@@ -19,6 +19,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 {
 	username: Captain_Sisko,
 	uuid: 804c7ee5-db51-4e58-a011-475f00df6828,
+	livemode: false,
 	commands: []
 }
 */
@@ -102,7 +103,7 @@ export default async (req, res) => {
 							value] of Object.entries(product.metadata)) {
 							// repeat commands for higher quantities of subscriptions
 							for(let i = 0; i < lineItem.quantity; i += 1) {
-								if(key.startsWith(`mc_${type}`)) {
+								if(key.startsWith(`mc_${type}_cmd`)) {
 									let command = value;
 									command = command.replace('{USERNAME}', username);
 									command = command.replace('{UUID}', uuid);
@@ -126,14 +127,34 @@ export default async (req, res) => {
 							{ limit: 99 }
 						);
 						for(const lineItem of lineItems.data) {
-							console.log(lineItem);
+							const product = await stripe.products.retrieve(
+								lineItem.price.product
+							);
+							for(const [key,
+								value] of Object.entries(product.metadata)) {
+								// repeat commands for higher quantities of subscriptions
+								for(let i = 0; i < lineItem.quantity; i += 1) {
+									if(key.startsWith('mc_lifetime_cmd')) {
+										let command = value;
+										command = command.replace('{USERNAME}', username);
+										command = command.replace('{UUID}', uuid);
+										commands.push(command);
+									}
+								}
+							}
 						}
 					}
 				}
 
-				event.commands = commands;
+				const response = {
+					commands: JSON.stringify(commands),
+					livemode: event.livemode,
+					username: username,
+					uuid: uuid,
+					warnings: JSON.stringify(warnings)
+				};
 				await sqs.sendMessage({
-					MessageBody: JSON.stringify(event),
+					MessageBody: JSON.stringify(response),
 					MessageDeduplicationId: event.id,
 					MessageGroupId: 'webhook_event',
 					QueueUrl: process.env.SQS_QUEUE_URL
