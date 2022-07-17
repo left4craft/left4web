@@ -90,7 +90,7 @@ export default async (req, res) => {
 						username = lineItem.metadata.mc_username;
 						uuid = lineItem.metadata.mc_uuid;
 
-						const remainingDays = Math.floor((1660625482 - Date.now()/1000)/86400)+5;
+						const remainingDays = Math.floor((lineItem.period.end - Date.now()/1000)/86400)+5;
 						time = `${remainingDays}d`;
 
 						const type = lineItem.price.recurring.interval === 'month' ? 'monthly' : 'yearly';
