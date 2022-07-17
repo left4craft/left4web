@@ -1,8 +1,10 @@
-const stripe = require('stripe');
+/* eslint-disable max-depth */
+// const stripe = require('stripe');
 import { buffer } from 'micro';
 import {
 	ddb, sqs
 } from '../../../utils/aws';
+import { stripe } from '../../../utils/stripe';
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -13,6 +15,14 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 // 	secretAccessKey: process.env.DYNAMODB_ACCESS_KEY_SECRET
 // });
 
+/*
+{
+	username: Captain_Sisko,
+	uuid: 804c7ee5-db51-4e58-a011-475f00df6828,
+	commands: []
+}
+*/
+
 export const config = { api: { bodyParser: false } };
 
 export default async (req, res) => {
@@ -22,6 +32,8 @@ export default async (req, res) => {
 		const sig = req.headers['stripe-signature'];
 
 		let event;
+
+		const warnings = [];
 
 		try {
 			event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
@@ -61,6 +73,16 @@ export default async (req, res) => {
 					})
 					.promise();
 
+				// invoice paid event, used to handle subscriptions
+				if(event.type === 'invoice.paid') {
+					const lineItems = event.data.object.lines.data;
+					for(const lineItem of lineItems) {
+						if(lineItem.type !== 'subscription') {
+							warnings.push('Non-subscription product found on invoice');
+						}
+					}
+				}
+
 				await sqs.sendMessage({
 					MessageBody: JSON.stringify(event),
 					MessageDeduplicationId: event.id,
@@ -79,7 +101,10 @@ export default async (req, res) => {
 			return;
 		}
 
-		res.json({ received: true });
+		res.json({
+			received: true,
+			warnings: JSON.stringify(warnings)
+		});
 	} else {
 		res.setHeader('Allow', 'POST');
 		res.status(405).end('Method Not Allowed');

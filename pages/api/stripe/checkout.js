@@ -49,14 +49,11 @@ export default async (req, res) => {
 			cancel_url: process.env.NEXT_PUBLIC_URL + '/shop/products/checkout',
 			customer: customer.id,
 			line_items: line_items,
-
-			mode: 'payment',
-			payment_intent_data: {
-				metadata: {
-					mc_username: user,
-					mc_uuid: uuid
-				}
+			metadata: {
+				mc_username: user,
+				mc_uuid: uuid
 			},
+			mode: 'payment',
 			payment_method_types: ['card'],
 			success_url: process.env.NEXT_PUBLIC_URL + '/shop/success'
 		});
