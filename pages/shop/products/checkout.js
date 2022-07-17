@@ -282,7 +282,9 @@ function load_stripe(canCheckout, setLoading, setErrormessage) {
 
 function checkout(setLoading, setErrormessage) {
 	const checkout_request = new XMLHttpRequest();
-	checkout_request.open('get', '/api/stripe/checkout');
+	checkout_request.open('get', '/api/stripe/checkout' +
+		'?user=' + encodeURIComponent(document.getElementById('mc-username').value) +
+        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value));
 	checkout_request.send();
 	checkout_request.onload = () => {
 		const checkout_response = JSON.parse(checkout_request.response);

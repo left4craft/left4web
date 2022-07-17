@@ -106,7 +106,7 @@ export default function HistoryPage(props) {
 	</div>;
 }
 
-HistoryPage.propTypes = { history: PropTypes.object };
+HistoryPage.propTypes = { history: PropTypes.array };
 
 export async function getServerSideProps({ req }) {
 	// helper function to get a stripe customer, either from the database or creating a new one
