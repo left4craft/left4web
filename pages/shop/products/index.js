@@ -230,8 +230,7 @@ export async function getServerSideProps() {
 		});
 	}
 
-	console.log(JSON.stringify(stripe_products, null, 2));
-
+	// console.log(JSON.stringify(stripe_products, null, 2));
 
 	return { props: { stripe_products: stripe_products } };
 }

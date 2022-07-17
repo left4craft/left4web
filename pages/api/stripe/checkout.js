@@ -58,7 +58,7 @@ export default async (req, res) => {
 				}
 			},
 			payment_method_types: ['card'],
-			success_url: process.env.NEXT_PUBLIC_URL + '/shop/success?session_id={CHECKOUT_SESSION_ID}'
+			success_url: process.env.NEXT_PUBLIC_URL + '/shop/success'
 		});
 		return res.json({
 			session_id: checkout_session.id,

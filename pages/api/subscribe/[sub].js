@@ -2,13 +2,12 @@
 import { getSession } from 'next-auth/react';
 import { ddb } from '../../../utils/aws';
 import { stripe } from '../../../utils/stripe';
-import { stripe_products } from '../../../utils/stripe_products';
 
 export default async (req, res) => {
 	const session = await getSession({ req });
 
 	const {
-		sub, user, uuid, annual
+		sub, user, uuid
 	} = req.query;
 
 	// use regex to protect against injection attacks
@@ -16,22 +15,14 @@ export default async (req, res) => {
 		/^[0-9a-zA-Z_]{1,16}$/.test(user) &&
 		/^[0-9a-zA-Z-]{36}/.test(uuid)) {
 
-		// step 1: validate the product exists
-		if (stripe_products.subscriptions[sub] === undefined) {
-			return res.json({
-				error: 'Invalid subscription',
-				success: false
-			});
-		}
-
 		try {
-			// step 2: check if user has free trial
+			// step 1: check if user has free trial
 			const free_trial = await has_free_trial(uuid);
 
-			// step 3: get the stripe customer
+			// step 2: get the stripe customer
 			const customer = await get_stripe_customer(session, stripe);
 
-			// step 4: create the session
+			// step 3: create the session
 			const sub_data = {
 				metadata: {
 					mc_username: user,
@@ -47,18 +38,18 @@ export default async (req, res) => {
 
 			const checkout_session = await stripe.checkout.sessions.create({
 				allow_promotion_codes: true,
-				cancel_url: process.env.NEXT_PUBLIC_URL + '/shop/subscription/' + sub + '?annual=' + annual,
+				cancel_url: process.env.NEXT_PUBLIC_URL + '/shop',
 				customer: customer.id,
 				line_items: [
 					{
-						price: stripe_products.subscriptions[sub].price_id[annual === 'true' ? 1 : 0],
+						price: sub,
 						quantity: 1
 					}
 				],
 				mode: 'subscription',
 				payment_method_types: ['card'],
 				subscription_data: sub_data,
-				success_url: process.env.NEXT_PUBLIC_URL + '/shop/success?session_id={CHECKOUT_SESSION_ID}'
+				success_url: process.env.NEXT_PUBLIC_URL + '/shop/success'
 			});
 			return res.json({
 				session_id: checkout_session.id,

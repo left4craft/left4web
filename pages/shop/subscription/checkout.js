@@ -8,7 +8,6 @@ import { Profile } from '../../../components/profile';
 import { Navbar } from '../../../components/navbar';
 import { Hero } from '../../../components/hero';
 import { Footer } from '../../../components/footer';
-import { stripe_products } from '../../../utils/stripe_products';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Spinner } from '../../../components/loader';
@@ -16,7 +15,7 @@ import { Spinner } from '../../../components/loader';
 export default function Shop() {
 	const router = useRouter();
 	const {
-		sub, annual
+		annual, name, price, price_id
 	} = router.query;
 	const {
 		data: session, loading
@@ -41,8 +40,6 @@ export default function Shop() {
 	const [stripeLoading,
 		setStripeLoading] = useState(false);
 
-	const isAnnual = annual === 'true';
-
 	if(loading) {
 		return <>
 			<Head>
@@ -58,7 +55,7 @@ export default function Shop() {
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
-				<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
+				<h2>Subscribe to { name }</h2>
 			</div>
 			<div className="text-white text-center text-l bg-dark p-8">
 				<Spinner /> Loading...
@@ -69,7 +66,7 @@ export default function Shop() {
 		</>;
 	}
 
-	if(!(sub in stripe_products.subscriptions)) {
+	if(!name || !price || !price_id) {
 		return <>
 			<Head>
 				<title>Left4Craft | Subscribe</title>
@@ -109,7 +106,7 @@ export default function Shop() {
 
 			<div className="text-white text-center text-4xl bg-dark font-bold">
 				<div className="h-8" />
-				<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
+				<h2>Subscribe to { name }</h2>
 			</div>
 			<div className="text-white text-center text-l bg-dark p-8">
 				You must <u><Link href="/api/auth/signin">log in</Link></u> to check out.
@@ -134,13 +131,13 @@ export default function Shop() {
 
 		<div className="text-white text-center text-4xl bg-dark font-bold">
 			<div className="h-8" />
-			<h2>Subscribe to { stripe_products.subscriptions[sub].display_name }</h2>
+			<h2>Subscribe to {name}</h2>
 		</div>
 
 		<div className="flex flex-wrap justify-center text-white text-center text-l bg-dark p-8">
 
 			<div className="text-left w-96 relative">
-				<p>Cost: ${ stripe_products.subscriptions[sub].price[isAnnual ? 1 : 0] } / {isAnnual ? 'year' : 'month'} </p>
+				<p>Cost: { price } / {annual === 'true' ? 'year' : 'month'} </p>
 				<p>The exact total, including coupons, currency conversions and transaction fees, will be computed in the next step.</p>
 				<p>One month is free for Minecraft accounts which have never subscribed before.</p>
 				<div className='h-4' />
@@ -190,7 +187,7 @@ export default function Shop() {
 						</span>
 					</label>
 					{stripeErrorMessage !== '' && <label htmlFor="checkout" className="text-red-500">{stripeErrorMessage}</label>}
-					<button type="button" id="checkout" onClick={() => load_stripe(sub, annual, (box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
+					<button type="button" id="checkout" onClick={() => load_stripe(price_id, (box1 && box2), setStripeLoading, setStripeErrorMessage)} className={`flex justify-center items-center w-l py-2 px-4 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ${(box1 && box2) ? 'bg-primary hover:bg-secondary' : 'bg-light cursor-not-allowed'}`}>
 						{stripeLoading ? <><Spinner /> <p>Loading...</p></>: 'Checkout'}
 					</button>
 					<p>Free trial and coupon details (if applicable) will be displayed on the checkout screen.</p>
@@ -248,7 +245,7 @@ function validate_user(setCheckout, setValidating, setErrormessage, setUUID) {
 
 }
 
-function load_stripe(sub, annual, canCheckout, setLoading, setErrormessage) {
+function load_stripe(sub, canCheckout, setLoading, setErrormessage) {
 	if(!canCheckout) return;
 
 	setLoading(true);
@@ -262,19 +259,18 @@ function load_stripe(sub, annual, canCheckout, setLoading, setErrormessage) {
 		document.body.appendChild(script);
 
 		script.onload = () => {
-			checkout(sub, annual, setLoading, setErrormessage);
+			checkout(sub, setLoading, setErrormessage);
 		};
 	} else {
-		checkout(sub, annual, setLoading, setErrormessage);
+		checkout(sub, setLoading, setErrormessage);
 	}
 }
 
-function checkout(sub, annual, setLoading, setErrormessage) {
+function checkout(sub, setLoading, setErrormessage) {
 	const checkout_request = new XMLHttpRequest();
 	checkout_request.open('get', '/api/subscribe/' + sub +
         '?user=' + encodeURIComponent(document.getElementById('mc-username').value) +
-        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value) +
-		'&annual=' + annual);
+        '&uuid=' + encodeURIComponent(document.getElementById('mc-uuid').value));
 
 	checkout_request.send();
 

@@ -10,8 +10,10 @@ import { SubscriptionCard } from '../../components/subscription_card';
 import { OnlineTime } from '../../components/time_online';
 import { Footer } from '../../components/footer';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { stripe } from '../../utils/stripe';
 
-export default function Shop() {
+export default function Shop(props) {
 	const {
 		data: session, loading
 	} = useSession();
@@ -54,12 +56,8 @@ export default function Shop() {
 					<b>Annual Billing</b> (save 20%)
 				</span>
 			</div>
-
 			<div className="flex flex-wrap bg-dark justify-center">
-				< SubscriptionCard rank="userplus" annual={ isAnnual } />
-				< SubscriptionCard rank="donor" annual={ isAnnual } />
-				< SubscriptionCard rank="patron" annual={ isAnnual } />
-				< SubscriptionCard rank="patronplus" annual={ isAnnual } />
+				{props.stripe_subscriptions.map(rank => < SubscriptionCard key={rank.name} rank={rank} annual={ isAnnual } />)}
 			</div>
 			<OnlineTime />
 			<div className="bg-primary bg-grass-pattern bg-repeat bg-fixed animate-pan motion-reduce:animate-none py-20 px-4 text-white">
@@ -134,3 +132,52 @@ export default function Shop() {
 		</div>
 	);
 }
+
+Shop.propTypes = { stripe_subscriptions: PropTypes.array };
+
+export async function getServerSideProps() {
+
+	const products = await stripe.products.list({ limit: 99 });
+
+	const stripe_subscriptions = [];
+	for(const product of products.data) {
+
+		// validate subscription metadata
+		if(!product.metadata.perks_enabled) continue;
+		try {
+			JSON.parse(product.metadata.perks_enabled);
+			product.metadata.perks_disabled && JSON.parse(product.metadata.perks_disabled);
+		} catch (e) {
+			// console.log(e);
+			continue;
+		}
+
+		// get the price
+		const prices = (await stripe.prices.search(
+			{ query: `active:"true" AND product:"${product.id}" AND type:"recurring"` }
+		)).data;
+		// skip product if it's missing price data
+		if(!prices || prices.length < 2) continue;
+
+		const monthly_idx = prices[0].recurring.interval === 'month' ? 0 : 1;
+		const yearly_idx = 1 - monthly_idx;
+
+		stripe_subscriptions.push({
+			name: product.name,
+			perks_disabled: product.metadata.perks_disabled ? JSON.parse(product.metadata.perks_disabled) : null,
+			perks_enabled: JSON.parse(product.metadata.perks_enabled),
+			price: [prices[monthly_idx].unit_amount,
+				prices[yearly_idx].unit_amount],
+			price_id: [prices[monthly_idx].id,
+				prices[yearly_idx].id]
+		});
+	}
+
+	// sort subscriptions by price in ascending order
+	stripe_subscriptions.sort((a, b) => a.price[0] - b.price[0]);
+
+	// console.log(JSON.stringify(stripe_subscriptions, null, 2));
+
+	return { props: { stripe_subscriptions: stripe_subscriptions } };
+}
+

@@ -92,7 +92,7 @@ export default function HistoryPage(props) {
 		<div className="flex flex-wrap justify-center text-white text-center text-l bg-dark p-8">
 
 			<div className="text-left w-96 relative">
-				<History history={props.history} />
+				{props.history.length > 0 ? <History history={props.history} /> : <p>No one-time purchase history.</p>}
 
 				<p className='p-8'>To view and manage subscription payments, click &quot;Manage Subscriptions&quot; at the top of this page.</p>
 
@@ -151,7 +151,7 @@ export async function getServerSideProps({ req }) {
 	const order_history = await stripe.charges.search({
 		limit: 99,
 		query: `customer:"${customer.id}"`
-	}, { apiVersion: '2020-08-27' });
+	});
 
 	const order_history_cleaned = [];
 
@@ -165,7 +165,7 @@ export async function getServerSideProps({ req }) {
 		order_history_cleaned.push(order_elem);
 	}
 
-	console.log(JSON.stringify(order_history_cleaned, null, 2));
+	// console.log(JSON.stringify(order_history_cleaned, null, 2));
 
 
 	return { props: { history: order_history_cleaned } };

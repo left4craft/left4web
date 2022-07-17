@@ -7,8 +7,9 @@ import Link from 'next/link';
 const server_founded = 1385532000000;
 
 export function OnlineTime () {
+	// must start at null to prevent hydration errors
 	const [time,
-		setTime] = useState(Date.now());
+		setTime] = useState(null);
 
 	useEffect(() => {
 		const interval = setInterval(() => setTime(Date.now()), 1000);
