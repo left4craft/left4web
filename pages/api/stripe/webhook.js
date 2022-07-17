@@ -35,6 +35,11 @@ export default async (req, res) => {
 
 		const warnings = [];
 
+		let username = null;
+		let uuid = null;
+		let time = null;
+		let commands = [];
+
 		try {
 			event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
 			// use "livemode" value instead
@@ -73,16 +78,42 @@ export default async (req, res) => {
 					})
 					.promise();
 
+
 				// invoice paid event, used to handle subscriptions
 				if(event.type === 'invoice.paid') {
 					const lineItems = event.data.object.lines.data;
 					for(const lineItem of lineItems) {
 						if(lineItem.type !== 'subscription') {
 							warnings.push('Non-subscription product found on invoice');
+							continue;
+						}
+						username = lineItem.metadata.mc_username;
+						uuid = lineItem.metadata.mc_uuid;
+						
+						const remainingDays = Math.floor((1660625482 - Date.now()/1000)/86400)+5;
+						time = `${remainingDays}d`;
+
+						const type = lineItem.price.recurring.interval === 'month' ? 'monthly' : 'yearly';
+
+						const product = await stripe.products.retrieve(
+							lineItem.price.product
+						);
+
+						for(const [key, value] of Object.entries(product.metadata)) {
+							// repeat commands for higher quantities of subscriptions
+							for(let i = 0; i < lineItem.quantity; i += 1) {
+								if(key.startsWith(`mc_${type}`)) {
+									let command = value;
+									command = command.replace('{USERNAME}', username);
+									command = command.replace('{UUID}', uuid);
+									command = command.replace('{TIME}', time);
+									commands.push(command);
+								}	
+							}
 						}
 					}
 				}
-
+				event.commands = commands;
 				await sqs.sendMessage({
 					MessageBody: JSON.stringify(event),
 					MessageDeduplicationId: event.id,
@@ -103,6 +134,10 @@ export default async (req, res) => {
 
 		res.json({
 			received: true,
+			username: username;
+			uuid: uuid;
+			time: time;
+			commands: JSON.stringify(commands);
 			warnings: JSON.stringify(warnings)
 		});
 	} else {
