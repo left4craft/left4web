@@ -34,11 +34,10 @@ export default async (req, res) => {
 		let event;
 
 		const warnings = [];
-
+		const commands = [];
 		let username = null;
 		let uuid = null;
 		let time = null;
-		let commands = [];
 
 		try {
 			event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
@@ -89,7 +88,7 @@ export default async (req, res) => {
 						}
 						username = lineItem.metadata.mc_username;
 						uuid = lineItem.metadata.mc_uuid;
-						
+
 						const remainingDays = Math.floor((1660625482 - Date.now()/1000)/86400)+5;
 						time = `${remainingDays}d`;
 
@@ -99,7 +98,8 @@ export default async (req, res) => {
 							lineItem.price.product
 						);
 
-						for(const [key, value] of Object.entries(product.metadata)) {
+						for(const [key,
+							value] of Object.entries(product.metadata)) {
 							// repeat commands for higher quantities of subscriptions
 							for(let i = 0; i < lineItem.quantity; i += 1) {
 								if(key.startsWith(`mc_${type}`)) {
@@ -108,11 +108,29 @@ export default async (req, res) => {
 									command = command.replace('{UUID}', uuid);
 									command = command.replace('{TIME}', time);
 									commands.push(command);
-								}	
+								}
 							}
 						}
 					}
 				}
+				// checkout session completed event, used to handle one-time payments
+				if(event.type === 'checkout.session.completed') {
+					if(event.data.object.mode !== 'payment') {
+						warnings.push('checkout.session.completed called in non-payment mode');
+					} else {
+						username = event.data.object.metadata.mc_username;
+						uuid = event.data.object.metadata.mc_uuid;
+
+						const lineItems = await stripe.checkout.sessions.listLineItems(
+							event.data.object.id,
+							{ limit: 99 }
+						);
+						for(const lineItem of lineItems.data) {
+							console.log(lineItem);
+						}
+					}
+				}
+
 				event.commands = commands;
 				await sqs.sendMessage({
 					MessageBody: JSON.stringify(event),
@@ -133,11 +151,11 @@ export default async (req, res) => {
 		}
 
 		res.json({
+			commands: JSON.stringify(commands),
 			received: true,
-			username: username;
-			uuid: uuid;
-			time: time;
-			commands: JSON.stringify(commands);
+			time: time,
+			username: username,
+			uuid: uuid,
 			warnings: JSON.stringify(warnings)
 		});
 	} else {
