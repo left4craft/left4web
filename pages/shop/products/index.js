@@ -201,7 +201,7 @@ export default function ProductPage(props) {
 
 ProductPage.propTypes = { stripe_products: PropTypes.object };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
 	const products = await stripe.products.list({ limit: 99 });
 
@@ -232,6 +232,11 @@ export async function getServerSideProps() {
 
 	// console.log(JSON.stringify(stripe_products, null, 2));
 
-	return { props: { stripe_products: stripe_products } };
+	return {
+		props: {
+			revalidate: 3600,
+			stripe_products: stripe_products
+		}
+	};
 }
 

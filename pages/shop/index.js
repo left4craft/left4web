@@ -135,7 +135,7 @@ export default function Shop(props) {
 
 Shop.propTypes = { stripe_subscriptions: PropTypes.array };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
 	const products = await stripe.products.list({ limit: 99 });
 
@@ -178,6 +178,11 @@ export async function getServerSideProps() {
 
 	// console.log(JSON.stringify(stripe_subscriptions, null, 2));
 
-	return { props: { stripe_subscriptions: stripe_subscriptions } };
+	return {
+		props: {
+			revalidate: 3600,
+			stripe_subscriptions: stripe_subscriptions
+		}
+	};
 }
 
