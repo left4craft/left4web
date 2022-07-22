@@ -35,7 +35,7 @@ export default function Privacy() {
 					<p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
 
 					<div className='text-center text-2xl font-bold p-4'>
-						<h1>Information we collect</h1>
+						<h1>Information We Collect</h1>
 					</div>
 
 					<p>The personal information that you are asked to provide, and the reasons why you are asked to provide it,
@@ -48,7 +48,7 @@ export default function Privacy() {
 						address, email address, and telephone number.</p>
 
 					<div className='text-center text-2xl font-bold p-4'>
-						<h1>How we use your information</h1>
+						<h1>How We Use Your Information</h1>
 					</div>
 
 					<p>We use the information we collect in various ways, including to:</p>
@@ -149,7 +149,7 @@ export default function Privacy() {
 						contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
 
 					<div className='h-8' />
-					<p>Last updated: December 28, 2021</p>
+					<p>Last updated: July 21, 2022</p>
 				</div>
 			</div>
 

@@ -56,7 +56,7 @@ export default function Terms() {
 					<p>By purchasing intangible items from Left4Craft, you agree to a no refund policy. Left4Craft is not required to
 						give a refund after items are purchased. Left4Craft will make a good-faith effort to deliver the
 						virtual items as described, but we cannot guarentee their delivery. All virtual items
-						purchased have no real world value. we reserve the right to transform or change any rank or any other virtual item,
+						purchased have no real world value. We reserve the right to transform or change any rank or any other virtual item,
 						at any time, without prior notice.</p>
 					<br />
 					<p>We reserve the right to restrict your access to any of our services, including but not limited to our Minecraft Server
@@ -64,10 +64,9 @@ export default function Terms() {
 						at <a href='https://wiki.left4craft.org/rules/'>https://wiki.left4craft.org/rules/</a>.
 					</p>
 					<br />
-					<p>You are free to change or cancel subscription purchases at any time. To do so, log in at <Link href='/shop'>https://left4craft.org/shop</Link> and
-						click the &quot;Manage Account&quot; button. A prorated credit, based on the cost and remaining length of
-						the subscription, may
-						be applied to future transactions with us. This does not, however, constitute a refund.
+					<p>You are free to cancel a subscription purchases at any time. To do so, log in at <Link href='/shop'>https://left4craft.org/shop</Link> and
+						click the &quot;Manage Account&quot; button. Cancelling a subscription will stop future payments for that subscription,
+						and you will lose access to the subscription benefits at the end of the most recent subscription period.
 					</p>
 
 					<div className='text-center text-2xl font-bold p-4'>
@@ -204,7 +203,7 @@ export default function Terms() {
 						to and follow these linking terms and conditions.</p>
 
 					<div className='text-center text-2xl font-bold p-4'>
-						<h1>Removal of links from our website</h1>
+						<h1>Removal of Links from Our Website</h1>
 					</div>
 
 					<p>If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment.
@@ -234,7 +233,7 @@ export default function Terms() {
 						be liable for any loss or damage of any nature.</p>
 
 					<div className='h-8' />
-					<p>Last updated: December 28, 2021</p>
+					<p>Last updated: July 21, 2022</p>
 				</div>
 			</div>
 
