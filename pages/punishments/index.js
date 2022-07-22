@@ -166,8 +166,14 @@ export default function Bans({
 	// );
 }
 
-export async function getStaticProps({ params }) {
-	const args = params.args || ['bans',
+Bans.propTypes = {
+	data: PropTypes.object,
+	success: PropTypes.bool,
+	type: PropTypes.array
+};
+
+export async function getStaticProps() {
+	const args = ['bans',
 		'1'];
 
 	// /punishments/[punishment]
@@ -248,23 +254,3 @@ export async function getStaticProps({ params }) {
 		revalidate: 300
 	};
 }
-
-export async function getStaticPaths() {
-	return {
-		fallback: true,
-		paths: [
-			'/punishments',
-			'/punishments/bans/1',
-			'/punishments/mutes/1',
-			'/punishments/kicks/1',
-			'/punishments/warnings/1'
-		]
-	};
-}
-
-Bans.propTypes = {
-	data: PropTypes.object,
-	success: PropTypes.bool,
-	type: PropTypes.array
-};
-
