@@ -103,7 +103,7 @@ export default function ProductPage(props) {
 	};
 
 	return (
-		<div>
+        <div>
 			<Modal
 				isOpen={!!selected}
 				onRequestClose={() => setSelected(null)}
@@ -179,7 +179,7 @@ export default function ProductPage(props) {
 				<div className="w-96 relative text-white">
 					{cart !== '{}' ? <>
 						<Cart cart={cart} removeFromCart={removeFromCart} canRemove={true} />
-						<Link href={{ pathname: '/shop/products/checkout' }}  passHref>
+						<Link href={{ pathname: '/shop/products/checkout' }} passHref legacyBehavior>
 							<button type="button" className="w-96 px-3 py-3 text-sm shadow rounded-lg text-white bg-primary hover:bg-secondary transition ease-in duration-200">
 								Checkout
 							</button>
@@ -196,7 +196,7 @@ export default function ProductPage(props) {
 			<div className="h-16" />
 			<Footer />
 		</div>
-	);
+    );
 }
 
 ProductPage.propTypes = { stripe_products: PropTypes.object };

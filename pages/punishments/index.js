@@ -82,8 +82,8 @@ export default function Bans({
 			</div>
 		);
 	} else if (success === false) {
-		return(
-			<div>
+		return (
+            <div>
 				<Head>
 					<title>Left4Craft | Bans</title>
 					<meta name="title" content="Left4Craft | Bans" />
@@ -102,7 +102,7 @@ export default function Bans({
 						<p>Invalid URL</p>
 						<div className="h-8" />
 						<div className="h-16 flex justify-center text-white">
-							<Link href="/punishments" passHref>
+							<Link href="/punishments" passHref legacyBehavior>
 								<button className="bg-light hover:bg-secondary h-12 px-8 rounded-lg focus:outline-none transition ease-in duration-200">Back to List</button>
 							</Link>
 						</div>
@@ -110,7 +110,7 @@ export default function Bans({
 				</div>
 				<Footer />
 			</div>
-		);
+        );
 	}
 	return (
 		<div>

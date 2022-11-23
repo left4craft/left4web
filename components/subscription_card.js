@@ -4,45 +4,50 @@ import { toReadablePrice } from '../utils/readable_price';
 
 export function SubscriptionCard (props) {
 	const prices = props.rank.price;
-	return <div className="p-8">
-		<div className="shadow-lg rounded-2xl w-72 bg-gradient-to-r from-primary to-secondary p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-			<div className="flex text-white  items-center justify-between">
-				<p className="text-4xl font-medium mb-4">
-					{props.rank.name}
-				</p>
-				<p className="text-3xl font-bold flex flex-col">
-					{toReadablePrice(prices[props.annual ? 1 : 0])}
-					<span className="font-thin text-right text-sm">
-						{props.annual ? '/ year' : '/ month'}
-					</span>
-				</p>
-			</div>
-			<p className="text-white text-md mt-4">
-				{props.annual && 'Save ' + toReadablePrice(prices[0]*12 - prices[1]) + ' per year!'}
-			</p>
+	return (
+        <div className="p-8">
+            <div className="shadow-lg rounded-2xl w-72 bg-gradient-to-r from-primary to-secondary p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                <div className="flex text-white  items-center justify-between">
+                    <p className="text-4xl font-medium mb-4">
+                        {props.rank.name}
+                    </p>
+                    <p className="text-3xl font-bold flex flex-col">
+                        {toReadablePrice(prices[props.annual ? 1 : 0])}
+                        <span className="font-thin text-right text-sm">
+                            {props.annual ? '/ year' : '/ month'}
+                        </span>
+                    </p>
+                </div>
+                <p className="text-white text-md mt-4">
+                    {props.annual && 'Save ' + toReadablePrice(prices[0]*12 - prices[1]) + ' per year!'}
+                </p>
 
-			<p className="text-white text-md mt-4">
-				Perks:
-			</p>
-			<ul className="text-sm text-white w-full mt-6 mb-6">
-				{getPerks(props.rank)}
-			</ul>
-			<Link href={{
-				pathname: '/shop/subscription/checkout',
-				query: {
-					annual: props.annual,
-					name: props.rank.name,
-					price: toReadablePrice(props.rank.price[props.annual ? 1 : 0]),
-					price_id: props.rank.price_id[props.annual ? 1 : 0]
-				}
-			}}  passHref>
-				<button type="button" className="w-full px-3 py-3 text-sm shadow rounded-lg text-white bg-dark hover:bg-light transition ease-in duration-200">
-					Subscribe
-				</button>
-			</Link>
+                <p className="text-white text-md mt-4">
+                    Perks:
+                </p>
+                <ul className="text-sm text-white w-full mt-6 mb-6">
+                    {getPerks(props.rank)}
+                </ul>
+                <Link
+                    href={{
+                        pathname: '/shop/subscription/checkout',
+                        query: {
+                            annual: props.annual,
+                            name: props.rank.name,
+                            price: toReadablePrice(props.rank.price[props.annual ? 1 : 0]),
+                            price_id: props.rank.price_id[props.annual ? 1 : 0]
+                        }
+                    }}
+                    passHref
+                    legacyBehavior>
+                    <button type="button" className="w-full px-3 py-3 text-sm shadow rounded-lg text-white bg-dark hover:bg-light transition ease-in duration-200">
+                        Subscribe
+                    </button>
+                </Link>
 
-		</div>
-	</div>;
+            </div>
+        </div>
+    );
 }
 
 function getPerks(rank) {

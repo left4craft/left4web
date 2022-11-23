@@ -9,14 +9,14 @@ export function Footer() {
 				</div>
 				<div className="mt-4 md:mt-0 flex flex-col md:flex-row">
 					<nav className="flex-1 flex flex-col items-center justify-center md:items-end md:border-r border-light md:pr-5">
-						<Link href="/shop">
-							<a aria-current="page" className="hover:text-white">Store</a>
+						<Link href="/shop" aria-current="page" className="hover:text-white">
+							Store
 						</Link>
-						<Link href="/tos">
-							<a aria-current="page" className="hover:text-white">Terms of Service</a>
+						<Link href="/tos" aria-current="page" className="hover:text-white">
+							Terms of Service
 						</Link>
-						<Link href="/privacy">
-							<a aria-current="page" className="hover:text-white">Privacy</a>
+						<Link href="/privacy" aria-current="page" className="hover:text-white">
+							Privacy
 						</Link>
 					</nav>
 					<div className="md:hidden mt-4 mx-auto w-11 h-px rounded-full">
