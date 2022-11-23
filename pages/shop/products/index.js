@@ -103,7 +103,7 @@ export default function ProductPage(props) {
 	};
 
 	return (
-        <div>
+		<div>
 			<Modal
 				isOpen={!!selected}
 				onRequestClose={() => setSelected(null)}
@@ -196,7 +196,7 @@ export default function ProductPage(props) {
 			<div className="h-16" />
 			<Footer />
 		</div>
-    );
+	);
 }
 
 ProductPage.propTypes = { stripe_products: PropTypes.object };

@@ -83,7 +83,7 @@ export default function Bans({
 		);
 	} else if (success === false) {
 		return (
-            <div>
+			<div>
 				<Head>
 					<title>Left4Craft | Bans</title>
 					<meta name="title" content="Left4Craft | Bans" />
@@ -110,7 +110,7 @@ export default function Bans({
 				</div>
 				<Footer />
 			</div>
-        );
+		);
 	}
 	return (
 		<div>

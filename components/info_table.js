@@ -69,9 +69,9 @@ export function InfoTable({
 						</tr>
 					</Link>
 					<Link
-                        href={`/punishments/by/${data.result.banned_by_uuid}`}
-                        passHref
-                        legacyBehavior>
+						href={`/punishments/by/${data.result.banned_by_uuid}`}
+						passHref
+						legacyBehavior>
 						<tr className="hover:bg-light cursor-pointer">
 							<td className="border border-light px-4 py-2">{action} by</td>
 							<td className="border border-light px-4 py-2">

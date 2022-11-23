@@ -29,55 +29,55 @@ export function Profile (props) {
 
 	if (props.session) {
 		return (
-            <div className="shadow-lg bg-dark p-4">
-                <div className="max-w-6xl mx-auto px-2">
-                    <div className="flex-row items-center gap-4 flex max-w-3xl ">
-                        <div className="flex-shrink-0">
-                            <Image height={ 64 } width={ 64 } className="mx-auto object-cover rounded-full" alt="profile" src={props.session.user.image} />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-gray-400 text-xs">
+			<div className="shadow-lg bg-dark p-4">
+				<div className="max-w-6xl mx-auto px-2">
+					<div className="flex-row items-center gap-4 flex max-w-3xl ">
+						<div className="flex-shrink-0">
+							<Image height={ 64 } width={ 64 } className="mx-auto object-cover rounded-full" alt="profile" src={props.session.user.image} />
+						</div>
+						<div className="flex flex-col">
+							<span className="text-gray-400 text-xs">
                         Logged in as
-                            </span>
-                            <span className="text-white text-lg font-medium">
-                                {props.session.user.email}
-                            </span>
+							</span>
+							<span className="text-white text-lg font-medium">
+								{props.session.user.email}
+							</span>
 
-                        </div>
-                        <button type="button" onClick={ redirect_to_manage } className="hidden md:block py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+						</div>
+						<button type="button" onClick={ redirect_to_manage } className="hidden md:block py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
                             Manage Subscriptions
-                        </button>
-                        <Link href='/shop/history' passHref legacyBehavior>
-                            <button type="button" className="hidden md:block py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+						</button>
+						<Link href='/shop/history' passHref legacyBehavior>
+							<button type="button" className="hidden md:block py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
                                 Purchase History
-                            </button>
-                        </Link>
-                        <button type="button" onClick={props.signOut} className="hidden md:block py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+							</button>
+						</Link>
+						<button type="button" onClick={props.signOut} className="hidden md:block py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
                             Log Out
-                        </button>
-                    </div>
-                    <div className="md:hidden pt-4 flex-row items-center gap-4 flex max-w-3xl ">
-                        <button type="button" onClick={ redirect_to_manage } className="py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+						</button>
+					</div>
+					<div className="md:hidden pt-4 flex-row items-center gap-4 flex max-w-3xl ">
+						<button type="button" onClick={ redirect_to_manage } className="py-2 px-4  bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
                             Manage Subscriptions
-                        </button>
-                    </div>
-                    <Link href='/shop/history' passHref legacyBehavior>
-                        <div className="md:hidden pt-4 flex-row items-center gap-4 flex max-w-3xl ">
-                            <button type="button" onClick={ redirect_to_manage } className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+						</button>
+					</div>
+					<Link href='/shop/history' passHref legacyBehavior>
+						<div className="md:hidden pt-4 flex-row items-center gap-4 flex max-w-3xl ">
+							<button type="button" onClick={ redirect_to_manage } className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
                                 Purchase History
-                            </button>
-                        </div>
-                    </Link>
-                    <div className="md:hidden pt-4 flex-row items-center gap-4 flex max-w-3xl ">
-                        <button type="button" onClick={props.signOut} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
+							</button>
+						</div>
+					</Link>
+					<div className="md:hidden pt-4 flex-row items-center gap-4 flex max-w-3xl ">
+						<button type="button" onClick={props.signOut} className="py-2 px-4 bg-primary hover:bg-secondary text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg focus:bg-light focus:animate-pulse">
                             Log Out
-                        </button>
-                    </div>
+						</button>
+					</div>
 
-                </div>
+				</div>
 
-            </div>
-        );
+			</div>
+		);
 
 	} else {
 		return <div className="shadow-lg bg-dark p-4">

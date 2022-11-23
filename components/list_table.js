@@ -84,10 +84,10 @@ export function ListTable({
 		</table>
 		<div className="flex items-center text-white h-12">
 			<Link
-                href={`/punishments/${type[1]}/${Math.max(1, data.pragnation.page)}`}
-                scroll={false}
-                passHref
-                legacyBehavior>
+				href={`/punishments/${type[1]}/${Math.max(1, data.pragnation.page)}`}
+				scroll={false}
+				passHref
+				legacyBehavior>
 				<button type="button" className="w-full text-base font-medium rounded-bl-lg bg-light hover:bg-secondary h-full px-4 focus:outline-none transition ease-in duration-200">
 					Previous Page
 				</button>
@@ -96,10 +96,10 @@ export function ListTable({
 				Page {data.pragnation.page+1}/{data.pragnation.pages+1}
 			</button>
 			<Link
-                href={`/punishments/${type[1]}/${Math.min(data.pragnation.pages+1, data.pragnation.page+2)}`}
-                scroll={false}
-                passHref
-                legacyBehavior>
+				href={`/punishments/${type[1]}/${Math.min(data.pragnation.pages+1, data.pragnation.page+2)}`}
+				scroll={false}
+				passHref
+				legacyBehavior>
 				<button type="button" className="w-full text-base font-medium rounded-br-lg bg-light hover:bg-secondary h-full px-4 focus:outline-none transition ease-in duration-200">
 					Next Page
 				</button>
@@ -125,7 +125,7 @@ function ListRow({
 		removed_by = ' (Removed by ' + rowData.removed_by_name + ')';
 	}
 	return (
-        <Link href={`/punishments/${type}/info/${rowData.id}`} passHref legacyBehavior>
+		<Link href={`/punishments/${type}/info/${rowData.id}`} passHref legacyBehavior>
 			<tr className="bg-dark cursor-pointer hover:bg-light border border-light md:border-none block md:table-row">
 				<td className="p-2 md:border md:border-light text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Player</span><span className='md:hidden'>{rowData.name}</span><div className="items-center hidden md:flex">
 					<div className='mr-2'><Image src={`/api/minecraft/gethead/${rowData.uuid}`} height={32} width={32} className='pixelated rounded-md' draggable={false} unoptimized/></div>{rowData.name}</div></td>
@@ -136,7 +136,7 @@ function ListRow({
 				<td className="p-2 md:border md:border-light text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Expires</span>{(rowData.until === -1 ? 'Permanent' : new Date(rowData.until).toLocaleString()) + removed_by}</td>
 			</tr>
 		</Link>
-    );
+	);
 }
 
 ListRow.propTypes = {
