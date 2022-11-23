@@ -66,5 +66,5 @@ export default NextAuth({
 	],
 	secret: process.env.NEXTAUTH_SECRET
 	// site: process.env.NEXTAUTH_URL
-	// site: 'https://www.left4craft.org'
+	// host: 'https://example.com'
 });
