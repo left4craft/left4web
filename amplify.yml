@@ -5,30 +5,29 @@ frontend:
       commands:
         - npm ci
         - echo "DISCORD_CLIENT_ID=$DISCORD_CLIENT_ID" >> .env
-		    - echo "DISCORD_CLIENT_SECRET=$DISCORD_CLIENT_SECRET" >> .env
-		    - echo "DYNAMODB_ACCESS_KEY_ID=$DYNAMODB_ACCESS_KEY_ID" >> .env
-		    - echo "DYNAMODB_ACCESS_KEY_SECRET=$DYNAMODB_ACCESS_KEY_SECRET" >> .env
-		    - echo "DYNAMODB_NEXTAUTH_TABLE=$DYNAMODB_NEXTAUTH_TABLE" >> .env
-		    - echo "DYNAMODB_REGION=$DYNAMODB_REGION" >> .env
-		    - echo "DYNAMODB_STRIPE_EVENTS_TABLE=$DYNAMODB_STRIPE_EVENTS_TABLE" >> .env
-		    - echo "DYNAMODB_STRIPE_TABLE=$DYNAMODB_STRIPE_TABLE" >> .env
-		    - echo "DYNAMODB_STRIPE_TRIALS_TABLE=$DYNAMODB_STRIPE_TRIALS_TABLE" >> .env
-		    - echo "EMAIL_FROM=$EMAIL_FROM" >> .env
-		    - echo "EMAIL_SERVER_HOST=$EMAIL_SERVER_HOST" >> .env
-		    - echo "EMAIL_SERVER_PASSWORD=$EMAIL_SERVER_PASSWORD" >> .env
-		    - echo "EMAIL_SERVER_PORT=$EMAIL_SERVER_PORT" >> .env
-		    - echo "EMAIL_SERVER_USER=$EMAIL_SERVER_USER" >> .env
-		    - echo "JWT_SIGNING_PRIVATE_KEY=$JWT_SIGNING_PRIVATE_KEY" >> .env
-		    - echo "LITEBANS_API=$LITEBANS_API" >> .env
-		    - echo "LITEBANS_API_KEY=$LITEBANS_API_KEY" >> .env
-		    - echo "NEXT_PUBLIC_STRIPE_KEY=$NEXT_PUBLIC_STRIPE_KEY" >> .env
-		    - echo "NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL" >> .env
-		    - echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env
-		    - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env
-		    - echo "SQS_QUEUE_URL=$SQS_QUEUE_URL" >> .env
-		    - echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY" >> .env
-		    - echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET" >> .env
-
+        - echo "DISCORD_CLIENT_SECRET=$DISCORD_CLIENT_SECRET" >> .env
+        - echo "DYNAMODB_ACCESS_KEY_ID=$DYNAMODB_ACCESS_KEY_ID" >> .env
+        - echo "DYNAMODB_ACCESS_KEY_SECRET=$DYNAMODB_ACCESS_KEY_SECRET" >> .env
+        - echo "DYNAMODB_NEXTAUTH_TABLE=$DYNAMODB_NEXTAUTH_TABLE" >> .env
+        - echo "DYNAMODB_REGION=$DYNAMODB_REGION" >> .env
+        - echo "DYNAMODB_STRIPE_EVENTS_TABLE=$DYNAMODB_STRIPE_EVENTS_TABLE" >> .env
+        - echo "DYNAMODB_STRIPE_TABLE=$DYNAMODB_STRIPE_TABLE" >> .env
+        - echo "DYNAMODB_STRIPE_TRIALS_TABLE=$DYNAMODB_STRIPE_TRIALS_TABLE" >> .env
+        - echo "EMAIL_FROM=$EMAIL_FROM" >> .env
+        - echo "EMAIL_SERVER_HOST=$EMAIL_SERVER_HOST" >> .env
+        - echo "EMAIL_SERVER_PASSWORD=$EMAIL_SERVER_PASSWORD" >> .env
+        - echo "EMAIL_SERVER_PORT=$EMAIL_SERVER_PORT" >> .env
+        - echo "EMAIL_SERVER_USER=$EMAIL_SERVER_USER" >> .env
+        - echo "JWT_SIGNING_PRIVATE_KEY=$JWT_SIGNING_PRIVATE_KEY" >> .env
+        - echo "LITEBANS_API=$LITEBANS_API" >> .env
+        - echo "LITEBANS_API_KEY=$LITEBANS_API_KEY" >> .env
+        - echo "NEXT_PUBLIC_STRIPE_KEY=$NEXT_PUBLIC_STRIPE_KEY" >> .env
+        - echo "NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL" >> .env
+        - echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env
+        - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env
+        - echo "SQS_QUEUE_URL=$SQS_QUEUE_URL" >> .env
+        - echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY" >> .env
+        - echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET" >> .env
     build:
       commands:
         - npm run build
