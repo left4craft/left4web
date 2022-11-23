@@ -28,20 +28,20 @@ export default NextAuth({
 		{ tableName: process.env.DYNAMODB_NEXTAUTH_TABLE }
 	),
 	// https://github.com/nextauthjs/next-auth/discussions/4445
-	callbacks: {
-		async redirect(params) {
-			const { url } = params;
+	// callbacks: {
+	// 	async redirect(params) {
+	// 		const { url } = params;
 
-			// url is just a path, e.g.: /videos/pets
-			if (!url.startsWith('http')) return url;
+	// 		// url is just a path, e.g.: /videos/pets
+	// 		if (!url.startsWith('http')) return url;
 
-			// If we have a callback use only its relative path
-			const callbackUrl = new URL(url).searchParams.get('callbackUrl');
-			if (!callbackUrl) return url;
+	// 		// If we have a callback use only its relative path
+	// 		const callbackUrl = new URL(url).searchParams.get('callbackUrl');
+	// 		if (!callbackUrl) return url;
 
-			return new URL(callbackUrl).pathname;
-		}
-	},
+	// 		return new URL(callbackUrl).pathname;
+	// 	}
+	// },
 	jwt: {
 		signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
 		verificationOptions: { algorithms: ['HS512'] }
