@@ -64,6 +64,7 @@ export default NextAuth({
 			clientSecret: process.env.DISCORD_CLIENT_SECRET
 		})    // ...add more providers here
 	],
-	secret: process.env.NEXTAUTH_SECRET,
-	site: process.env.NEXTAUTH_URL
+	secret: process.env.NEXTAUTH_SECRET
+	// site: process.env.NEXTAUTH_URL
+	// site: 'https://www.left4craft.org'
 });
