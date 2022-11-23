@@ -65,8 +65,8 @@ export default NextAuth({
 			clientSecret: process.env.DISCORD_CLIENT_SECRET
 		})    // ...add more providers here
 	],
-	secret: process.env.NEXTAUTH_SECRET
-	// session: { strategy: 'jwt' }
+	secret: process.env.NEXTAUTH_SECRET,
+	session: { strategy: 'jwt' }
 	// site: process.env.NEXTAUTH_URL
 	// host: 'https://example.com'
 });
