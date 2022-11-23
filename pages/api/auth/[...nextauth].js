@@ -60,7 +60,7 @@ export default NextAuth({
 			}
 		}),
 		DiscordProvider({
-			checks: 'state',
+			checks: 'none',
 			clientId: process.env.DISCORD_CLIENT_ID,
 			clientSecret: process.env.DISCORD_CLIENT_SECRET
 		})    // ...add more providers here
