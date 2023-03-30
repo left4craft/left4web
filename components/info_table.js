@@ -94,7 +94,7 @@ export function InfoTable({
 					</tr>
 					<tr className="hover:bg-light">
 						<td className="border border-light px-4 py-2">Expires</td>
-						<td className="border border-light px-4 py-2">{new Date(data.result.until).toLocaleString() + removed_by}</td>
+						<td className="border border-light px-4 py-2">{data.result.until <= 0 ? 'Permanent' : new Date(data.result.until).toLocaleString() + removed_by}</td>
 					</tr>
 					<tr className="hover:bg-light">
 						<td className="border border-light px-4 py-2">Origin Server</td>
