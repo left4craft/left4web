@@ -1,11 +1,13 @@
 // const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 	/*
 	 * future: {
 	 *   webpack5: true,
 	 * },
 	 */
+	output: 'standalone',
 	env: {
 		DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
 		DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
@@ -45,6 +47,32 @@ module.exports = {
 			'mc-heads.net',
 			'files.stripe.com', // stripe product icons
 			'static.eartharoid.me' // temp
+		],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: '*.gravatar.com'
+			},
+			{
+				protocol: 'https',
+				hostname: '*.discordapp.com'
+			},
+			{
+				protocol: 'https',
+				hostname: '*.crafatar.com'
+			},
+			{
+				protocol: 'https',
+				hostname: '*.mc-heads.net'
+			},
+			{
+				protocol: 'https',
+				hostname: '*.stripe.com'
+			},
+			{
+				protocol: 'https',
+				hostname: '*.eartharoid.me'
+			}
 		]
 	}
 	// webpack: config => {
@@ -88,3 +116,5 @@ module.exports = {
 	// 	return config;
 	// }
 };
+
+module.exports = nextConfig;

@@ -22,7 +22,7 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
 	}
 });
 
-export default NextAuth({
+export const authOptions = {
 	adapter: DynamoDBAdapter(
 		client,
 		{ tableName: process.env.DYNAMODB_NEXTAUTH_TABLE }
@@ -43,8 +43,7 @@ export default NextAuth({
 	// 	}
 	// },
 	jwt: {
-		signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
-		verificationOptions: { algorithms: ['HS512'] }
+		maxAge: 30 * 24 * 60 * 60 // 30 days
 	},
 	// Configure one or more authentication providers
 	providers: [
@@ -69,4 +68,6 @@ export default NextAuth({
 	session: { strategy: 'jwt' }
 	// site: process.env.NEXTAUTH_URL
 	// host: 'https://example.com'
-});
+};
+
+export default NextAuth(authOptions);
