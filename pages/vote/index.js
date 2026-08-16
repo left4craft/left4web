@@ -19,7 +19,7 @@ const sites = [
 	},
 	{
 		name: 'TopG',
-		url: 'https://topg.org/minecraft-servers/server-373900'
+		url: 'https://topg.org/minecraft-servers/server-685174'
 	},
 	{
 		name: 'Minecraft Server List',
