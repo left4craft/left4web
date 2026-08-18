@@ -1,10 +1,10 @@
 // visit this page at http://localhost:3000/onboarding/trevor
-import { useState } from 'react';
+
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 export default function Page() {
-	const [count,
-		setCount] = useState(1);
+	const [count, setCount] = useState(1);
 
 	return (
 		<>
@@ -15,8 +15,7 @@ export default function Page() {
 }
 
 function FizzBuzz(props) {
-	const [FizzBuzz,
-		setFizzBuzz] = useState(props.count);
+	const [FizzBuzz, setFizzBuzz] = useState(props.count);
 
 	function onClick() {
 		const count = props.count + 1;
@@ -36,7 +35,7 @@ function FizzBuzz(props) {
 
 	return (
 		<>
-			<button onClick={() => onClick()} >Count: {props.count}</button>
+			<button onClick={() => onClick()}>Count: {props.count}</button>
 			<p>{FizzBuzz}</p>
 		</>
 	);

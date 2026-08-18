@@ -1,11 +1,7 @@
-import {
-	Canvas, useThree, useFrame
-} from '@react-three/fiber';
-import {
-	MathUtils, Texture, ImageLoader, MeshBasicMaterial, Mesh, BoxGeometry
-} from 'three';
-import { useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { BoxGeometry, ImageLoader, MathUtils, Mesh, MeshBasicMaterial, Texture } from 'three';
 
 let lon = 180;
 let lat = -15;
@@ -14,64 +10,57 @@ let theta = 0;
 
 // Loads the skybox texture and applies it to the scene.
 function SkyBox(props) {
-	const {
-		gl, camera, scene
-	} = useThree();
+	const { gl, camera, scene } = useThree();
 
-	useEffect(
-		() => {
-			const textures = getTexturesFromAtlasFile('/images/panorama.png', 6, props.setLoaded);
+	useEffect(() => {
+		const textures = getTexturesFromAtlasFile('/images/panorama.png', 6, props.setLoaded);
 
-			const materials = [];
-			for (let i = 0; i < 6; i++) {
-				materials.push(new MeshBasicMaterial({ map: textures[i] }));
-			}
+		const materials = [];
+		for (let i = 0; i < 6; i++) {
+			materials.push(new MeshBasicMaterial({ map: textures[i] }));
+		}
 
-			const skyBox = new Mesh(new BoxGeometry(1, 1, 1), materials);
-			skyBox.geometry.scale(1, 1, - 1);
-			scene.add(skyBox);
+		const skyBox = new Mesh(new BoxGeometry(1, 1, 1), materials);
+		skyBox.geometry.scale(1, 1, -1);
+		scene.add(skyBox);
 
-			camera.position.z = 0.01;
+		camera.position.z = 0.01;
 
-			window.addEventListener('scroll', listenToScroll);
-			window.addEventListener('resize', onWindowResize);
-			listenToScroll();
-			onWindowResize();
+		window.addEventListener('scroll', listenToScroll);
+		window.addEventListener('resize', onWindowResize);
+		listenToScroll();
+		onWindowResize();
 
-			// clean up useEffect stuff on unmount
-			return () => {
-				scene.remove(skyBox);
-				window.removeEventListener('scroll', listenToScroll);
-				window.removeEventListener('resize', onWindowResize);
-			};
-		},
-		[]
-	);
+		// clean up useEffect stuff on unmount
+		return () => {
+			scene.remove(skyBox);
+			window.removeEventListener('scroll', listenToScroll);
+			window.removeEventListener('resize', onWindowResize);
+		};
+	}, []);
 
 	function getTexturesFromAtlasFile(atlasImgUrl, tilesNum, setLoaded) {
 		const textures = [];
 
-		for (let i = 0; i < tilesNum; i ++) {
+		for (let i = 0; i < tilesNum; i++) {
 			textures[i] = new Texture();
 		}
 
-		new ImageLoader()
-			.load(atlasImgUrl, image => {
+		new ImageLoader().load(atlasImgUrl, (image) => {
+			let canvas, context;
+			const tileWidth = image.height;
 
-				let canvas, context;
-				const tileWidth = image.height;
-
-				for (let i = 0; i < textures.length; i ++) {
-					canvas = document.createElement('canvas');
-					context = canvas.getContext('2d');
-					canvas.height = tileWidth;
-					canvas.width = tileWidth;
-					context.drawImage(image, tileWidth * i, 0, tileWidth, tileWidth, 0, 0, tileWidth, tileWidth);
-					textures[i].image = canvas;
-					textures[i].needsUpdate = true;
-				}
-				setLoaded(true);
-			});
+			for (let i = 0; i < textures.length; i++) {
+				canvas = document.createElement('canvas');
+				context = canvas.getContext('2d');
+				canvas.height = tileWidth;
+				canvas.width = tileWidth;
+				context.drawImage(image, tileWidth * i, 0, tileWidth, tileWidth, 0, 0, tileWidth, tileWidth);
+				textures[i].image = canvas;
+				textures[i].needsUpdate = true;
+			}
+			setLoaded(true);
+		});
 		return textures;
 	}
 
@@ -86,7 +75,7 @@ function SkyBox(props) {
 			scrolled = 0;
 		}
 
-		lat = -25 + 40*scrolled;
+		lat = -25 + 40 * scrolled;
 	}
 
 	function onWindowResize() {
@@ -108,18 +97,19 @@ function SkyBox(props) {
 
 		camera.lookAt(x, y, z);
 		gl.render(scene, camera);
-
 	});
 	return null;
 }
 
 export function Panorama(props) {
 	// use <Canvas linear> instead of <Canvas> to fix color mapping issues with react-three-fiber
-	return <>
-		<Canvas linear>
-			<SkyBox loaded = {props.loaded} setLoaded={props.setLoaded} />
-		</Canvas>
-	</>;
+	return (
+		<>
+			<Canvas linear>
+				<SkyBox loaded={props.loaded} setLoaded={props.setLoaded} />
+			</Canvas>
+		</>
+	);
 }
 
 Panorama.propTypes = {

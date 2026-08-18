@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# left4web
 
-## Getting Started
+The [left4craft.org](https://www.left4craft.org) website: [Next.js](https://nextjs.org/) (pages router), deployed to
+**Cloudflare Workers** via [OpenNext](https://opennext.js.org/cloudflare).
 
-First, run the development server:
+## Architecture
+
+- **Hosting**: Cloudflare Workers (`@opennextjs/cloudflare` + `wrangler`). ISR pages (`/shop`, `/punishments/*`)
+  are cached in the `left4web-inc-cache` R2 bucket.
+- **Database**: PlanetScale Postgres, reached through pgbouncer via a **Hyperdrive** binding. Holds
+  better-auth tables, Stripe customer/trial/event tables, the `job_queue` table, and the LiteBans data.
+- **Auth**: [better-auth](https://better-auth.com) — Discord OAuth + email magic links (sent with SES v2 over
+  HTTP via `aws4fetch`). Routes live under `/api/auth/*`.
+- **Shop**: Stripe Checkout. The webhook (`/api/stripe/webhook`) records events idempotently in
+  `stripe_events` and enqueues rank commands into `job_queue`, which the Left4Hub plugin polls with
+  `FOR UPDATE SKIP LOCKED`.
+- **Punishments**: LiteBans tables queried directly (`utils/litebans.js`); `/api/punishments/check`
+  serves the client-side ban search.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
+cp .dev.vars.example .dev.vars   # fill in secrets
+npm install
+npm run dev                      # next dev with wrangler's local binding proxy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`next build` needs `DATABASE_URL`, `STRIPE_SECRET_KEY`, and `NEXT_PUBLIC_*` set to fully pre-render;
+without them the ISR pages build empty and self-heal at runtime.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Deploy
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```bash
+npm run preview   # build + run the real worker locally
+npm run deploy    # build + deploy to Cloudflare
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+One-time setup: create the R2 bucket (`npx wrangler r2 bucket create left4web-inc-cache`), apply
+`migrations/*.sql` to Postgres, and set secrets with `npx wrangler secret put` (see `.dev.vars.example`
+for the list).
 
-## Learn More
+## Linting
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Biome](https://biomejs.dev) handles linting and formatting: `npm run lint` / `npm run lint:fix`.

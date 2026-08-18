@@ -1,10 +1,9 @@
-import fetch from 'node-fetch';
 import Jimp from 'jimp-compact';
 
 export default async (req, res) => {
 	const { uuid } = req.query;
 
-	if(!/^[0-9a-zA-Z-]{32,36}$/.test(uuid)) {
+	if (!/^[0-9a-zA-Z-]{32,36}$/.test(uuid)) {
 		res.send({ success: false });
 	}
 
@@ -60,7 +59,6 @@ export default async (req, res) => {
 		// const skin_face = Buffer.from(edited_skin_buf);
 
 		// res.send(skin_face);
-
 	} catch (e) {
 		res.send({
 			// exception: e,

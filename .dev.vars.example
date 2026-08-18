@@ -1,0 +1,25 @@
+# Direct Postgres connection, used by `next dev`/`next build` and as the
+# Hyperdrive local connection in `wrangler dev`
+DATABASE_URL=postgres://user:pass@pgbouncer-host:6432/left4craft
+CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=postgres://user:pass@pgbouncer-host:6432/left4craft
+
+# better-auth
+BETTER_AUTH_SECRET=generate-with-openssl-rand-base64-32
+
+# Discord OAuth (same app as before; callback path is unchanged:
+# /api/auth/callback/discord — but add preview/localhost origins in Discord dev portal)
+DISCORD_CLIENT_ID=
+DISCORD_CLIENT_SECRET=
+
+# Stripe (use test keys locally)
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_STRIPE_KEY=
+
+# SES (IAM user scoped to ses:SendEmail only)
+SES_ACCESS_KEY_ID=
+SES_SECRET_ACCESS_KEY=
+SES_REGION=us-east-1
+EMAIL_FROM="Left4Craft <noreply@left4craft.org>"
+
+NEXT_PUBLIC_URL=http://localhost:3000

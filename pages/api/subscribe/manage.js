@@ -1,15 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getSession } from 'next-auth/react';
-import { ddb } from '../../../utils/aws';
+import { getServerSession } from '../../../utils/auth';
 import { stripe } from '../../../utils/stripe';
+import { getStripeCustomer } from '../../../utils/stripe_customer';
 
 export default async (req, res) => {
-	const session = await getSession({ req });
+	const session = await getServerSession(req);
 
 	if (session) {
 		try {
 			// step 1: get the stripe customer
-			const customer = await get_stripe_customer(session, stripe);
+			const customer = await getStripeCustomer(session.user.email, stripe);
 
 			// step 2: create the session
 			const stripe_session = await stripe.billingPortal.sessions.create({
@@ -32,37 +31,3 @@ export default async (req, res) => {
 		});
 	}
 };
-
-// helper function to get a stripe customer, either from the database or creating a new one
-async function get_stripe_customer(session, stripe) {
-	// query dynamodb to get the first matching email. The database shouldn
-	const saved_stripe_customer = (
-		await ddb
-			.query({
-				ExpressionAttributeValues: { ':email': { S: session.user.email } },
-				KeyConditionExpression: 'email = :email',
-				TableName: process.env.DYNAMODB_STRIPE_TABLE
-			})
-			.promise()
-	).Items[0];
-
-	// if the stripe user doesn't exist, make a new one
-	let customer;
-	if (!saved_stripe_customer) {
-		customer = await stripe.customers.create({ email: session.user.email });
-		await ddb
-			.putItem({
-				Item: {
-					email: { S: session.user.email },
-					stripe_customer_id: { S: customer.id }
-				},
-				TableName: process.env.DYNAMODB_STRIPE_TABLE
-			})
-			.promise();
-	} else {
-		// console.log('Got stripe customer: ' + saved_stripe_customer.stripe_customer_id.S);
-		customer = await stripe.customers.retrieve(saved_stripe_customer.stripe_customer_id.S);
-	}
-
-	return customer;
-}
