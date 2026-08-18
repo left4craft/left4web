@@ -8,12 +8,12 @@ import { Navbar } from '../../components/navbar';
 
 const sites = [
 	{
-		name: 'Planet Minecraft',
-		url: 'https://www.planetminecraft.com/server/left4craft-survival-horde-no-lag-247/vote/'
+		name: 'MinecraftServers.org',
+		url: 'https://minecraftservers.org/vote/691880'
 	},
 	{
-		name: 'TopG',
-		url: 'https://topg.org/minecraft-servers/server-685174'
+		name: 'Planet Minecraft',
+		url: 'https://www.planetminecraft.com/server/left4craft-survival-horde-no-lag-247/vote/'
 	},
 	{
 		name: 'Minecraft Server List',
@@ -22,6 +22,14 @@ const sites = [
 	{
 		name: 'Minecraft MP',
 		url: 'https://minecraft-mp.com/server/27140/vote/'
+	},
+	{
+		name: 'TopG',
+		url: 'https://topg.org/minecraft-servers/server-685174'
+	},
+	{
+		name: 'Minecraft Buzz',
+		url: 'https://minecraft.buzz/vote/left4craft'
 	}
 ];
 
@@ -123,12 +131,7 @@ export default function Vote() {
 								</div>
 								<div className="text-gray-300">
 									<h6 className="text-white text-lg font-semibold">Rewards</h6>
-									<p>You are given a random reward when you vote, and the possible rewards are:</p>
-									<ul className="list-disc list-inside">
-										<li>70% $100 in-game currency</li>
-										<li>25% 1x Normal Key</li>
-										<li>5% 1x Mythic Key</li>
-									</ul>
+									<p>You are given $100 in-game when you vote.</p>
 								</div>
 							</div>
 						</div>
