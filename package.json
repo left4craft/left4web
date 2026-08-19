@@ -1,29 +1,13 @@
 {
-	"name": "left4web",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"preinstall": "npx npm-force-resolutions",
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix"
-	},
 	"dependencies": {
-		"@aws-sdk/client-dynamodb": "^3.782.0",
-		"@aws-sdk/lib-dynamodb": "^3.782.0",
-		"@next-auth/dynamodb-adapter": "^3.0.2",
+		"@opennextjs/cloudflare": "^1.20.2",
 		"@react-three/fiber": "^9.1.2",
 		"autoprefixer": "^10.4.21",
-		"aws-sdk": "^2.1692.0",
+		"aws4fetch": "^1.0.20",
+		"better-auth": "^1.7.0",
 		"cookies-next": "^4.1.1",
-		"jimp-compact": "^0.16.2",
-		"micro": "^10.0.1",
-		"next": "^15.2.4",
-		"next-auth": "^4.24.11",
-		"node-fetch": "^3.3.2",
-		"nodemailer": "^6.10.0",
+		"next": "^16.3.1",
+		"pg": "^8.23.0",
 		"postcss": "^8.4.35",
 		"prop-types": "^15.8.1",
 		"react": "^19.1.0",
@@ -31,15 +15,26 @@
 		"react-icons": "^5.5.0",
 		"react-modal": "^3.16.3",
 		"react-multi-carousel": "^2.8.5",
-		"sharp": "^0.34.1",
 		"stripe": "^18.0.0",
 		"tailwindcss": "^3.4.1",
 		"three": "^0.160.0"
 	},
 	"devDependencies": {
-		"@next/eslint-plugin-next": "^15.2.4",
-		"eslint": "^8.56.0",
-		"eslint-config-next": "^15.2.4",
-		"eslint-plugin-react": "^7.33.2"
-	}
+		"@biomejs/biome": "^2.5.9",
+		"wrangler": "^4.124.0"
+	},
+	"name": "left4web",
+	"private": true,
+	"scripts": {
+		"auth:schema": "npx @better-auth/cli generate --config utils/auth-cli.mjs --output migrations/001_better_auth.sql",
+		"build": "next build",
+		"deploy": "npm run opennext -- build && npm run opennext -- deploy",
+		"dev": "node --env-file-if-exists=.dev.vars node_modules/next/dist/bin/next dev",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"opennext": "node --env-file-if-exists=.dev.vars node_modules/@opennextjs/cloudflare/dist/cli/index.js",
+		"preview": "npm run opennext -- build && npm run opennext -- preview",
+		"start": "next start"
+	},
+	"version": "0.2.0"
 }

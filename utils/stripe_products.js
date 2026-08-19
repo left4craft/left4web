@@ -248,4 +248,3 @@
 // 	console.log(JSON.stringify(value.perks_disabled));
 // }
 
-

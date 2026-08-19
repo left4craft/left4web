@@ -1,63 +1,41 @@
-import React, {
-	useRef, useState, useEffect
-} from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import PropTypes from 'prop-types';
-import {
-	Canvas, useFrame
-} from '@react-three/fiber';
-import {
-	TextureLoader, MeshBasicMaterial, NearestFilter
-} from 'three';
+import React, { useEffect, useRef, useState } from 'react';
+import { MeshBasicMaterial, NearestFilter, TextureLoader } from 'three';
 
 function Box(props) {
-
 	// This reference will give us direct access to the mesh
 	const mesh = useRef();
 
-	useEffect(
-		() => {
-			const loader = new TextureLoader();
-			loader.setPath(`/images/heads/${props.player}/`);
+	useEffect(() => {
+		const loader = new TextureLoader();
+		loader.setPath(`/images/heads/${props.player}/`);
 
-			const materials = [];
-			for(const texture of ['px.png',
-				'nx.png',
-				'py.png',
-				'ny.png',
-				'pz.png',
-				'nz.png']) {
+		const materials = [];
+		for (const texture of ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']) {
+			const textureMap = loader.load(texture);
 
-				const textureMap = loader.load(texture);
+			// pixelated scaling to prevent blurry faces
+			textureMap.magFilter = NearestFilter;
 
-				// pixelated scaling to prevent blurry faces
-				textureMap.magFilter = NearestFilter;
-
-				materials.push(new MeshBasicMaterial({ map: textureMap }));
-			}
-			mesh.current.material = materials;
-		},
-		[]
-	);
+			materials.push(new MeshBasicMaterial({ map: textureMap }));
+		}
+		mesh.current.material = materials;
+	}, []);
 
 	// Subscribe this component to the render-loop, rotate the mesh every frame
-	useFrame(
-		() => {
-			mesh.current.rotation.y = props.rotation.x;
-			mesh.current.rotation.x = props.rotation.y;
-		}
-	);
+	useFrame(() => {
+		mesh.current.rotation.y = props.rotation.x;
+		mesh.current.rotation.x = props.rotation.y;
+	});
 	// Return view, these are regular three.js elements expressed in JSX
 	return (
-		<mesh
-			ref={mesh}
-			scale={props.scale}>
+		<mesh ref={mesh} scale={props.scale}>
 			{/* onClick={event => setActive(!active)}
 			onPointerOver={event => setHover(true)}
 			onPointerOut={event => setHover(false)}> */}
-			<boxGeometry args={[1,
-				1,
-				1]} />
-			<meshStandardMaterial color='black' />
+			<boxGeometry args={[1, 1, 1]} />
+			<meshStandardMaterial color="black" />
 		</mesh>
 	);
 }
@@ -70,60 +48,51 @@ Box.propTypes = {
 
 export function PlayerHead(props) {
 	// store the HTML element to be able to extract its position
-	const [headElem,
-		setHeadElem] = useState(null);
+	const [headElem, setHeadElem] = useState(null);
 
-	const [rotation,
-		setRotation] = useState({
+	const [rotation, setRotation] = useState({
 		x: 0,
 		y: 0
 	});
 
 	// whenever mouse position or scroll changes, update direction
 	// the head is facing
-	useEffect(
-		() => {
+	useEffect(() => {
+		if (headElem !== null) {
+			const bound = headElem.getBoundingClientRect();
+			const headX = (bound.left + bound.right) / 2;
+			const headY = (bound.top + bound.bottom) / 2;
 
-			if(headElem !== null) {
-				const bound = headElem.getBoundingClientRect();
-				const headX = (bound.left + bound.right) / 2;
-				const headY = (bound.top + bound.bottom) / 2;
+			let xRot = (2 * (props.mousePos.x - headX)) / document.body.clientWidth;
+			let yRot = (2 * (props.mousePos.y - props.scroll - headY)) / window.innerHeight;
 
-				let xRot = 2*(props.mousePos.x - headX) / document.body.clientWidth;
-				let yRot = 2*(props.mousePos.y - props.scroll - headY) / window.innerHeight;
-
-				// make sure head isn't rotated too far
-				if (Math.abs(xRot) > 0.6) {
-					xRot = Math.sign(xRot) * 0.6;
-				}
-				if (Math.abs(yRot) > 0.6) {
-					yRot = Math.sign(yRot) * 0.6;
-				}
-
-				// console.log((props.mousePos.x - headX) / document.body.clientWidth);
-				// console.log((props.mousePos.y - props.scroll - headY) / window.innerHeight);
-				setRotation({
-					x: xRot,
-					y: yRot
-				});
+			// make sure head isn't rotated too far
+			if (Math.abs(xRot) > 0.6) {
+				xRot = Math.sign(xRot) * 0.6;
 			}
-		},
-		[props.mousePos,
-			props.scroll]
-	);
+			if (Math.abs(yRot) > 0.6) {
+				yRot = Math.sign(yRot) * 0.6;
+			}
+
+			// console.log((props.mousePos.x - headX) / document.body.clientWidth);
+			// console.log((props.mousePos.y - props.scroll - headY) / window.innerHeight);
+			setRotation({
+				x: xRot,
+				y: yRot
+			});
+		}
+	}, [props.mousePos, props.scroll]);
 
 	return (
 		<div
-			ref={el => {
-				if(el === null || headElem === el) return;
+			ref={(el) => {
+				if (el === null || headElem === el) return;
 				setHeadElem(el);
-			}
-			}>
-			<Canvas linear className='z-10'>
+			}}
+		>
+			<Canvas linear className="z-10">
 				<ambientLight />
-				<pointLight position={[10,
-					10,
-					10]} />
+				<pointLight position={[10, 10, 10]} />
 				{/* <ambientLight />
 				<pointLight position={[10,
 					10,
@@ -131,11 +100,8 @@ export function PlayerHead(props) {
 				<Box position={[-1.2,
 					0,
 					0]} /> */}
-				<Box position={[0,
-					0,
-					0]} rotation={rotation} scale={props.scale} player={props.player} />
+				<Box position={[0, 0, 0]} rotation={rotation} scale={props.scale} player={props.player} />
 			</Canvas>
-
 		</div>
 	);
 }

@@ -1,16 +1,14 @@
+import { deleteCookie, hasCookie } from 'cookies-next';
 import Head from 'next/head';
-import { Navbar } from '../../components/navbar';
-import { Hero } from '../../components/hero';
-import { Footer } from '../../components/footer';
 import Link from 'next/link';
-import {
-	hasCookie, deleteCookie
-} from 'cookies-next';
 import { useEffect } from 'react';
+import { Footer } from '../../components/footer';
+import { Hero } from '../../components/hero';
+import { Navbar } from '../../components/navbar';
 export default function ShopFinished() {
 	// clear cookies on shopping success
 	useEffect(() => {
-		if(hasCookie('cart')) deleteCookie('cart');
+		if (hasCookie('cart')) deleteCookie('cart');
 	}, []);
 
 	return (
@@ -22,7 +20,7 @@ export default function ShopFinished() {
 				<meta name="twitter:title" content="Left4Craft | Shop" />
 			</Head>
 			<Navbar />
-			<Hero title='Shop' />
+			<Hero title="Shop" />
 			<div className="text-white text-center text-4xl font-bold p-8">
 				<div className="h-8" />
 				<h2>Thanks for Contributing to Left4Craft</h2>
@@ -31,10 +29,14 @@ export default function ShopFinished() {
 				<p>You will recieve an email with your recipt shortly.</p>
 			</div>
 			<div className="text-white text-center text-l p-8">
-				<u><Link href="/shop/history">View Order History</Link></u>
+				<u>
+					<Link href="/shop/history">View Order History</Link>
+				</u>
 			</div>
 			<div className="text-white text-center text-l p-8">
-				<u><Link href="/shop">Return to store</Link></u>
+				<u>
+					<Link href="/shop">Return to store</Link>
+				</u>
 			</div>
 
 			<Footer />

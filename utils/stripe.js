@@ -1,17 +1,19 @@
 import Stripe from 'stripe';
 
-export const stripe = new Stripe(
-	process.env.STRIPE_SECRET_KEY,
-	{
-		/*
-		 * https://github.com/stripe/stripe-node#configuration
-		 * apiVersion: '2020-08-27',
-		 * Register this as an official Stripe plugin.
-		 * https://stripe.com/docs/building-plugins#setappinfo
-		 */
-		appInfo: {
-			name: 'Left4Craft Store',
-			version: '0.1'
-		}
+// Instantiated lazily: on Workers process.env is populated per-request,
+// so the key may not exist at module-import time.
+let client = null;
+
+function instance() {
+	if (!client) {
+		client = new Stripe(process.env.STRIPE_SECRET_KEY, {
+			appInfo: {
+				name: 'Left4Craft Store',
+				version: '0.2'
+			}
+		});
 	}
-);
+	return client;
+}
+
+export const stripe = new Proxy({}, { get: (_target, prop) => instance()[prop] });

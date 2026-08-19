@@ -1,15 +1,19 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getSession } from 'next-auth/react';
-import { ddb } from '../../../utils/aws';
-import { stripe } from '../../../utils/stripe';
 import { getCookie } from 'cookies-next';
+import { getServerSession } from '../../../utils/auth';
+import { stripe } from '../../../utils/stripe';
+import { getStripeCustomer } from '../../../utils/stripe_customer';
 
 export default async (req, res) => {
-	const session = await getSession({ req });
+	const session = await getServerSession(req);
 
-	const {
-		user, uuid
-	} = req.query;
+	if (!session) {
+		return res.json({
+			error: 'Unauthorized',
+			success: false
+		});
+	}
+
+	const { user, uuid } = req.query;
 
 	const cart = getCookie('cart', {
 		req,
@@ -18,13 +22,12 @@ export default async (req, res) => {
 
 	const line_items = [];
 	try {
-		for(const [id,
-			product] of Object.entries(JSON.parse(cart))) {
+		for (const [id, product] of Object.entries(JSON.parse(cart))) {
 			const item = {
 				price: id,
 				quantity: product.quantity
 			};
-			if(!product.limit_one) {
+			if (!product.limit_one) {
 				item.adjustable_quantity = {
 					enabled: true,
 					maximum: product.unlimited_quantity ? 999 : 99
@@ -32,7 +35,7 @@ export default async (req, res) => {
 			}
 			line_items.push(item);
 		}
-	} catch(e) {
+	} catch (e) {
 		console.error(e);
 		return res.json({
 			error: 'Invalid cart',
@@ -42,7 +45,7 @@ export default async (req, res) => {
 
 	try {
 		// step 1: get the stripe customer
-		const customer = await get_stripe_customer(session, stripe);
+		const customer = await getStripeCustomer(session.user.email, stripe);
 		// step 2: create the session
 		const checkout_session = await stripe.checkout.sessions.create({
 			allow_promotion_codes: true,
@@ -69,37 +72,3 @@ export default async (req, res) => {
 		});
 	}
 };
-
-// helper function to get a stripe customer, either from the database or creating a new one
-async function get_stripe_customer(session, stripe) {
-	// query dynamodb to get the first matching email. The database shouldn
-	const saved_stripe_customer = (
-		await ddb
-			.query({
-				ExpressionAttributeValues: { ':email': { S: session.user.email } },
-				KeyConditionExpression: 'email = :email',
-				TableName: process.env.DYNAMODB_STRIPE_TABLE
-			})
-			.promise()
-	).Items[0];
-
-	// if the stripe user doesn't exist, make a new one
-	let customer;
-	if (!saved_stripe_customer) {
-		customer = await stripe.customers.create({ email: session.user.email });
-		await ddb
-			.putItem({
-				Item: {
-					email: { S: session.user.email },
-					stripe_customer_id: { S: customer.id }
-				},
-				TableName: process.env.DYNAMODB_STRIPE_TABLE
-			})
-			.promise();
-	} else {
-		// console.log('Got stripe customer: ' + saved_stripe_customer.stripe_customer_id.S);
-		customer = await stripe.customers.retrieve(saved_stripe_customer.stripe_customer_id.S);
-	}
-
-	return customer;
-}

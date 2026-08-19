@@ -13,17 +13,15 @@ let theta = 0;
 // let x = 0;
 // let y = 0;
 
-
 init();
 animate();
 
 function init() {
-
 	const container = document.getElementById('panorama');
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth-15, window.innerHeight);
+	renderer.setSize(window.innerWidth - 15, window.innerHeight);
 	container.appendChild(renderer.domElement);
 
 	scene = new THREE.Scene();
@@ -44,7 +42,6 @@ function init() {
 	scene.add(skyBox);
 
 	window.addEventListener('resize', onWindowResize);
-
 }
 
 function getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
@@ -55,7 +52,7 @@ function getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
 	}
 
 	const imageObj = new Image();
-	imageObj.onload = function () {
+	imageObj.onload = () => {
 		let canvas, context;
 		const tileWidth = imageObj.height;
 
@@ -68,24 +65,20 @@ function getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
 			textures[i].image = canvas;
 			textures[i].needsUpdate = true;
 		}
-
 	};
 
 	imageObj.src = atlasImgUrl;
 
 	return textures;
-
 }
 
 function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	renderer.setSize(window.innerWidth-15, window.innerHeight);
-
+	renderer.setSize(window.innerWidth - 15, window.innerHeight);
 }
 
 function update() {
-
 	/* if(!mouse_down) */ lon += 0.03;
 
 	lat = Math.max(-85, Math.min(85, lat));
@@ -100,12 +93,10 @@ function update() {
 	renderer.render(scene, camera);
 }
 
-
 function animate() {
 	requestAnimationFrame(animate);
 	update();
 }
-
 
 // document.getElementById('panorama').addEventListener('mousedown', e=> {
 // 	mouse_down = true;

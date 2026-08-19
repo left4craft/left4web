@@ -1,0 +1,49 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
+	"compatibility_date": "2026-08-01",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"hyperdrive": [
+		// local dev reads WRANGLER_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE
+		// from the environment (see .dev.vars.example)
+		{
+			"binding": "HYPERDRIVE",
+			"id": "a1114c16d47e4488a07ac63687228d98"
+		}
+	],
+	"main": ".open-next/worker.js",
+	"name": "left4web",
+	"observability": {
+		"enabled": true
+	},
+	// public repo: no preview URLs for uploaded versions
+	"preview_urls": false,
+	// R2 bucket backing the Next.js incremental cache (ISR pages: /shop, /punishments/*).
+	// Create it once with: npx wrangler r2 bucket create left4web-inc-cache
+	"r2_buckets": [
+		{
+			"binding": "NEXT_INC_CACHE_R2_BUCKET",
+			"bucket_name": "left4web-inc-cache"
+		}
+	],
+	"routes": [
+		{
+			"custom_domain": true,
+			"pattern": "www.left4craft.org"
+		}
+	],
+	"vars": {
+		"EMAIL_FROM": "Left4Craft <noreply@left4craft.org>",
+		// public, non-secret configuration; secrets go in `wrangler secret put` / .dev.vars:
+		//   BETTER_AUTH_SECRET, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET,
+		//   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,
+		//   SES_ACCESS_KEY_ID, SES_SECRET_ACCESS_KEY
+		"NEXT_PUBLIC_URL": "https://www.left4craft.org",
+		"SES_REGION": "us-east-1"
+	},
+	// public repo: don't expose the site on left4web.<account>.workers.dev
+	"workers_dev": false
+}

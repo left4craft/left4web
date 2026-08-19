@@ -1,9 +1,7 @@
-import fetch from 'node-fetch';
-
 export default async (req, res) => {
 	const { name } = req.query;
 
-	if(!/^[0-9a-zA-Z_]{1,16}$/.test(name)) {
+	if (!/^[0-9a-zA-Z_]{1,16}$/.test(name)) {
 		res.send({ success: false });
 	}
 

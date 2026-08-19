@@ -1,11 +1,9 @@
 module.exports = {
-	content: ['./pages/**/*.{js,ts,jsx,tsx}',
-		'./components/**/*.{js,ts,jsx,tsx}'],
+	content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	darkMode: 'class', // or 'media' or 'class'
 	plugins: [],
 	// eslint-disable-next-line no-unused-vars
 	theme: {
-
 		extend: {
 			// that is animation class
 			animation: {
@@ -16,14 +14,14 @@ module.exports = {
 			},
 
 			// eslint-disable-next-line no-unused-vars
-			backgroundImage: theme => ({
+			backgroundImage: (theme) => ({
 				// 'grass-pattern': 'url(\'/images/grass.png\')',
-				'grass-pattern': 'linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url(\'/images/grass.png\')',
-				'hero-1': 'linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url(\'/images/avalon-sunrise.webp\')',
-				'hero-2': 'linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url(\'/images/avalon-sunset.webp\')',
-				'hero-3': 'linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url(\'/images/avalon-midnight.webp\')',
+				'grass-pattern': "linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('/images/grass.png')",
+				'hero-1': "linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url('/images/avalon-sunrise.webp')",
+				'hero-2': "linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url('/images/avalon-sunset.webp')",
+				'hero-3': "linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75)), url('/images/avalon-midnight.webp')",
 				'hero-loading': 'linear-gradient(45deg, rgba(76, 175, 80, 0.75), rgba(102,170,68, 0.75))',
-				'l4c-logo': 'url(\'/images/logo.png\')'
+				'l4c-logo': "url('/images/logo.png')"
 			}),
 			colors: {
 				dark: '#2e2e2e',
@@ -34,7 +32,7 @@ module.exports = {
 
 			// that is actual animation
 			// eslint-disable-next-line no-unused-vars
-			keyframes: theme => ({
+			keyframes: (theme) => ({
 				'fade-in-down': {
 					'0%': {
 						opacity: '0',
@@ -46,11 +44,11 @@ module.exports = {
 					}
 				},
 				'fade-out-up': {
-					'from': {
+					from: {
 						opacity: '1',
 						transform: 'translateY(0px)'
 					},
-					'to': {
+					to: {
 						opacity: '0',
 						transform: 'translateY(-10px)'
 					}
@@ -72,8 +70,7 @@ module.exports = {
 			backgroundColor: ['checked'],
 			borderColor: ['checked'],
 			inset: ['checked'],
-			zIndex: ['hover',
-				'active']
+			zIndex: ['hover', 'active']
 		}
 	}
 };

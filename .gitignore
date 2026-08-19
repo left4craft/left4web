@@ -35,10 +35,12 @@ yarn-error.log*
 # vercel
 .vercel
 
-# serverless files
-/.serverless/
-/.serverless_nextjs/
+# cloudflare
+/.open-next/
+/.wrangler/
+.dev.vars
 
-# aws environment setup stript
-aws.sh
+# one-off local artifacts from the AWS -> Cloudflare migration
+zone.json
+left4craft.org.zone
 

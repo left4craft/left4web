@@ -1,21 +1,22 @@
 // visit this page at http://localhost:3000/onboarding/trevor
 
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 export default function Page() {
-	const [count,
-		setCount] = useState(1);
+	const [count, setCount] = useState(1);
 
-	return <>
-		<h1>Hello World</h1>
-		<CounterButton count = {count} setCount = {setCount} />
-		<CounterDisplay count = {count} />
-	</>;
+	return (
+		<>
+			<h1>Hello World</h1>
+			<CounterButton count={count} setCount={setCount} />
+			<CounterDisplay count={count} />
+		</>
+	);
 }
 
 function CounterButton(props) {
-	return <button onClick= { () => props.setCount(props.count + 1) }> Count: { props.count } </button>;
+	return <button onClick={() => props.setCount(props.count + 1)}> Count: {props.count} </button>;
 }
 
 function CounterDisplay(props) {

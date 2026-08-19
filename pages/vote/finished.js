@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { Navbar } from '../../components/navbar';
-import { Hero } from '../../components/hero';
 import { Footer } from '../../components/footer';
+import { Hero } from '../../components/hero';
+import { Navbar } from '../../components/navbar';
 
 export default function VoteFinished() {
 	return (
@@ -13,11 +13,11 @@ export default function VoteFinished() {
 				<meta name="twitter:title" content="Left4Craft | Vote" />
 			</Head>
 			<Navbar />
-			<Hero title='Vote' />
+			<Hero title="Vote" />
 			<div className="text-white bg-dark center flex justify-center items-center">
 				<div className="max-w-4xl p-8">
-					<div className='font-bold m-4 sm:m-12'>
-						<p className='text-4xl'>Thank you for voting.</p>
+					<div className="font-bold m-4 sm:m-12">
+						<p className="text-4xl">Thank you for voting.</p>
 					</div>
 				</div>
 			</div>
