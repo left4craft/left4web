@@ -35,6 +35,14 @@
 			"pattern": "www.left4craft.org"
 		}
 	],
+	// the OpenNext memory queue triggers ISR revalidation by fetching the
+	// worker through this self-referencing service binding
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "left4web"
+		}
+	],
 	"vars": {
 		"EMAIL_FROM": "Left4Craft <noreply@left4craft.org>",
 		// public, non-secret configuration; secrets go in `wrangler secret put` / .dev.vars:
